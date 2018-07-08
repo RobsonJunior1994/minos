@@ -9,16 +9,18 @@ namespace Minos.UnitTests
     public class ProfessorControllerTests
     {
         [Trait("ProfessorController", "Salvar Professor")]
-        [Fact(DisplayName = "Blable")]
+        [Fact(DisplayName = "Deveria Salvar Professor ChamandoRepository Uma Vez")]
         public void DeveriaSalvarProfessorChamandoRepositoryUmaVez()
         {
+            //arrange
             Mock<IProfessorRepository> professorRepositoryMock = new Mock<IProfessorRepository>();
 
-            AdminController adminController = new AdminController(professorRepositoryMock.Object);
+            //act
+            var sut = new AdminController(professorRepositoryMock.Object);
+            sut.CadastrarProfessor("Robson", "Junior");
 
-            adminController.CadastrarProfessor("Bla", "Ble");
-
+            //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
-        }
+        }        
     }
 }
