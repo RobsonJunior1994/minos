@@ -24,12 +24,14 @@ namespace Minos.Site.Controllers
 
         public IActionResult CadastrarProfessor(string nome, string sobrenome)
         {
-            Professor professor = new Professor()
+            Professor professor = new Professor(nome, sobrenome);
+            // Se nome/sobrenome contiver algum numero dentro da sua sequência de string devolver uma msg de erro.
+            //if (nome /*é um numero ?*/ || sobrenome /* É um numero?*/)
+            // any == qualquer
+            if(nome.Any(char.IsDigit) || sobrenome.Any(char.IsDigit))
             {
-                Nome = nome,
-                Sobrenome = sobrenome
-            };
-
+                //Enviar msg de erro
+            }
             _professorRepository.Salvar(professor);
 
             return View();
