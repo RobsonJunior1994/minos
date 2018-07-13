@@ -16,5 +16,20 @@ namespace Minos.Site.Models
             Nome = nome;
             Sobrenome = sobrenome;
         }
+
+        public bool ValidaProfessor()
+        {
+            if(Nome.Any(x => char.IsDigit(x)) || Sobrenome.Any(x => char.IsDigit(x))
+                || string.IsNullOrEmpty(Nome) || string.IsNullOrEmpty(Sobrenome)
+                )
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
     }
 }

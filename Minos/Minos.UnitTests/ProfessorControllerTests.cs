@@ -21,6 +21,21 @@ namespace Minos.UnitTests
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
-        }        
+        }
+
+        [Trait("ProfessorController", "Não Deveria salvar Professor")]
+        [Fact(DisplayName = "Deveria bloquear o salvamento do Professor")]
+        public void DeveriaBloquearOSalvamentoDoProfessor()
+        {
+            //arrange
+            Mock<IProfessorRepository> professorRepositoryMock = new Mock<IProfessorRepository>();
+
+            //act
+            var sut = new AdminController(professorRepositoryMock.Object);
+            sut.CadastrarProfessor("", "Junior");
+
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+        }
     }
 }
