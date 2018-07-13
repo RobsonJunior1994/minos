@@ -32,7 +32,9 @@ namespace Minos.UnitTests
 
             //act
             var sut = new AdminController(professorRepositoryMock.Object);
-            sut.CadastrarProfessor("", "Junior");
+
+            sut.CadastrarProfessor("Robso2n", "Robson");
+            
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
