@@ -31,7 +31,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarProfessor("Robson", "Junior","Serie",Grau.Fundamental);
+            sut.CadastrarProfessor("Robson", "Junior", "Serie", Grau.Fundamental);
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
@@ -107,6 +107,20 @@ namespace Minos.UnitTests
             //act
             CriaAdminController();
             sut.CadastrarProfessor("Robson", "Junior", null, Grau.Fundamental);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
+        [Trait("ProfessorController", "Deveria Não Salvar Professor Com Grau Nenhum")]
+        [Fact(DisplayName = "Deveria Não Salvar Professor Com Grau Nenhum")]
+        public void DeveriaNaoSalvarProfessorComGrauNenhum()
+
+        {
+            //arrange
+            CriaMock();
+            //act
+            CriaAdminController();
+            sut.CadastrarProfessor("Robson", "Junior", "Serie", Grau.Nenhum);
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 

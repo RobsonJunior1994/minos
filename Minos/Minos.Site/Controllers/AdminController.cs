@@ -27,6 +27,7 @@ namespace Minos.Site.Controllers
 
             Professor professor = new Professor(nome, sobrenome);
             Turma turma = new Turma(serie, grau);
+
             if (!professor.ValidaProfessor() || !turma.ValidaTurmas())
             {
                 ViewData["Message"] = "Envie os dados do professor de forma correta!";
