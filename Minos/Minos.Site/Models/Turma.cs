@@ -20,6 +20,7 @@ namespace Minos.Site.Models
         
         public bool ValidaTurmas()
         {
+            //Não sei como colocar para comparar o Enum Grau .
             if (string.IsNullOrEmpty(Serie))
             {
                 return false;
