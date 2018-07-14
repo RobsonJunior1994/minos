@@ -10,11 +10,14 @@ namespace Minos.Site.Controllers
     public class AdminController : Controller
     {
         private IProfessorRepository _professorRepository;
+        private ITurmaRepository _turmaRepository;
 
         public AdminController(
-            IProfessorRepository professorRepository)
+            IProfessorRepository professorRepository,
+            ITurmaRepository turmaRepository)
         {
             _professorRepository = professorRepository;
+            _turmaRepository = turmaRepository;
         }
 
         public IActionResult Index()
@@ -22,11 +25,11 @@ namespace Minos.Site.Controllers
             return View();
         }
 
-        public IActionResult CadastrarProfessor(string nome, string sobrenome, string serie, Grau grau)
+        public IActionResult CadastrarProfessor(string nome, string sobrenome, int turmaId)
         {
 
             Professor professor = new Professor(nome, sobrenome);
-            Turma turma = new Turma(serie, grau);
+            Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
             if (!professor.ValidaProfessor() || !turma.ValidaTurmas())
             {
