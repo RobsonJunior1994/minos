@@ -30,7 +30,6 @@ namespace Minos.Site.Models
             {
                 return true;
             }
-            
         }
     }
 }

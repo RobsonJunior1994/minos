@@ -7,6 +7,7 @@ namespace Minos.Site.Models
 {
     public enum Grau
     {
+        Nenhum,
         Fundamental,
         Medio
     }

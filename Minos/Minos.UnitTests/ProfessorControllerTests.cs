@@ -31,7 +31,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarProfessor("Robson", "Junior");
+            sut.CadastrarProfessor("Robson", "Junior", "Serie", Grau.Fundamental);
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
@@ -39,8 +39,8 @@ namespace Minos.UnitTests
 
         
 
-        [Trait("ProfessorController", "Deveria não salvar professor com numero")]
-        [Fact(DisplayName = "Deveria não salvar professor com numero")]
+        [Trait("ProfessorController", "Deveria Não Salvar Nome Do Professor Com Numeros")]
+        [Fact(DisplayName = "Deveria Não Salvar Nome Do Professor Com Numeros")]
         public void DeveriaNaoSalvarProfessorComNumero()
         {
             //arrange
@@ -49,36 +49,78 @@ namespace Minos.UnitTests
             //act
             CriaAdminController();
 
-            sut.CadastrarProfessor("Robso2n", "Robson");
+            sut.CadastrarProfessor("Robso2n", "Robson", "Serie", Grau.Fundamental);
             
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
         }
 
-        [Trait("ProfessorController", "Deveria não salvar professor com null")]
-        [Fact(DisplayName = "Deveria não salvar professor com null")]
+        [Trait("ProfessorController", "Deveria Não Salvar Com Nome Do Professor Null")]
+        [Fact(DisplayName = "Deveria Não Salvar Com Nome Do Professor Null")]
         public void DeveriaNaoSalvarProfessorComNull()
         {
             //arrange
             CriaMock();
             //act
             CriaAdminController();
-            sut.CadastrarProfessor("Robson", null);
+            sut.CadastrarProfessor("Robson", null, "Serie", Grau.Fundamental);
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 
         }
 
-        [Trait("ProfessorController", "Deveria não salvar professor com Vazio")]
-        [Fact(DisplayName = "Deveria não salvar professor com Vazio")]
+        [Trait("ProfessorController", "Deveria Não Salvar Com Nome Do Professor Vazio")]
+        [Fact(DisplayName = "Deveria Não Salvar Com Nome Do Professor Vazio")]
         public void DeveriaNaoSalvarProfessorComVazio()
         {
             //arrange
             CriaMock();
             //act
             CriaAdminController();
-            sut.CadastrarProfessor("", "Junior");
+            sut.CadastrarProfessor("", "Junior", "Serie", Grau.Fundamental);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
+
+        [Trait("ProfessorController", "Deveria Não Salvar Professor Com Serie Vazio")]
+        [Fact(DisplayName = "Deveria Não Salvar Professor Com Serie Vazio")]
+        public void DeveriaNaoSalvarProfessorSerieVazia()
+        {
+            //arrange
+            CriaMock();
+            //act
+            CriaAdminController();
+            sut.CadastrarProfessor("Robson", "Junior", "", Grau.Fundamental);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
+        [Trait("ProfessorController", "Deveria Não Salvar Professor Com Serie Null")]
+        [Fact(DisplayName = "Deveria Não Salvar Professor Com Serie Null")]
+        public void DeveriaNaoSalvarProfessorComSerieNula()
+
+        {
+            //arrange
+            CriaMock();
+            //act
+            CriaAdminController();
+            sut.CadastrarProfessor("Robson", "Junior", null, Grau.Fundamental);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
+        [Trait("ProfessorController", "Deveria Não Salvar Professor Com Grau Nenhum")]
+        [Fact(DisplayName = "Deveria Não Salvar Professor Com Grau Nenhum")]
+        public void DeveriaNaoSalvarProfessorComGrauNenhum()
+
+        {
+            //arrange
+            CriaMock();
+            //act
+            CriaAdminController();
+            sut.CadastrarProfessor("Robson", "Junior", "Serie", Grau.Nenhum);
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 

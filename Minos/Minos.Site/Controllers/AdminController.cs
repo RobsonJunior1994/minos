@@ -22,11 +22,13 @@ namespace Minos.Site.Controllers
             return View();
         }
 
-        public IActionResult CadastrarProfessor(string nome, string sobrenome)
+        public IActionResult CadastrarProfessor(string nome, string sobrenome, string serie, Grau grau)
         {
 
             Professor professor = new Professor(nome, sobrenome);
-            if (!professor.ValidaProfessor())
+            Turma turma = new Turma(serie, grau);
+
+            if (!professor.ValidaProfessor() || !turma.ValidaTurmas())
             {
                 ViewData["Message"] = "Envie os dados do professor de forma correta!";
                 return View();
