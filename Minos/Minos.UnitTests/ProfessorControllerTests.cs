@@ -84,15 +84,29 @@ namespace Minos.UnitTests
 
         }
 
-        [Trait("ProfessorController", "Deveria não salvar professor sem Serie")]
-        [Fact(DisplayName = "Deveria não salvar professor sem Serie")]
-        public void DeveriaNaoSalvarProfessorSemSerie()
+        [Trait("ProfessorController", "Deveria não salvar professor com Serie Vazia")]
+        [Fact(DisplayName = "Deveria não salvar professor com Serie Vazia")]
+        public void DeveriaNaoSalvarProfessorSerieVazia()
         {
             //arrange
             CriaMock();
             //act
             CriaAdminController();
-            sut.CadastrarProfessor("", "Junior", "Serie", Grau.Fundamental);
+            sut.CadastrarProfessor("Robson", "Junior", "", Grau.Fundamental);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
+        [Trait("ProfessorController", "Deveria não salvar professor com Serie Nula")]
+        [Fact(DisplayName = "Deveria não salvar professor com Serie nula")]
+        public void DeveriaNaoSalvarProfessorComSerieNula()
+
+        {
+            //arrange
+            CriaMock();
+            //act
+            CriaAdminController();
+            sut.CadastrarProfessor("Robson", "Junior", null, Grau.Fundamental);
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 
