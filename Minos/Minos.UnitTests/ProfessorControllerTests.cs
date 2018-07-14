@@ -23,7 +23,7 @@ namespace Minos.UnitTests
         }
 
         [Trait("ProfessorController", "Salvar Professor")]
-        [Fact(DisplayName = "Deveria Salvar Professor ChamandoRepository Uma Vez")]
+        [Fact(DisplayName = "Deveria Salvar Professor Chamando Repository Uma Vez")]
         public void DeveriaSalvarProfessorChamandoRepositoryUmaVez()
         {
             //arrange
