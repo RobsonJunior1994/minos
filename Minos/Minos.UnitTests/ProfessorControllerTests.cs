@@ -56,8 +56,8 @@ namespace Minos.UnitTests
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
         }
 
-        [Trait("ProfessorController", "Deveria Não Salvar Com Nome Po Professor Null")]
-        [Fact(DisplayName = "Deveria Não Salvar Com Nome Po Professor Null")]
+        [Trait("ProfessorController", "Deveria Não Salvar Com Nome Do Professor Null")]
+        [Fact(DisplayName = "Deveria Não Salvar Com Nome Do Professor Null")]
         public void DeveriaNaoSalvarProfessorComNull()
         {
             //arrange
