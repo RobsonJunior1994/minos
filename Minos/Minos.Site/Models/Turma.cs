@@ -11,5 +11,23 @@ namespace Minos.Site.Models
         public string Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
+
+        public Turma(string serie, Grau grau)
+        {
+            Serie = serie;
+            this.Grau = grau;
+        }
+        
+        public bool ValidaTurmas()
+        {
+            if (string.IsNullOrEmpty(Serie))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
