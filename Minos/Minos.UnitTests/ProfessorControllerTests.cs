@@ -13,9 +13,12 @@ namespace Minos.UnitTests
         private Mock<ITurmaRepository> turmaRepositoryMock;
         private AdminController sut;
         private Mock<Turma> turmaMock;
-        private Mock<List<int>> turmaId;
-
-
+        private List<int> turmaId;
+       
+        public void PopulaTurmaId()
+        {
+            turmaId.Add(01);
+        }
 
         public void CriaMock()
         {
@@ -35,11 +38,7 @@ namespace Minos.UnitTests
         {
             this.turmaMock = new Mock<Turma>();
         }
-
-        public void CriaTurmaId()
-        {
-            this.turmaId = new Mock<List<int>>();
-        }
+       
 
         [Trait("ProfessorController", "Salvar Professor")]
         [Fact(DisplayName = "Deveria Salvar Professor Chamando Repository Uma Vez")]
@@ -48,6 +47,7 @@ namespace Minos.UnitTests
             //arrange
             CriaMock();
             CriaTurmaMock();
+            PopulaTurmaId();
             
             //act
             CriaAdminController();
