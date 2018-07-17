@@ -132,7 +132,6 @@ namespace Minos.UnitTests
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 
         }
-
-
+        
     }
 }

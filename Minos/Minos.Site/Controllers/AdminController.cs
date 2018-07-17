@@ -33,7 +33,7 @@ namespace Minos.Site.Controllers
             {
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
-                if (turma != null)
+                if (turma != null || turma.Id > 0)
                 {
                     professor.Turmas.Add(turma);  
                 }
