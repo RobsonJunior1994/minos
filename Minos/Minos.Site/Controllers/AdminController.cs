@@ -31,6 +31,7 @@ namespace Minos.Site.Controllers
             Professor professor = new Professor(nome, sobrenome);
             foreach (var turmaId in turmasId)
             {
+                
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmasId);
                 professor.Turmas.Add(turma);
 

@@ -13,10 +13,11 @@ namespace Minos.UnitTests
         private Mock<ITurmaRepository> turmaRepositoryMock;
         private AdminController sut;
         private Mock<Turma> turmaMock;
-        private List<int> turmaId;
+        public List<int> turmaId;
        
         public void PopulaTurmaId()
         {
+            turmaId = new List<int>();
             turmaId.Add(01);
         }
 
@@ -52,11 +53,11 @@ namespace Minos.UnitTests
             //act
             CriaAdminController();
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<List<int>>())).Returns(turmaMock.Object);
+            
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
-            
+            //turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<List<int>>())).Returns(turmaMock.Object);
 
         }
 
