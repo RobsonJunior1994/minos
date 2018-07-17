@@ -7,6 +7,6 @@ namespace Minos.Site.Models
 {
     public interface ITurmaRepository
     {
-        Turma ObterTurmaPeloId(List<int> turmaId);
+        Turma ObterTurmaPeloId(int turmaId);
     }
 }

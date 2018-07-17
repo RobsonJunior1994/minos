@@ -57,7 +57,7 @@ namespace Minos.UnitTests
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
-            //turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<List<int>>())).Returns(turmaMock.Object);
+            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(turmaMock.Object);
 
         }
 

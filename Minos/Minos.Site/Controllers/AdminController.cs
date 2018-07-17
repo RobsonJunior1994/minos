@@ -32,7 +32,7 @@ namespace Minos.Site.Controllers
             foreach (var turmaId in turmasId)
             {
                 
-                Turma turma = _turmaRepository.ObterTurmaPeloId(turmasId);
+                Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
                 professor.Turmas.Add(turma);
 
             }
