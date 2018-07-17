@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Minos.Site.Models;
+using Minos.Site.Repositories;
 
 namespace Minos.Site.Controllers
 {
@@ -11,10 +12,12 @@ namespace Minos.Site.Controllers
     {
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
+        private readonly MinosContext _context;
 
         public AdminController(
             IProfessorRepository professorRepository,
-            ITurmaRepository turmaRepository)
+            ITurmaRepository turmaRepository,
+            MinosContext minosContext)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
@@ -22,6 +25,10 @@ namespace Minos.Site.Controllers
 
         public IActionResult Index()
         {
+            _context.Database.EnsureCreated();
+
+            var bla = _context.Professores.ToList();
+
             return View();
         }
 
