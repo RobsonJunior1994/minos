@@ -25,15 +25,16 @@ namespace Minos.Site.Controllers
             return View();
         }
 
-        public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> turmasId)
+        public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
 
             Professor professor = new Professor(nome, sobrenome);
-            foreach (var turmaId in turmasId)
+            if (listaDeIdDasTurmas.Count() <= 0) return View();
+            foreach (var turmaId in listaDeIdDasTurmas)
             {
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
-                if (turma != null || turma.Id > 0)
+                if (turma != null && turma.Id >= 0)
                 {
                     professor.Turmas.Add(turma);  
                 }

@@ -11,10 +11,11 @@ namespace Minos.UnitTests
     {
         private Mock<IProfessorRepository> professorRepositoryMock;
         private Mock<ITurmaRepository> turmaRepositoryMock;
+        private List<int> turmaIdVazia = new List<int>();
         private AdminController sut;
         private Mock<Turma> turmaMock;
         public List<int> turmaId;
-        private Turma turmaVazia;
+        private Turma turmaNull;
 
         public void PopulaTurmaId()
         {
@@ -26,6 +27,7 @@ namespace Minos.UnitTests
         {
             this.professorRepositoryMock = new Mock<IProfessorRepository>();
             this.turmaRepositoryMock = new Mock<ITurmaRepository>();
+            
         }
 
         
@@ -48,17 +50,17 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
             PopulaTurmaId();
             
             //act
             CriaAdminController();
+            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             
 
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Once);
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(turmaMock.Object);
+            
 
         }
 
@@ -75,6 +77,7 @@ namespace Minos.UnitTests
             //act
             CriaAdminController();
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            //turmaId.
             sut.CadastrarProfessor("Robso2n", "Robson", turmaId);
 
 
@@ -126,12 +129,29 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(turmaVazia);
+            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(turmaNull);
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //assert
             professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
 
         }
-        
+
+        [Trait("ProfessorController", "Deveria Não Salvar Com a lista de turmas passada pelo usuario sem valores atribuidos a ela")]
+        [Fact(DisplayName = "Deveria Não Salvar Com a lista de turmas passada pelo usuario sem valores atribuidos a ela")]
+        public void DeveriaNaoSalvarComAListaDeTurmasPassadaPeloUsuarioSemValoresAtribuidosAEla()
+        {
+            //arrange
+            CriaMock();
+            PopulaTurmaId();
+
+            //act
+            CriaAdminController();
+            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
+            sut.CadastrarProfessor("Robson", "Junior", turmaIdVazia);
+            //assert
+            professorRepositoryMock.Verify(x => x.Salvar(It.IsAny<Professor>()), Times.Never);
+
+        }
     }
 }
