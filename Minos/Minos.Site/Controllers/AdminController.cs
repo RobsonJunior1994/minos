@@ -29,21 +29,17 @@ namespace Minos.Site.Controllers
         {
 
             Professor professor = new Professor(nome, sobrenome);
-            if (listaDeIdDasTurmas.Count() <= 0) return View();
+            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
+                return View();
+
             foreach (var turmaId in listaDeIdDasTurmas)
             {
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
-                if (turma != null && turma.Id >= 0)
-                {
-                    professor.Turmas.Add(turma);  
-                }
-                else
-                {
+                if (turma == null || turma.Id == 0)
                     return View();
-                }
-                
 
+                professor.Turmas.Add(turma);
             }
             
 
