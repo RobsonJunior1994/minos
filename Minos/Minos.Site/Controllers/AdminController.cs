@@ -25,6 +25,15 @@ namespace Minos.Site.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CadastrarProfessor()
+        {
+            List<Turma> turmas = _turmaRepository.ObterTurmasDesteAno();
+
+            return View(turmas);
+        }
+
+        [HttpPost]
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
 
