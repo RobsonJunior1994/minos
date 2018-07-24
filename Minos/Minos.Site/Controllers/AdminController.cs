@@ -10,11 +10,14 @@ namespace Minos.Site.Controllers
     public class AdminController : Controller
     {
         private IProfessorRepository _professorRepository;
+        private ITurmaRepository _turmaRepository;
 
         public AdminController(
-            IProfessorRepository professorRepository)
+            IProfessorRepository professorRepository,
+            ITurmaRepository turmaRepository)
         {
             _professorRepository = professorRepository;
+            _turmaRepository = turmaRepository;
         }
 
         public IActionResult Index()
@@ -22,13 +25,34 @@ namespace Minos.Site.Controllers
             return View();
         }
 
-        public IActionResult CadastrarProfessor(string nome, string sobrenome, string serie, Grau grau)
+        [HttpGet]
+        public IActionResult CadastrarProfessor()
+        {
+            List<Turma> turmas = _turmaRepository.ObterTurmasDesteAno();
+
+            return View(turmas);
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
 
             Professor professor = new Professor(nome, sobrenome);
-            Turma turma = new Turma(serie, grau);
+            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
+                return View();
 
-            if (!professor.ValidaProfessor() || !turma.ValidaTurmas())
+            foreach (var turmaId in listaDeIdDasTurmas)
+            {
+                Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
+
+                if (turma == null || turma.Id == 0)
+                    return View();
+
+                professor.Turmas.Add(turma);
+            }
+            
+
+            if (!professor.ValidaProfessor())
             {
                 ViewData["Message"] = "Envie os dados do professor de forma correta!";
                 return View();
