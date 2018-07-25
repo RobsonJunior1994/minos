@@ -24,27 +24,43 @@ namespace Minos.Site.Controllers
         {
             return View();
         }
+        
+        public IActionResult CadastrarTurma(string serie, Grau grau)
+        {
+            Turma turma = new Turma(serie, grau);
+
+            if (!turma.ValidaTurma())
+            {  
+                ViewData["Message"] = "Por favor, preencha todos os campos necessários!";
+                return View();
+            }
+            else
+            {
+                _turmaRepository.Salvar(turma);
+            }
+            return View();
+
+
+        }
 
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> turmasId)
         {
 
             Professor professor = new Professor(nome, sobrenome);
+
             foreach (var turmaId in turmasId)
             {
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
-                if (turma != null || turma.Id > 0)
+                if (turma != null && turma.Id == 0)
                 {
-                    professor.Turmas.Add(turma);  
+                    professor.Turmas.Add(turma);
                 }
                 else
                 {
                     return View();
                 }
-                
-
             }
-            
 
             if (!professor.ValidaProfessor())
             {

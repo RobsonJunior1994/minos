@@ -12,15 +12,15 @@ namespace Minos.Site.Models
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
 
-        //public Turma(string serie, Grau grau)
-        //{
-        //    Serie = serie;
-        //    this.Grau = grau;
-        //}
-        
-        public bool ValidaTurmas()
+        public Turma(string serie, Grau grau)
         {
-            //Não sei como colocar para comparar o Enum Grau .
+            Serie = serie;
+            Grau = grau;
+            Professores = new List<Professor>();
+        }
+        
+        public bool ValidaTurma()
+        {
             if (string.IsNullOrEmpty(Serie) || Grau == Grau.Nenhum)
             {
                 return false;
