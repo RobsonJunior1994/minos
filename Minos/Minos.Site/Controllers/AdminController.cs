@@ -81,7 +81,7 @@ namespace Minos.Site.Controllers
             Questionario questionario = new Questionario(listaDePerguntas, periodo);
             if (questionario.EhValido())
             {
-                questionario.Salvar();
+                _questionarioRepository.Salvar(questionario);
             }
 
             return View();
