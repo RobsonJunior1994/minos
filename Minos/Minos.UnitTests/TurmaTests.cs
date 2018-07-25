@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Minos.UnitTests
 {
-    public class TurmaControllerTests
+    public class TurmaTests
     {
         private Mock<IProfessorRepository> professorRepositoryMock;
         private Mock<ITurmaRepository> turmaRepositoryMock;
@@ -52,7 +52,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma("1ano", Grau.Medio);
+            sut.CadastrarTurma(Serie.Nono, Grau.Medio);
 
 
             //assert
@@ -61,7 +61,7 @@ namespace Minos.UnitTests
         }
 
         [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Deveria Não Salvar Turma Se Serie Eh Vazio")]
+        [Fact(DisplayName = "Deveria Não Salvar Turma Se Serie Eh Nenhuma")]
         public void DeveriaSalvarTurmaSeSerieEhVazio()
         {
             //arrange
@@ -70,32 +70,14 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma("", Grau.Medio);
+            sut.CadastrarTurma(Serie.Nenhuma,Grau.Medio);
 
 
             //assert
             turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
 
         }
-
-        [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Deveria Não Salvar Turma Se Serie Eh Null")]
-        public void DeveriaSalvarTurmaSeSerieEhNull()
-        {
-            //arrange
-            CriaMock();
-            CriaTurmaMock();
-
-            //act
-            CriaAdminController();
-            sut.CadastrarTurma(null, Grau.Medio);
-
-
-            //assert
-            turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
-
-        }
-
+        
         [Trait("TurmaController", "Salvar Turma")]
         [Fact(DisplayName = "Deveria Não Salvar Grau Se Eh Nenhum")]
         public void DeveriaSalvarTurmaSeGrauEhNenhum()
@@ -106,7 +88,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma("1ano", Grau.Nenhum);
+            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum);
 
 
             //assert

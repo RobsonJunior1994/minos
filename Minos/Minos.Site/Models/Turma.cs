@@ -8,11 +8,11 @@ namespace Minos.Site.Models
     public class Turma
     {
         public int Id { get; set; }
-        public string Serie { get; set; }
+        public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
 
-        public Turma(string serie, Grau grau)
+        public Turma(Serie serie, Grau grau)
         {
             Serie = serie;
             Grau = grau;
@@ -21,7 +21,7 @@ namespace Minos.Site.Models
         
         public bool ValidaTurma()
         {
-            if (string.IsNullOrEmpty(Serie) || Grau == Grau.Nenhum)
+            if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum)
             {
                 return false;
             }

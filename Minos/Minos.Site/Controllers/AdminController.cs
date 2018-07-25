@@ -25,7 +25,7 @@ namespace Minos.Site.Controllers
             return View();
         }
         
-        public IActionResult CadastrarTurma(string serie, Grau grau)
+        public IActionResult CadastrarTurma(Serie serie, Grau grau)
         {
             Turma turma = new Turma(serie, grau);
 
