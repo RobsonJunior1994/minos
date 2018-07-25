@@ -11,13 +11,16 @@ namespace Minos.Site.Controllers
     {
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
+        private IQuestinarioRepository _questionarioRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
-            ITurmaRepository turmaRepository)
+            ITurmaRepository turmaRepository,
+            IQuestinarioRepository questionarioRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
+            _questionarioRepository = questionarioRepository;
         }
 
         public IActionResult Index()
@@ -62,6 +65,25 @@ namespace Minos.Site.Controllers
                 _professorRepository.Salvar(professor);
             }
                   
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarQuestinario()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CadastrarQuestinario(List<Perguntas> listaDePerguntas, Periodo periodo)
+        {
+            Questionario questionario = new Questionario(listaDePerguntas, periodo);
+            if (questionario.EhValido())
+            {
+                questionario.Salvar();
+            }
+
             return View();
         }
     }

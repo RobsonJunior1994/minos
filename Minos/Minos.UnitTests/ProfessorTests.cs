@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Minos.UnitTests
 {
-    public class ProfessorControllerTests
+    public class ProfessorTests
     {
         private Mock<IProfessorRepository> professorRepositoryMock;
         private Mock<ITurmaRepository> turmaRepositoryMock;
@@ -16,6 +16,7 @@ namespace Minos.UnitTests
         private Mock<Turma> turmaMock;
         public List<int> turmaId;
         private Turma turmaNull;
+        private Mock<IQuestinarioRepository> questionarioRepositoryMock;
 
         public void PopulaTurmaId()
         {
@@ -33,7 +34,7 @@ namespace Minos.UnitTests
         
         public void CriaAdminController()
         {
-            this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object);
+            this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object);
             
             
         }
