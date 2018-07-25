@@ -9,7 +9,7 @@ namespace Minos.Site.Models
     {
         public Periodo Periodo { get; private set; } // <- para representar uma data!
         public List<Turma> ListaDeTurmas { get; private set; }
-        public List<Perguntas> ListaDePerguntas { get; private set; }
+        public List<Perguntas> ListaDePerguntas { get; set; }
 
 
         public Questionario(List<Perguntas> listaDePerguntas, Periodo periodo)
@@ -21,19 +21,12 @@ namespace Minos.Site.Models
 
         public bool EhValido()
         {
-            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataFinal == default)
+            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataFinal == default || ListaDePerguntas.Count <= 0 || ListaDePerguntas == null) // + || ListaDeTurmas == null || ListaDeTurmas.Count() <= 0 - sera que Questionario deveria ser criado sem uma lista de turmas ?  
             {
-                if(ListaDeTurmas == null || ListaDeTurmas.Count() <= 0)
-                {
-                    return false;
-                }
+                return false;
             }
             return true;
         }
 
-        internal void Salvar()
-        {
-            //Implementar metodo de Salvar.
-        }
     }
 }
