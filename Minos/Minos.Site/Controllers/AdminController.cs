@@ -43,23 +43,31 @@ namespace Minos.Site.Controllers
 
         }
 
-        public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> turmasId)
+       
+        [HttpGet]
+        public IActionResult CadastrarProfessor()
+        {
+            List<Turma> turmas = _turmaRepository.ObterTurmasDesteAno();
+
+            return View(turmas);
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
 
             Professor professor = new Professor(nome, sobrenome);
+            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
+                return View();
 
-            foreach (var turmaId in turmasId)
+            foreach (var turmaId in listaDeIdDasTurmas)
             {
                 Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
-                if (turma != null && turma.Id == 0)
-                {
-                    professor.Turmas.Add(turma);
-                }
-                else
-                {
+                if (turma == null || turma.Id == 0)
                     return View();
-                }
+
+                professor.Turmas.Add(turma);
             }
 
             if (!professor.ValidaProfessor())
