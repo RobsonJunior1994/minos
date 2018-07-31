@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Models
 {
-    public class Perguntas
+    public interface IPerguntaRepository
     {
+        void Salvar(Pergunta pergunta);
     }
 }

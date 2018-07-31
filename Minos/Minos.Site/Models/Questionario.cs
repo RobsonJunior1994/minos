@@ -9,10 +9,10 @@ namespace Minos.Site.Models
     {
         public Periodo Periodo { get; private set; } // <- para representar uma data!
         public List<Turma> ListaDeTurmas { get; private set; }
-        public List<Perguntas> ListaDePerguntas { get; set; }
+        public List<Pergunta> ListaDePerguntas { get; set; }
 
 
-        public Questionario(List<Perguntas> listaDePerguntas, Periodo periodo)
+        public Questionario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
             Periodo = periodo;
             ListaDePerguntas = listaDePerguntas;

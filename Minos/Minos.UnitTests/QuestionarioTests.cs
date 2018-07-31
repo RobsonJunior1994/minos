@@ -51,7 +51,7 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestinario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Perguntas>();
+            var listaDePerguntas = new List<Pergunta>();
 
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
@@ -76,7 +76,7 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestinario(new List<Perguntas>(), new Periodo());
-            List<Perguntas> listaDePerguntas = null;
+            List<Pergunta> listaDePerguntas = null;
 
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
@@ -101,8 +101,8 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestinario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Perguntas>();
-            Perguntas pergunta = new Perguntas();
+            var listaDePerguntas = new List<Pergunta>();
+            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
             listaDePerguntas.Add(pergunta);
 
             Periodo periodo = null;
@@ -127,8 +127,8 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestinario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Perguntas>();
-            Perguntas pergunta = new Perguntas();
+            var listaDePerguntas = new List<Pergunta>();
+            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
             listaDePerguntas.Add(pergunta);
 
             var periodo = new Periodo();
@@ -153,8 +153,8 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestinario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Perguntas>();
-            Perguntas pergunta = new Perguntas();
+            var listaDePerguntas = new List<Pergunta>();
+            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
             listaDePerguntas.Add(pergunta);
 
             var periodo = new Periodo();

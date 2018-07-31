@@ -12,6 +12,7 @@ namespace Minos.Site.Controllers
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
         private IQuestinarioRepository _questionarioRepository;
+        private IPerguntaRepository _perguntaRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
@@ -21,6 +22,7 @@ namespace Minos.Site.Controllers
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
             _questionarioRepository = questionarioRepository;
+            
         }
 
         public IActionResult Index()
@@ -76,12 +78,31 @@ namespace Minos.Site.Controllers
 
 
         [HttpPost]
-        public IActionResult CadastrarQuestinario(List<Perguntas> listaDePerguntas, Periodo periodo)
+        public IActionResult CadastrarQuestinario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
             Questionario questionario = new Questionario(listaDePerguntas, periodo);
             if (questionario.EhValido())
             {
                 _questionarioRepository.Salvar(questionario);
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarPergunta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarPergunta(string perguntaEnviada)
+        {
+            Pergunta pergunta = new Pergunta(perguntaEnviada);
+
+            if (pergunta.EhValida())
+            {
+                _perguntaRepository.Salvar(pergunta);
             }
 
             return View();
