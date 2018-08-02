@@ -7,36 +7,36 @@ using Xunit;
 
 namespace Minos.UnitTests
 {
-    public class QuestionarioTests
+    public class QuestionarioTests : Tests
     {
 
-        private AdminController sut;
-        private Mock<IProfessorRepository> professorRepositoryMock;
-        private Mock<ITurmaRepository> turmaRepositoryMock;
-        private Mock<IQuestinarioRepository> questionarioRepositoryMock;
-        private List<int> turmaId;
+    //    private AdminController sut;
+    //    private Mock<IProfessorRepository> professorRepositoryMock;
+    //    private Mock<ITurmaRepository> turmaRepositoryMock;
+    //    private Mock<IQuestinarioRepository> questionarioRepositoryMock;
+    //    private List<int> turmaId;
 
 
-        public void PopulaTurmaId()
-        {
-            turmaId = new List<int>();
-            turmaId.Add(01);
-        }
+    //    public void PopulaTurmaId()
+    //    {
+    //        turmaId = new List<int>();
+    //        turmaId.Add(01);
+    //    }
 
-        public void CriaMock()
-        {
-            this.professorRepositoryMock = new Mock<IProfessorRepository>();
-            this.turmaRepositoryMock = new Mock<ITurmaRepository>();
-            this.questionarioRepositoryMock = new Mock<IQuestinarioRepository>();
+    //    public void CriaMock()
+    //    {
+    //        this.professorRepositoryMock = new Mock<IProfessorRepository>();
+    //        this.turmaRepositoryMock = new Mock<ITurmaRepository>();
+    //        this.questionarioRepositoryMock = new Mock<IQuestinarioRepository>();
             
 
-    }
+    //}
 
-    public void CriaAdminController()
-        {
-            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object);
+    //public void CriaAdminController()
+    //    {
+    //        sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object);
             
-        }
+    //    }
 
         [Trait("QuestionarioController", "Cadastrar Questionario")]
         [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Lista De Perguntas For Vazia")]

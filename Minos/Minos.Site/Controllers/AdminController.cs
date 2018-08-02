@@ -17,11 +17,13 @@ namespace Minos.Site.Controllers
         public AdminController(
             IProfessorRepository professorRepository,
             ITurmaRepository turmaRepository,
-            IQuestinarioRepository questionarioRepository)
+            IQuestinarioRepository questionarioRepository,
+            IPerguntaRepository perguntaRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
             _questionarioRepository = questionarioRepository;
+            _perguntaRepository = perguntaRepository;
             
         }
 

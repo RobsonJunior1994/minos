@@ -11,11 +11,13 @@ namespace Minos.UnitTests
     {
         internal AdminController sut;
         internal Mock<IProfessorRepository> professorRepositoryMock;
+        internal List<int> turmaIdVazia = new List<int>();
         internal Mock<ITurmaRepository> turmaRepositoryMock;
         internal Mock<IQuestinarioRepository> questionarioRepositoryMock;
         internal Mock<IPerguntaRepository> perguntaRepositoryMock;
         internal List<int> turmaId;
-       
+        internal Turma turmaNull;
+
 
         public void PopulaTurmaId()
         {
@@ -34,7 +36,7 @@ namespace Minos.UnitTests
 
         public void CriaAdminController()
         {
-            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object);
+            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object);
 
         }
 
