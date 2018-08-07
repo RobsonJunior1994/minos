@@ -79,7 +79,7 @@ namespace Minos.UnitTests
         }
         
         [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Deveria Não Salvar Grau Se Eh Nenhum")]
+        [Fact(DisplayName = "Deveria Não Salvar Turma Se Grau Eh Nenhum")]
         public void DeveriaSalvarTurmaSeGrauEhNenhum()
         {
             //arrange
