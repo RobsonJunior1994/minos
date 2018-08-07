@@ -21,7 +21,7 @@ namespace Minos.Site.Models
 
         public bool EhValido()
         {
-            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataFinal == default || ListaDePerguntas.Count <= 0 || ListaDePerguntas == null) // + || ListaDeTurmas == null || ListaDeTurmas.Count() <= 0 - sera que Questionario deveria ser criado sem uma lista de turmas ?  
+            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataFinal == default || ListaDePerguntas == null || ListaDePerguntas.Count == 0) // + || ListaDeTurmas == null || ListaDeTurmas.Count() <= 0 - sera que Questionario deveria ser criado sem uma lista de turmas ?  
             {
                 return false;
             }

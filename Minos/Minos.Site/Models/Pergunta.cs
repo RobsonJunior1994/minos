@@ -16,7 +16,7 @@ namespace Minos.Site.Models
 
         internal bool EhValida()
         {
-            if(pergunta == null || pergunta.Length <= 10)
+            if (pergunta == null || pergunta.Length <= 10)
             {
                 return false;
             }

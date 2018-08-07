@@ -26,5 +26,38 @@ namespace Minos.UnitTests
             //assert
             perguntaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Pergunta>()), Times.Once);
         }
+
+        [Trait("PerguntaController", "Cadastrar Pergunta")]
+        [Fact(DisplayName = "Deveria Não Salvar Questionario Quando pergunta for nula")]
+        public void DeveriaNaoSalvarQuandoPerguntaForNull()
+        {
+            //arrange
+            CriaMock();
+            PopulaTurmaId();
+
+            //act
+            CriaAdminController();
+            string nula = null;
+            sut.CadastrarPergunta(nula);
+
+            //assert
+            perguntaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Pergunta>()), Times.Never);
+        }
+
+        [Trait("PerguntaController", "Cadastrar Pergunta")]
+        [Fact(DisplayName = "Deveria Nao Salvar Quando Pergunta Contiver Uma Pergunta Com Menos De 10 Caracter")]
+        public void DeveriaNaoSalvarQuandoPerguntaContiverUmaPerguntaComMenosDe10Caracter()
+        {
+            //arrange
+            CriaMock();
+            PopulaTurmaId();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarPergunta("Qual nota");
+
+            //assert
+            perguntaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Pergunta>()), Times.Never);
+        }
     }
 }
