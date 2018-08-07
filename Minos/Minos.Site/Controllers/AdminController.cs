@@ -25,9 +25,16 @@ namespace Minos.Site.Controllers
             return View();
         }
         
-        public IActionResult CadastrarTurma(Serie serie, Grau grau)
+        [HttpGet]
+        public IActionResult CadastrarTurma()
         {
-            Turma turma = new Turma(serie, grau);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarTurma(Serie serie, Grau grau, string codigoTurma)
+        {
+            Turma turma = new Turma(serie, grau, codigoTurma);
 
             if (!turma.ValidaTurma())
             {  
@@ -39,7 +46,6 @@ namespace Minos.Site.Controllers
                 _turmaRepository.Salvar(turma);
             }
             return View();
-
 
         }
 
