@@ -36,35 +36,27 @@ namespace Minos.Site.Controllers
 
             return View(turmas);
         }
-        
+
         public IActionResult CadastrarUsuario(string login, string senha)
         {
             Usuario usuario = new Usuario(login, senha);
-            
-            if(usuario.ValidaLogin())
+
+            if (!usuario.ValidaLogin())
             {
-                ViewData["Message"] = "Porfavor Digite um Login!";
-            }
-            else
-            {
-                ViewData["Message"] = "Login Aceito!";
+                ViewData["Message"] = "Porfavor Digite um Login Válido.";
+                return View();
             }
 
-            if (usuario.ValidaSenha())
+            if (!usuario.ValidaSenha())
             {
                 ViewData["Message"] = "Porfavor Digite uma Senha Válida!";
-            }
-            else
-            {
-                ViewData["Message"] = "Senha Válida";
+                return View();
             }
 
-            if (usuario.ValidaLogin() && usuario.ValidaSenha() == true)
-            {
-                _usuarioRepository.Salvar(usuario);
-            }
+            ViewData["Message"] = "Login e Senha Válida";
+            _usuarioRepository.Salvar(usuario);
+
             return View();
-            
         }
 
         [HttpPost]
@@ -84,7 +76,7 @@ namespace Minos.Site.Controllers
 
                 professor.Turmas.Add(turma);
             }
-            
+
 
             if (!professor.ValidaProfessor())
             {
@@ -95,7 +87,7 @@ namespace Minos.Site.Controllers
             {
                 _professorRepository.Salvar(professor);
             }
-                  
+
             return View();
         }
     }
