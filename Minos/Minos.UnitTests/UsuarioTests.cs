@@ -9,20 +9,16 @@ namespace Minos.UnitTests
 {
     public class UsuarioTests
     {
-        private Mock<IProfessorRepository> professorRepositoryMock;
-        private Mock<ITurmaRepository> turmaRepositoryMock;
         private Mock<IUsuarioRepository> usuarioRepositoryMock;
-        private AdminController sut;
+        private UsuarioController sut;
 
         public void CriaMock()
         {
-            this.professorRepositoryMock = new Mock<IProfessorRepository>();
-            this.turmaRepositoryMock = new Mock<ITurmaRepository>();
             this.usuarioRepositoryMock = new Mock<IUsuarioRepository>();
         }
         public void CriaAdminController()
         {
-            this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, usuarioRepositoryMock.Object);
+            this.sut = new UsuarioController(usuarioRepositoryMock.Object);
         }
 
         //TESTES

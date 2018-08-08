@@ -12,16 +12,13 @@ namespace Minos.Site.Controllers
     {
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
-        private IUsuarioRepository _usuarioRepository;
-
+        
         public AdminController(
             IProfessorRepository professorRepository,
-            ITurmaRepository turmaRepository,
-            IUsuarioRepository usuarioRepository)
+            ITurmaRepository turmaRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
-            _usuarioRepository = usuarioRepository;
         }
 
         public IActionResult Index()
@@ -37,36 +34,6 @@ namespace Minos.Site.Controllers
             return View(turmas);
         }
         
-        public IActionResult CadastrarUsuario(string login, string senha)
-        {
-            Usuario usuario = new Usuario(login, senha);
-            
-            if(usuario.ValidaLogin())
-            {
-                ViewData["Message"] = "Porfavor Digite um Login!";
-            }
-            else
-            {
-                ViewData["Message"] = "Login Aceito!";
-            }
-
-            if (usuario.ValidaSenha())
-            {
-                ViewData["Message"] = "Porfavor Digite uma Senha Válida!";
-            }
-            else
-            {
-                ViewData["Message"] = "Senha Válida";
-            }
-
-            if (usuario.ValidaLogin() && usuario.ValidaSenha() == true)
-            {
-                _usuarioRepository.Salvar(usuario);
-            }
-            return View();
-            
-        }
-
         [HttpPost]
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
