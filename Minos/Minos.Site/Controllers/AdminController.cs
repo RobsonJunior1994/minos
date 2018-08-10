@@ -36,6 +36,11 @@ namespace Minos.Site.Controllers
         {
             Turma turma = new Turma(serie, grau, codigoTurma);
 
+            if(codigoTurma == null)
+            {
+                turma.GerarCodigo();
+            }
+
             if (!turma.ValidaTurma())
             {  
                 ViewData["Message"] = "Por favor, preencha todos os campos necessários!";

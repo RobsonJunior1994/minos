@@ -9,6 +9,7 @@ namespace Minos.Site.Models
     {
         public int Id { get; set; }
         public string CodigoTurma { get; set; }
+        public Periodo Periodo { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
@@ -28,10 +29,56 @@ namespace Minos.Site.Models
 
         public string GerarCodigo()
         {
-            //string prefixo = "LUC";
-            //
-            //
-            //
+            string codigo = null;
+            switch (Grau)
+            {
+                case Grau.Nenhum:
+                    break;
+                case Grau.Fundamental:
+                    codigo += "A";
+                    break;
+                case Grau.Medio:
+                    codigo += "B";
+                    break;
+            }
+            switch (Serie)
+            {
+                case Serie.Nenhuma:
+                    break;
+                case Serie.Primeiro:
+                    codigo += 10;
+                    break;
+                case Serie.Segundo:
+                    codigo += 20;
+                    break;
+                case Serie.Terceiro:
+                    codigo += 30;
+                    break;
+                case Serie.Setimo:
+                    codigo += 70;
+                    break;
+                case Serie.Oitavo:
+                    codigo += 80;
+                    break;
+                case Serie.Nono:
+                    codigo += 90;
+                    break;
+            }
+            switch (Periodo)
+            {
+                case Periodo.Nenhum:
+                    break;
+                case Periodo.Manhã:
+                    codigo += "M";
+                    break;
+                case Periodo.Tarde:
+                    codigo += "T";
+                    break;
+                case Periodo.Noite:
+                    codigo += "N";
+                    break;
+            }
+
             return null;
         }
 

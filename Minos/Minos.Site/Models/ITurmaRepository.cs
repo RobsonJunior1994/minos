@@ -10,5 +10,6 @@ namespace Minos.Site.Models
         Turma ObterTurmaPeloId(int turmaId);
         List<Turma> ObterTurmasDesteAno();
         void Salvar(Turma turma);
+        void Salvar(string CodigoTurma);
     }
 }

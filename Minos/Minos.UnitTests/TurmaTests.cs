@@ -52,7 +52,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Medio);
+            sut.CadastrarTurma(Serie.Nono, Grau.Medio,"A102T");
 
 
             //assert
@@ -70,7 +70,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nenhuma,Grau.Medio);
+            sut.CadastrarTurma(Serie.Nenhuma,Grau.Medio, "A102T");
 
 
             //assert
@@ -88,7 +88,25 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum);
+            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, "A102T");
+
+
+            //assert
+            turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
+
+        }
+
+        [Trait("TurmaController", "Salvar Turma")]
+        [Fact(DisplayName = "Deveria Não Salvar Turma Se CodigoTurma Eh Null")]
+        public void DeveriaSalvarTurmaSeCodigoTurmaEhNull()
+        {
+            //arrange
+            CriaMock();
+            CriaTurmaMock();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, null);
 
 
             //assert
