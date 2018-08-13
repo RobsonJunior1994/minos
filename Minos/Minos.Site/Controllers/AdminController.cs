@@ -36,12 +36,13 @@ namespace Minos.Site.Controllers
         {
             Turma turma = new Turma(serie, grau, codigoTurma);
 
-            if(codigoTurma == null)
+            if (!turma.EhCodigoValido())
             {
-                turma.GerarCodigo();
+                ViewData["Message"] = "Por favor, preencha os campos corretamente";
+                return View();
             }
 
-            if (!turma.ValidaTurma())
+            if (!turma.EhTurmaValida())
             {  
                 ViewData["Message"] = "Por favor, preencha todos os campos necessários!";
                 return View();

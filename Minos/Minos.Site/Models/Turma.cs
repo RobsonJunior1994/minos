@@ -27,48 +27,58 @@ namespace Minos.Site.Models
             Professores = new List<Professor>();
         }
 
+        public bool EhCodigoValido()
+        {
+            if (CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string GerarCodigo()
         {
             string codigo = null;
             switch (Grau)
             {
-                case Grau.Nenhum:
-                    break;
                 case Grau.Fundamental:
                     codigo += "A";
                     break;
                 case Grau.Medio:
                     codigo += "B";
                     break;
+                default:
+                    break;
             }
             switch (Serie)
             {
-                case Serie.Nenhuma:
-                    break;
                 case Serie.Primeiro:
-                    codigo += 10;
+                    codigo += 1;
                     break;
                 case Serie.Segundo:
-                    codigo += 20;
+                    codigo += 2;
                     break;
                 case Serie.Terceiro:
-                    codigo += 30;
+                    codigo += 3;
                     break;
                 case Serie.Setimo:
-                    codigo += 70;
+                    codigo += 7;
                     break;
                 case Serie.Oitavo:
-                    codigo += 80;
+                    codigo += 8;
                     break;
                 case Serie.Nono:
-                    codigo += 90;
+                    codigo += 9;
+                    break;
+                default:
                     break;
             }
             switch (Periodo)
             {
-                case Periodo.Nenhum:
-                    break;
-                case Periodo.Manhã:
+                case Periodo.Manha:
                     codigo += "M";
                     break;
                 case Periodo.Tarde:
@@ -77,12 +87,13 @@ namespace Minos.Site.Models
                 case Periodo.Noite:
                     codigo += "N";
                     break;
+                default:
+                    break;
             }
-
-            return null;
+            return codigo;
         }
 
-        public bool ValidaTurma()
+        public bool EhTurmaValida()
         {
             if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum || string.IsNullOrEmpty(CodigoTurma))
             {

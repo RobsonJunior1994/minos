@@ -8,7 +8,7 @@ namespace Minos.Site.Models
     public enum Periodo
     {
         Nenhum,
-        Manhã,
+        Manha,
         Tarde,
         Noite
     }
