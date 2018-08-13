@@ -89,7 +89,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                ViewData["Message"] = "O cadastro de questionario está incorretor, por favor envie os paramatros necessários!";
+                ViewData["Message"] = "O cadastro de questionario está incorreto, por favor envie os paramatros necessários!";
             }
 
             return View();
@@ -112,7 +112,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                ViewData["Message"] = "O cadastro de pergunta está incorretor, por favor envie os paramatros necessários!";
+                ViewData["Message"] = "O cadastro de pergunta está incorreto, por favor envie os paramatros necessários!";
             }
 
             return View();
