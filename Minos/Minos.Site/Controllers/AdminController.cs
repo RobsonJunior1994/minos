@@ -87,6 +87,10 @@ namespace Minos.Site.Controllers
             {
                 _questionarioRepository.Salvar(questionario);
             }
+            else
+            {
+                ViewData["Message"] = "O cadastro de questionario está incorretor, por favor envie os paramatros necessários!";
+            }
 
             return View();
         }
@@ -105,6 +109,10 @@ namespace Minos.Site.Controllers
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Salvar(pergunta);
+            }
+            else
+            {
+                ViewData["Message"] = "O cadastro de pergunta está incorretor, por favor envie os paramatros necessários!";
             }
 
             return View();
