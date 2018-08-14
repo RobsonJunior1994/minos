@@ -52,7 +52,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Medio, "A1T");
+            sut.CadastrarTurma(Serie.Nono, Grau.Medio, Turno.Manha, "A1T");
 
 
             //assert
@@ -70,7 +70,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nenhuma,Grau.Medio, "A1T");
+            sut.CadastrarTurma(Serie.Nenhuma, Grau.Medio, Turno.Manha, "A1T");
 
 
             //assert
@@ -88,7 +88,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, "A1T");
+            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, Turno.Manha, "A1T");
 
 
             //assert
@@ -97,8 +97,8 @@ namespace Minos.UnitTests
         }
 
         [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Deveria Não Salvar Turma Se CodigoTurma Eh Null")]
-        public void DeveriaNaoSalvarTurmaSeCodigoTurmaEhNull()
+        [Fact(DisplayName = "Deveria Não Salvar Turma Se Turno Eh Nenhum")]
+        public void DeveriaNaoSalvarTurmaSeTurnoEhNenhum()
         {
             //arrange
             CriaMock();
@@ -106,11 +106,29 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, null);
+            sut.CadastrarTurma(Serie.Nono, Grau.Fundamental, Turno.Nenhum, "A1T");
 
 
             //assert
             turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
+
+        }
+
+        [Trait("TurmaController", "Salvar Turma")]
+        [Fact(DisplayName = "Deveria Salvar Turma Se CodigoTurma Eh Valido")]
+        public void DeveriaSalvarTurmaSeCodigoTurmaEhValido()
+        {
+            //arrange
+            CriaMock();
+            CriaTurmaMock();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarTurma(Serie.Nono, Grau.Fundamental, Turno.Manha, "A1T");
+
+
+            //assert
+            turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Once);
 
         }
 
@@ -124,11 +142,28 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Serie.Nono, Grau.Nenhum, "");
+            sut.CadastrarTurma(Serie.Nono, Grau.Fundamental, Turno.Manha, "****");
 
 
             //assert
             turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
+
+        }
+        [Trait("TurmaController", "Salvar Turma")]
+        [Fact(DisplayName = "Teste De Gerador De Codigo")]
+        public void TesteDeGeradorDeCodigo()
+        {
+            //arrange
+            CriaMock();
+            CriaTurmaMock();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarTurma(Serie.Nono, Grau.Fundamental, Turno.Manha, "");
+
+
+            //assert
+            turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Once);
 
         }
     }

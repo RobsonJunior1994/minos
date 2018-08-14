@@ -9,15 +9,16 @@ namespace Minos.Site.Models
     {
         public int Id { get; set; }
         public string CodigoTurma { get; set; }
-        public Turno Periodo { get; set; }
+        public Turno Turno { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
 
-        public Turma(Serie serie, Grau grau, string codigoTurma)
+        public Turma(Serie serie, Grau grau,Turno turno,string codigoTurma)
         {
             Serie = serie;
             Grau = grau;
+            Turno = turno;
 
             if (string.IsNullOrEmpty(codigoTurma))
                 CodigoTurma = GerarCodigo();
@@ -76,7 +77,7 @@ namespace Minos.Site.Models
                 default:
                     break;
             }
-            switch (Periodo)
+            switch (Turno)
             {
                 case Turno.Manha:
                     codigo += "M";
@@ -95,7 +96,7 @@ namespace Minos.Site.Models
 
         public bool EhTurmaValida()
         {
-            if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum || string.IsNullOrEmpty(CodigoTurma))
+            if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum || Turno == Turno.Nenhum)
             {
                 return false;
             }

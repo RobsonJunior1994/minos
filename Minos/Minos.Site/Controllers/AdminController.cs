@@ -32,9 +32,9 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarTurma(Serie serie, Grau grau, string codigoTurma)
+        public IActionResult CadastrarTurma(Serie serie, Grau grau, Turno turno, string codigoTurma)
         {
-            Turma turma = new Turma(serie, grau, codigoTurma);
+            Turma turma = new Turma(serie, grau, turno, codigoTurma);
 
             if (!turma.EhCodigoValido())
             {
