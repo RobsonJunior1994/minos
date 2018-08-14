@@ -32,9 +32,9 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarTurma(Serie serie, Grau grau, Turno turno, string codigoTurma)
+        public IActionResult CadastrarTurma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
-            Turma turma = new Turma(serie, grau, turno, codigoTurma);
+            Turma turma = new Turma(grau, serie, turno, codigoTurma);
 
             if (!turma.EhCodigoValido())
             {
@@ -42,7 +42,7 @@ namespace Minos.Site.Controllers
                 return View();
             }
 
-            if (!turma.EhTurmaValida())
+            if (!turma.EhValida())
             {  
                 ViewData["Message"] = "Por favor, preencha todos os campos necessários!";
                 return View();

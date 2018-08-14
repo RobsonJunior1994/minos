@@ -14,10 +14,10 @@ namespace Minos.Site.Models
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
 
-        public Turma(Serie serie, Grau grau,Turno turno,string codigoTurma)
+        public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
-            Serie = serie;
             Grau = grau;
+            Serie = serie;
             Turno = turno;
 
             if (string.IsNullOrEmpty(codigoTurma))
@@ -94,7 +94,7 @@ namespace Minos.Site.Models
             return codigo;
         }
 
-        public bool EhTurmaValida()
+        public bool EhValida()
         {
             if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum || Turno == Turno.Nenhum)
             {
