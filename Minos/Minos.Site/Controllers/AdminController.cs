@@ -11,13 +11,13 @@ namespace Minos.Site.Controllers
     {
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
-        private IQuestinarioRepository _questionarioRepository;
+        private IQuestionarioRepository _questionarioRepository;
         private IPerguntaRepository _perguntaRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
             ITurmaRepository turmaRepository,
-            IQuestinarioRepository questionarioRepository,
+            IQuestionarioRepository questionarioRepository,
             IPerguntaRepository perguntaRepository)
         {
             _professorRepository = professorRepository;
@@ -73,14 +73,14 @@ namespace Minos.Site.Controllers
         }
 
         [HttpGet]
-        public IActionResult CadastrarQuestinario()
+        public IActionResult CadastrarQuestionario()
         {
             return View();
         }
 
 
         [HttpPost]
-        public IActionResult CadastrarQuestinario(List<Pergunta> listaDePerguntas, Periodo periodo)
+        public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
             Questionario questionario = new Questionario(listaDePerguntas, periodo);
             if (questionario.EhValido())

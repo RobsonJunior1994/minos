@@ -2,7 +2,7 @@
 
 namespace Minos.Site.Models
 {
-    public interface IQuestinarioRepository
+    public interface IQuestionarioRepository
     {
         void Salvar(Questionario Questionario);
     }

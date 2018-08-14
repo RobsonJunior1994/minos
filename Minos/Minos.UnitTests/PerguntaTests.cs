@@ -11,8 +11,8 @@ namespace Minos.UnitTests
     {
 
         [Trait("PerguntaController", "Cadastrar Pergunta")]
-        [Fact(DisplayName = "Deveria Salvar Questionario Quando Chamando O Pergunta Repository Salvar Uma Vez")]
-        public void DeveriaSalvarPerguntaQuandoChamandoOPerguntaRepositorySalvarUmaVez()
+        [Fact(DisplayName = "Deveria Salvar Pergunta Uma Vez Quando For Chamado O Metodo Salvar")]
+        public void DeveriaSalvarPerguntaUmaVezQuandoForChamadoOMetodoSalvar()
         {
             //arrange
             CriaMock();
@@ -28,7 +28,7 @@ namespace Minos.UnitTests
         }
 
         [Trait("PerguntaController", "Cadastrar Pergunta")]
-        [Fact(DisplayName = "Deveria Não Salvar Questionario Quando pergunta for nula")]
+        [Fact(DisplayName = "Deveria Não Salvar Quando pergunta for nula")]
         public void DeveriaNaoSalvarQuandoPerguntaForNull()
         {
             //arrange
@@ -45,8 +45,8 @@ namespace Minos.UnitTests
         }
 
         [Trait("PerguntaController", "Cadastrar Pergunta")]
-        [Fact(DisplayName = "Deveria Nao Salvar Quando Pergunta Contiver Uma Pergunta Com Menos De 10 Caracter")]
-        public void DeveriaNaoSalvarQuandoPerguntaContiverUmaPerguntaComMenosDe10Caracter()
+        [Fact(DisplayName = "Deveria Nao Salvar Pergunta Quando Contiver Menos De 10 Caracter")]
+        public void DeveriaNaoSalvarPerguntaQuandoContiverMenosDe10Caracter()
         {
             //arrange
             CriaMock();

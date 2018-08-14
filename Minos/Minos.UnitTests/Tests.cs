@@ -13,7 +13,7 @@ namespace Minos.UnitTests
         internal Mock<IProfessorRepository> professorRepositoryMock;
         internal List<int> turmaIdVazia = new List<int>();
         internal Mock<ITurmaRepository> turmaRepositoryMock;
-        internal Mock<IQuestinarioRepository> questionarioRepositoryMock;
+        internal Mock<IQuestionarioRepository> questionarioRepositoryMock;
         internal Mock<IPerguntaRepository> perguntaRepositoryMock;
         internal List<int> turmaId;
         internal Turma turmaNull;
@@ -29,7 +29,7 @@ namespace Minos.UnitTests
         {
             this.professorRepositoryMock = new Mock<IProfessorRepository>();
             this.turmaRepositoryMock = new Mock<ITurmaRepository>();
-            this.questionarioRepositoryMock = new Mock<IQuestinarioRepository>();
+            this.questionarioRepositoryMock = new Mock<IQuestionarioRepository>();
             this.perguntaRepositoryMock = new Mock<IPerguntaRepository>();
 
         }
