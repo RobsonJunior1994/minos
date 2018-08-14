@@ -9,7 +9,7 @@ namespace Minos.Site.Models
     {
         public int Id { get; set; }
         public string CodigoTurma { get; set; }
-        public Periodo Periodo { get; set; }
+        public Turno Periodo { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
@@ -78,13 +78,13 @@ namespace Minos.Site.Models
             }
             switch (Periodo)
             {
-                case Periodo.Manha:
+                case Turno.Manha:
                     codigo += "M";
                     break;
-                case Periodo.Tarde:
+                case Turno.Tarde:
                     codigo += "T";
                     break;
-                case Periodo.Noite:
+                case Turno.Noite:
                     codigo += "N";
                     break;
                 default:
