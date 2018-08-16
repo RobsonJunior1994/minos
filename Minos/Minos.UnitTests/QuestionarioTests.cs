@@ -131,8 +131,8 @@ namespace Minos.UnitTests
             listaDePerguntas.Add(pergunta);
 
             var periodo = new Periodo();
-            periodo.DataInicial = DateTime.Now;
-            periodo.DataFinal = new DateTime(2008, 5, 1, 8, 30, 52);
+            periodo.DataInicial = new DateTime(2018, 8, 16, 8, 30, 52);
+            periodo.DataFinal = new DateTime(2019, 8, 16, 8, 30, 52);
 
             sut.CadastrarQuestionario(listaDePerguntas, periodo);
 

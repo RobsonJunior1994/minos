@@ -21,7 +21,10 @@ namespace Minos.Site.Models
 
         public bool EhValido()
         {
-            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataFinal == default || ListaDePerguntas == null || ListaDePerguntas.Count == 0 || Periodo.DataInicial > Periodo.DataFinal || Periodo.DataInicial < DateTime.Now)
+            if (Periodo == null || Periodo.DataInicial == default || 
+                Periodo.DataFinal == default || ListaDePerguntas == null || 
+                ListaDePerguntas.Count == 0 || Periodo.DataInicial > Periodo.DataFinal || 
+                Periodo.DataInicial < DateTime.Now)
             {
                 return false;
             }
