@@ -23,8 +23,8 @@ namespace Minos.Site.Models
         {
             if (Periodo == null || Periodo.DataInicial == default || 
                 Periodo.DataFinal == default || ListaDePerguntas == null || 
-                ListaDePerguntas.Count == 0 || Periodo.DataInicial > Periodo.DataFinal || 
-                Periodo.DataInicial < DateTime.Now)
+                ListaDePerguntas.Count == 0 || Periodo.DataInicial.Date > Periodo.DataFinal.Date ||
+                Periodo.DataInicial.Date < DateTime.Now.Date)
             {
                 return false;
             }
