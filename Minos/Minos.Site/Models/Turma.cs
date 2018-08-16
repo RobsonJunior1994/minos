@@ -27,7 +27,7 @@ namespace Minos.Site.Models
 
             Professores = new List<Professor>();
         }
-
+        
         public bool EhCodigoValido()
         {
             if (CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
@@ -39,6 +39,8 @@ namespace Minos.Site.Models
                 return false;
             }
         }
+
+
 
         public string GerarCodigo()
         {

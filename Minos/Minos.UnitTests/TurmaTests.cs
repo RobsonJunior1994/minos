@@ -143,20 +143,19 @@ namespace Minos.UnitTests
 
         }
         [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Teste De Gerador De Codigo")]
-        public void TesteDeGeradorDeCodigo()
+        [Fact(DisplayName = "Deveria Não Salvar ")]
+        public void DeveriaNaoSalvar()
         {
             //arrange
-            CriaMock();
             CriaTurmaMock();
-
+            var esperado = "B9M";
+            var valor =                
             //act
-            CriaAdminController();
             sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "");
 
 
             //assert
-            turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Once);
+            turmaMock.Verify(x => x.GerarCodigo);
 
         }
     }
