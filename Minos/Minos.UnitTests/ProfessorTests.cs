@@ -9,42 +9,6 @@ namespace Minos.UnitTests
 {
     public class ProfessorTests : Tests
     {
-        //private Mock<IProfessorRepository> professorRepositoryMock;
-        //private Mock<ITurmaRepository> turmaRepositoryMock;
-        //private List<int> turmaIdVazia = new List<int>();
-        //private AdminController sut;
-        //private Mock<Turma> turmaMock;
-        //public List<int> turmaId;
-        //private Turma turmaNull;
-        //private Mock<IQuestinarioRepository> questionarioRepositoryMock;
-
-        //public void PopulaTurmaId()
-        //{
-        //    turmaId = new List<int>();
-        //    turmaId.Add(01);
-        //}
-
-        //public void CriaMock()
-        //{
-        //    this.professorRepositoryMock = new Mock<IProfessorRepository>();
-        //    this.turmaRepositoryMock = new Mock<ITurmaRepository>();
-            
-        //}
-
-        
-        //public void CriaAdminController()
-        //{
-        //    this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object);
-            
-            
-        //}
-
-        //public void CriaTurmaMock()
-        //{
-        //    this.turmaMock = new Mock<Turma>();
-        //}
-       
-
         [Trait("ProfessorController", "Cadastrar Professor")]
         [Fact(DisplayName = "Deveria Salvar Professor Chamando Repository Uma Vez")]
         public void DeveriaSalvarProfessorChamandoRepositoryUmaVez()

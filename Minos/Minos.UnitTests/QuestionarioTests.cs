@@ -9,8 +9,6 @@ namespace Minos.UnitTests
 {
     public class QuestionarioTests : Tests
     {
-
-    
         [Trait("QuestionarioController", "Cadastrar Questionario")]
         [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Lista De Perguntas For Vazia")]
         public void DeveriaNaoSalvarQuestionarioQuandoListaDePerguntasForVazia()

@@ -33,28 +33,21 @@ namespace Minos.Site.Controllers
         {
             Usuario usuario = new Usuario(login, senha);
 
-            if (usuario.ValidaLogin())
+            if (!usuario.ValidaLogin())
             {
                 ViewData["Message"] = "Porfavor Digite um Login!";
-            }
-            else
-            {
-                ViewData["Message"] = "Login Aceito!";
+                return View();
             }
 
-            if (usuario.ValidaSenha())
+            if (!usuario.ValidaSenha())
             {
                 ViewData["Message"] = "Porfavor Digite uma Senha Válida!";
-            }
-            else
-            {
-                ViewData["Message"] = "Senha Válida";
+                return View();
             }
 
-            if (usuario.ValidaLogin() && usuario.ValidaSenha() == true)
-            {
-                _usuarioRepository.Salvar(usuario);
-            }
+            ViewData["Message"] = "Login e Senha Válida";
+            _usuarioRepository.Salvar(usuario);
+            
             return View();
 
         }
