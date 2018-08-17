@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Minos.Site.Models;
+using System.Text.RegularExpressions;
 
 namespace Minos.Site.Controllers
 {
@@ -11,13 +12,20 @@ namespace Minos.Site.Controllers
     {
         private IProfessorRepository _professorRepository;
         private ITurmaRepository _turmaRepository;
+        private IQuestionarioRepository _questionarioRepository;
+        private IPerguntaRepository _perguntaRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
-            ITurmaRepository turmaRepository)
+            ITurmaRepository turmaRepository,
+            IQuestionarioRepository questionarioRepository,
+            IPerguntaRepository perguntaRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
+            _questionarioRepository = questionarioRepository;
+            _perguntaRepository = perguntaRepository;
+            
         }
 
         public IActionResult Index()
@@ -63,7 +71,7 @@ namespace Minos.Site.Controllers
 
             return View(turmas);
         }
-
+        
         [HttpPost]
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
@@ -92,6 +100,52 @@ namespace Minos.Site.Controllers
                 _professorRepository.Salvar(professor);
             }
                   
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarQuestionario()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, Periodo periodo)
+        {
+            Questionario questionario = new Questionario(listaDePerguntas, periodo);
+            if (questionario.EhValido())
+            {
+                _questionarioRepository.Salvar(questionario);
+            }
+            else
+            {
+                ViewData["Message"] = "O cadastro de questionario está incorreto, por favor envie os paramatros necessários!";
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarPergunta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarPergunta(string perguntaEnviada)
+        {
+            Pergunta pergunta = new Pergunta(perguntaEnviada);
+
+            if (pergunta.EhValida())
+            {
+                _perguntaRepository.Salvar(pergunta);
+            }
+            else
+            {
+                ViewData["Message"] = "O cadastro de pergunta está incorreto, por favor envie os paramatros necessários!";
+            }
+
             return View();
         }
     }
