@@ -8,32 +8,28 @@ using Xunit;
 
 namespace Minos.UnitTests
 {
-    public class TurmaTests
+    public class TurmaTests : Tests
     {
-        private Mock<IProfessorRepository> professorRepositoryMock;
-        private Mock<ITurmaRepository> turmaRepositoryMock;
-        private AdminController sut;
-        private Mock<Turma> turmaMock;
+        //private Mock<IProfessorRepository> professorRepositoryMock;
+        //private Mock<ITurmaRepository> turmaRepositoryMock;
+        //private AdminController sut;
+        
+
+        //public void CriaMock()
+        //{
+        //    this.professorRepositoryMock = new Mock<IProfessorRepository>();
+        //    this.turmaRepositoryMock = new Mock<ITurmaRepository>();
+        //}
 
 
-        public void CriaMock()
-        {
-            this.professorRepositoryMock = new Mock<IProfessorRepository>();
-            this.turmaRepositoryMock = new Mock<ITurmaRepository>();
-        }
+        //public void CriaAdminController()
+        //{
+        //    this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object);
 
 
-        public void CriaAdminController()
-        {
-            this.sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object);
+        //}
 
-
-        }
-
-        public void CriaTurmaMock()
-        {
-            this.turmaMock = new Mock<Turma>();
-        }
+        
 
         [Trait("TurmaController", "Salvar Turma")]
         [Fact(DisplayName = "Deveria Salvar Turma Chamando Repository Uma Vez")]
@@ -41,8 +37,7 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
-
+            
             //act
             CriaAdminController();
             sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
@@ -59,7 +54,6 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
 
             //act
             CriaAdminController();
@@ -77,8 +71,7 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
-
+            
             //act
             CriaAdminController();
             sut.CadastrarTurma(Grau.Nenhum, Serie.Nono, Turno.Manha, "A1T");
@@ -95,8 +88,7 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
-
+            
             //act
             CriaAdminController();
             sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Nenhum, "A1T");
@@ -113,8 +105,7 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
-
+            
             //act
             CriaAdminController();
             sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
@@ -131,8 +122,7 @@ namespace Minos.UnitTests
         {
             //arrange
             CriaMock();
-            CriaTurmaMock();
-
+            
             //act
             CriaAdminController();
             sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "****");
@@ -142,21 +132,33 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Verify(x => x.Salvar(It.IsAny<Turma>()), Times.Never);
 
         }
-        [Trait("TurmaController", "Salvar Turma")]
-        [Fact(DisplayName = "Deveria Não Salvar ")]
-        public void DeveriaNaoSalvar()
+
+        [Trait("TurmaController", "Gerar CodigoTurma")]
+        [Fact(DisplayName = "Deveria Gerar CodigoTurma Corretamente Quando CodigoTurma For Nulo")]
+        public void DeveriaGerarCodigoTurmaCorretamenteQuandoCodigoTurmaForNulo()
         {
-            //arrange
-            CriaTurmaMock();
-            var esperado = "B9M";
-            var valor =                
-            //act
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "");
+            var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
+            var turma2 = new Turma(Grau.Medio, Serie.Segundo, Turno.Tarde, null);
+            var turma3 = new Turma(Grau.Medio, Serie.Primeiro, Turno.Noite, null);
 
+            string codigoFinal1 = "A9M";
+            string codigoFinal2 = "B2T";
+            string codigoFinal3 = "B1N";
 
-            //assert
-            turmaMock.Verify(x => x.GerarCodigo);
+            Assert.True(turma1.CodigoTurma == codigoFinal1);
+            Assert.True(turma2.CodigoTurma == codigoFinal2);
+            Assert.True(turma3.CodigoTurma == codigoFinal3);
+        }
 
+        [Trait("TurmaController", "Gerar CodigoTurma")]
+        [Fact(DisplayName = "Deveria Nao Gerar CodigoTurma Quando CodigoTurma For Diferente Nulo")]
+        public void DeveriaNaoGerarCodigoTurmaQuandoCodigoTurmaForDiferenteNulo()
+        {
+            var turma = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, "BLA");
+         
+            string codigoFinal = "A9M";
+
+            Assert.True(turma.CodigoTurma != codigoFinal && turma.CodigoTurma == "BLA");
         }
     }
 }

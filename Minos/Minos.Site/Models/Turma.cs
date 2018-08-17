@@ -19,13 +19,13 @@ namespace Minos.Site.Models
             Grau = grau;
             Serie = serie;
             Turno = turno;
+            Professores = new List<Professor>();
 
             if (string.IsNullOrEmpty(codigoTurma))
                 CodigoTurma = GerarCodigo();
             else
                 CodigoTurma = codigoTurma;
 
-            Professores = new List<Professor>();
         }
         
         public bool EhCodigoValido()
