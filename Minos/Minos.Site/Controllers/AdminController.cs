@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Minos.Site.Models;
+using System.Text.RegularExpressions;
 
 namespace Minos.Site.Controllers
 {
@@ -39,7 +40,7 @@ namespace Minos.Site.Controllers
 
             return View(turmas);
         }
-
+        
         [HttpPost]
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
