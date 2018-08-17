@@ -32,7 +32,38 @@ namespace Minos.Site.Controllers
         {
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult CadastrarTurma()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public IActionResult CadastrarTurma(Grau grau, Serie serie, Turno turno, string codigoTurma)
+        {
+            Turma turma = new Turma(grau, serie, turno, codigoTurma);
+
+            if (!turma.EhCodigoValido())
+            {
+                ViewData["Message"] = "Por favor, preencha os campos corretamente";
+                return View();
+            }
+
+            if (!turma.EhValida())
+            {  
+                ViewData["Message"] = "Por favor, preencha todos os campos necessários!";
+                return View();
+            }
+            else
+            {
+                _turmaRepository.Salvar(turma);
+            }
+            return View();
+
+        }
+
+       
         [HttpGet]
         public IActionResult CadastrarProfessor()
         {
@@ -58,7 +89,6 @@ namespace Minos.Site.Controllers
 
                 professor.Turmas.Add(turma);
             }
-            
 
             if (!professor.ValidaProfessor())
             {

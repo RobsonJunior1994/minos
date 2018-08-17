@@ -39,6 +39,5 @@ namespace Minos.UnitTests
             sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object);
 
         }
-
     }
 }

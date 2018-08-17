@@ -19,7 +19,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma(Grau.Nenhum, Serie.Nenhuma, Turno.Nenhum, ""));
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();
@@ -44,7 +44,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             List<Pergunta> listaDePerguntas = null;
@@ -69,7 +69,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();
@@ -95,7 +95,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();
@@ -121,7 +121,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();
@@ -148,7 +148,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();
@@ -177,7 +177,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma());
+            
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
             var listaDePerguntas = new List<Pergunta>();

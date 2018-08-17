@@ -19,8 +19,7 @@ namespace Minos.Site.Models
         }
 
         public bool ValidaProfessor()
-        {
-            
+        { 
             if(string.IsNullOrEmpty(Nome) || string.IsNullOrEmpty(Sobrenome)
                 || Nome.Any(x => char.IsDigit(x)) || Sobrenome.Any(x => char.IsDigit(x))
                 )
