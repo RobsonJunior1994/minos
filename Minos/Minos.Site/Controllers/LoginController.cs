@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Minos.Site.Models;
 
 namespace Minos.Site.Controllers
 {
@@ -16,7 +17,12 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult Entrar(string usuario, string senha)
         {
-            return View();
+            Login login = new Login(usuario, senha);
+            if (login.EhValido())
+            {
+
+            } 
+                return View();
         }
     }
 }
