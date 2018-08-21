@@ -9,6 +9,13 @@ namespace Minos.Site.Controllers
 {
     public class LoginController : Controller
     {
+        private ILoginRepository _loginRepository;
+
+        public LoginController(ILoginRepository loginRepository)
+        {
+            _loginRepository = loginRepository;
+        }
+
         public IActionResult Entrar()
         {
             return View();
@@ -20,7 +27,7 @@ namespace Minos.Site.Controllers
             Login login = new Login(usuario, senha);
             if (login.EhValido())
             {
-
+                _loginRepository.Entrar(login);
             } 
                 return View();
         }
