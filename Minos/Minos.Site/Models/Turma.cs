@@ -40,8 +40,6 @@ namespace Minos.Site.Models
             }
         }
 
-
-
         public string GerarCodigo()
         {
             string codigo = null;
@@ -49,32 +47,41 @@ namespace Minos.Site.Models
             {
                 case Grau.Fundamental:
                     codigo += "A";
+                    switch (Serie)
+                    {
+                        case Serie.Sexto:
+                            codigo += 6;
+                            break;
+                        case Serie.Setimo:
+                            codigo += 7;
+                            break;
+                        case Serie.Oitavo:
+                            codigo += 8;
+                            break;
+                        case Serie.Nono:
+                            codigo += 9;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
+
                 case Grau.Medio:
                     codigo += "B";
-                    break;
-                default:
-                    break;
-            }
-            switch (Serie)
-            {
-                case Serie.Primeiro:
-                    codigo += 1;
-                    break;
-                case Serie.Segundo:
-                    codigo += 2;
-                    break;
-                case Serie.Terceiro:
-                    codigo += 3;
-                    break;
-                case Serie.Setimo:
-                    codigo += 7;
-                    break;
-                case Serie.Oitavo:
-                    codigo += 8;
-                    break;
-                case Serie.Nono:
-                    codigo += 9;
+                    switch (Serie)
+                    {
+                        case Serie.Primeiro:
+                            codigo += 1;
+                            break;
+                        case Serie.Segundo:
+                            codigo += 2;
+                            break;
+                        case Serie.Terceiro:
+                            codigo += 3;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;
@@ -95,6 +102,60 @@ namespace Minos.Site.Models
             }
             return codigo;
         }
+
+        //public string GerarCodigo()
+        //{
+        //    string codigo = null;
+        //    switch (Grau)
+        //    {
+        //        case Grau.Fundamental:
+        //            codigo += "A";
+        //            break;
+        //        case Grau.Medio:
+        //            codigo += "B";
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    switch (Serie)
+        //    {
+        //        case Serie.Primeiro:
+        //            codigo += 1;
+        //            break;
+        //        case Serie.Segundo:
+        //            codigo += 2;
+        //            break;
+        //        case Serie.Terceiro:
+        //            codigo += 3;
+        //            break;
+        //        case Serie.Setimo:
+        //            codigo += 7;
+        //            break;
+        //        case Serie.Oitavo:
+        //            codigo += 8;
+        //            break;
+        //        case Serie.Nono:
+        //            codigo += 9;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    switch (Turno)
+        //    {
+        //        case Turno.Manha:
+        //            codigo += "M";
+        //            break;
+        //        case Turno.Tarde:
+        //            codigo += "T";
+        //            break;
+        //        case Turno.Noite:
+        //            codigo += "N";
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    return codigo;
+        //}
 
         public bool EhValida()
         {
