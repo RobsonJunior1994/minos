@@ -13,7 +13,7 @@ namespace Minos.Site.Models
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
-
+        
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Grau = grau;
@@ -31,6 +31,8 @@ namespace Minos.Site.Models
         public string GerarCodigo()
         {
             string codigo = null;
+            //int _contador = 0;
+            //codigo = codigo.Insert(2, _contador++);
             switch (Grau)
             {
                 case Grau.Fundamental:
