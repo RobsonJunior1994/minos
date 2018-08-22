@@ -40,7 +40,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "A1T");
 
 
             //assert
@@ -108,7 +108,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "A1T");
 
 
             //assert
