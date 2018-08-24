@@ -13,7 +13,7 @@ namespace Minos.Site.Models
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
-        
+
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Grau = grau;
@@ -30,26 +30,29 @@ namespace Minos.Site.Models
 
         public string GerarCodigo()
         {
+            string codigo1 = null;
+            string codigo2 = null;
+            string codigo3 = null;
             string codigo = null;
-            //int _contador = 0;
-            //codigo = codigo.Insert(2, _contador++);
+            int contador = 0;
+            codigo = String.Format("{0:00}{1}{2}{3}", contador++, codigo1, codigo2, codigo3);
             switch (Grau)
             {
                 case Grau.Fundamental:
-                    codigo += "A";
+                    codigo1 += "EF";
                     switch (Serie)
                     {
                         case Serie.Sexto:
-                            codigo += 6;
+                            codigo2 += 6;
                             break;
                         case Serie.Setimo:
-                            codigo += 7;
+                            codigo2 += 7;
                             break;
                         case Serie.Oitavo:
-                            codigo += 8;
+                            codigo2 += 8;
                             break;
                         case Serie.Nono:
-                            codigo += 9;
+                            codigo2 += 9;
                             break;
                         default:
                             break;
@@ -57,17 +60,17 @@ namespace Minos.Site.Models
                     break;
 
                 case Grau.Medio:
-                    codigo += "B";
+                    codigo1 += "EM";
                     switch (Serie)
                     {
                         case Serie.Primeiro:
-                            codigo += 1;
+                            codigo2 += 1;
                             break;
                         case Serie.Segundo:
-                            codigo += 2;
+                            codigo2 += 2;
                             break;
                         case Serie.Terceiro:
-                            codigo += 3;
+                            codigo2 += 3;
                             break;
                         default:
                             break;
@@ -79,18 +82,19 @@ namespace Minos.Site.Models
             switch (Turno)
             {
                 case Turno.Manha:
-                    codigo += "M";
+                    codigo3 += "M";
                     break;
                 case Turno.Tarde:
-                    codigo += "T";
+                    codigo3 += "T";
                     break;
                 case Turno.Noite:
-                    codigo += "N";
+                    codigo3 += "N";
                     break;
                 default:
                     break;
             }
-            return codigo;
+            codigo = String.Format("{0}{1}{2:00}{3}", codigo1, codigo2, contador++, codigo3);
+            return codigo = codigo1 + codigo2 + codigo3;
         }
 
         public bool EhCodigoValido()
