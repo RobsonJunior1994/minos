@@ -93,8 +93,8 @@ namespace Minos.Site.Models
                 default:
                     break;
             }
-            codigo = String.Format("{0}{1}{2:00}{3}", codigo1, codigo2, contador++, codigo3);
-            return codigo = codigo1 + codigo2 + codigo3;
+            codigo = String.Format("{0:00}{1}{2}{3}", contador++, codigo1, codigo2, codigo3);
+            return codigo;
         }
 
         public bool EhCodigoValido()
