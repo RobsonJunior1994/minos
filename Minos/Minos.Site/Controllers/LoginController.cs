@@ -16,15 +16,15 @@ namespace Minos.Site.Controllers
             _loginRepository = loginRepository;
         }
 
-        public IActionResult Entrar()
+        public IActionResult Logar()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Entrar(string login, string senha)
+        public IActionResult Logar(string nomeDeUsuario, string senha)
         {
-            Usuario usuario = new Usuario(login, senha);
+            Usuario usuario = new Usuario(nomeDeUsuario, senha);
             if (usuario.EhValido())
             {
                 _loginRepository.Entrar(usuario);

@@ -10,11 +10,13 @@ namespace Minos.UnitTests
     public class Tests
     {
         internal AdminController sut;
+        internal LoginController sutLogin;
         internal Mock<IProfessorRepository> professorRepositoryMock;
         internal List<int> turmaIdVazia = new List<int>();
         internal Mock<ITurmaRepository> turmaRepositoryMock;
         internal Mock<IQuestionarioRepository> questionarioRepositoryMock;
         internal Mock<IPerguntaRepository> perguntaRepositoryMock;
+        internal Mock<ILoginRepository> loginRepositoryMock;
         internal List<int> turmaId;
         internal Turma turmaNull;
 
@@ -31,6 +33,7 @@ namespace Minos.UnitTests
             this.turmaRepositoryMock = new Mock<ITurmaRepository>();
             this.questionarioRepositoryMock = new Mock<IQuestionarioRepository>();
             this.perguntaRepositoryMock = new Mock<IPerguntaRepository>();
+            this.loginRepositoryMock = new Mock<ILoginRepository>();
 
         }
 
@@ -38,6 +41,11 @@ namespace Minos.UnitTests
         {
             sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object);
 
+        }
+
+        public void CriaLoginController()
+        {
+            sutLogin = new LoginController(loginRepositoryMock.Object);
         }
     }
 }
