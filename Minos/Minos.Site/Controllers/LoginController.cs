@@ -22,14 +22,15 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult Entrar(string usuario, string senha)
+        public IActionResult Entrar(string login, string senha)
         {
-            Login login = new Login(usuario, senha);
-            if (login.EhValido())
+            Usuario usuario = new Usuario(login, senha);
+            if (usuario.EhValido())
             {
-                _loginRepository.Entrar(login);
-            } 
-                return View();
+                _loginRepository.Entrar(usuario);
+                return View("AdminController");
+            }
+            return View();
         }
     }
 }

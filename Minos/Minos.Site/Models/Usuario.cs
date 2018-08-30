@@ -43,5 +43,16 @@ namespace Minos.Site.Controllers
                 return true;
             }
         }
+
+        public bool EhValido()
+        {
+            if(ValidaLogin() && ValidaSenha())
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
     }
 }
