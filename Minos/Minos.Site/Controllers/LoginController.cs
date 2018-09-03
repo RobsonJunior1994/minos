@@ -29,7 +29,11 @@ namespace Minos.Site.Controllers
             {
                 _loginRepository.Entrar(usuario);
                 return View("AdminController");
+            }   else
+            {
+                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
             }
+
             return View();
         }
     }

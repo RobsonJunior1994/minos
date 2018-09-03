@@ -38,5 +38,37 @@ namespace Minos.UnitTests
             //assert
             loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
         }
+
+        [Trait("LoginController", "Fazer Login")]
+        [Fact(DisplayName = "Deveria não fazer login com senha de usuario vazio")]
+        public void DeveriaNaoFazerLoginComSenhaDeUsuarioVazio()
+        {
+            //arrange
+            CriaMock();
+
+            //action
+            CriaLoginController();
+            sutLogin.Logar("robsonjunior1994", "");
+
+            //assert
+            loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
+        }
+
+        [Trait("LoginController", "Fazer Login")]
+        [Fact(DisplayName = "Deveria não fazer login com usuario e senha de usuario vazio")]
+        public void DeveriaNaoFazerLoginComUsuarioESenhaDeUsuarioVazio()
+        {
+            //arrange
+            CriaMock();
+
+            //action
+            CriaLoginController();
+            sutLogin.Logar("", "");
+
+            //assert
+            loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
+        }
+
+
     }
 }
