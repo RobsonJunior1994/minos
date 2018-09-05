@@ -11,6 +11,7 @@ namespace Minos.Site.Models
         Primeiro,
         Segundo,
         Terceiro,
+        Quinto,
         Sexto,
         Setimo,
         Oitavo,
