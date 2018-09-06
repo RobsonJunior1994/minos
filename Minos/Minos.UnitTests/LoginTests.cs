@@ -9,6 +9,7 @@ namespace Minos.UnitTests
 {
     public class LoginTests : Tests
     {
+
         [Trait("LoginController", "Fazer Login")]
         [Fact(DisplayName = "Deveria fazer login com Sucesso")]
         public void DeveriaFazerLoginComSucesso()
@@ -18,56 +19,71 @@ namespace Minos.UnitTests
 
             //action
             CriaLoginController();
-            sutLogin.Logar("robsonjunior1994","1234567890");
+            sutLogin.Logar("robsonjunior1994", "1234567890");
 
             //assert
             loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Once);
         }
 
-        [Trait("LoginController", "Fazer Login")]
-        [Fact(DisplayName = "Deveria não fazer login com nome de usuario vazio")]
-        public void DeveriaNaoFazerLoginComNomeDeUsuarioVazio()
-        {
-            //arrange
-            CriaMock();
+        //[Trait("LoginController", "Fazer Login")]
+        //[Fact(DisplayName = "Deveria fazer login com Sucesso")]
+        //public void DeveriaFazerLoginComSucesso()
+        //{
+        //    //arrange
+        //    CriaMock();
 
-            //action
-            CriaLoginController();
-            sutLogin.Logar("", "1234567890");
+        //    //action
+        //    CriaLoginController();
+        //    sutLogin.Logar("robsonjunior1994","1234567890");
 
-            //assert
-            loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
-        }
+        //    //assert
+        //    loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Once);
+        //}
 
-        [Trait("LoginController", "Fazer Login")]
-        [Fact(DisplayName = "Deveria não fazer login com senha de usuario vazio")]
-        public void DeveriaNaoFazerLoginComSenhaDeUsuarioVazio()
-        {
-            //arrange
-            CriaMock();
+        //[Trait("LoginController", "Fazer Login")]
+        //[Fact(DisplayName = "Deveria não fazer login com nome de usuario vazio")]
+        //public void DeveriaNaoFazerLoginComNomeDeUsuarioVazio()
+        //{
+        //    //arrange
+        //    CriaMock();
 
-            //action
-            CriaLoginController();
-            sutLogin.Logar("robsonjunior1994", "");
+        //    //action
+        //    CriaLoginController();
+        //    sutLogin.Logar("", "1234567890");
 
-            //assert
-            loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
-        }
+        //    //assert
+        //    loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
+        //}
 
-        [Trait("LoginController", "Fazer Login")]
-        [Fact(DisplayName = "Deveria não fazer login com usuario e senha de usuario vazio")]
-        public void DeveriaNaoFazerLoginComUsuarioESenhaDeUsuarioVazio()
-        {
-            //arrange
-            CriaMock();
+        //[Trait("LoginController", "Fazer Login")]
+        //[Fact(DisplayName = "Deveria não fazer login com senha de usuario vazio")]
+        //public void DeveriaNaoFazerLoginComSenhaDeUsuarioVazio()
+        //{
+        //    //arrange
+        //    CriaMock();
 
-            //action
-            CriaLoginController();
-            sutLogin.Logar("", "");
+        //    //action
+        //    CriaLoginController();
+        //    sutLogin.Logar("robsonjunior1994", "");
 
-            //assert
-            loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
-        }
+        //    //assert
+        //    loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
+        //}
+
+        //[Trait("LoginController", "Fazer Login")]
+        //[Fact(DisplayName = "Deveria não fazer login com usuario e senha de usuario vazio")]
+        //public void DeveriaNaoFazerLoginComUsuarioESenhaDeUsuarioVazio()
+        //{
+        //    //arrange
+        //    CriaMock();
+
+        //    //action
+        //    CriaLoginController();
+        //    sutLogin.Logar("", "");
+
+        //    //assert
+        //    loginRepositoryMock.Verify(x => x.Entrar(It.IsAny<Usuario>()), Times.Never);
+        //}
 
 
     }

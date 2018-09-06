@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Minos.Site.Models;
 
 namespace Minos.Site.Controllers
 {
@@ -53,6 +54,35 @@ namespace Minos.Site.Controllers
             {
                 return false;
             }
+        }
+
+        internal bool Existe(Usuario usuario)
+        {
+            var usuarioExiste = false;
+
+
+            using (var repo = new MinosContext())
+            {
+                List<Usuario> usuarios = repo.Usuarios.ToList();
+
+               // var ListaDeUsuariosDoBanco = usuarios;
+               //List<Usuario> ListaDeUsuario = new List<Usuario>();
+               // ListaDeUsuario.Add(ListaDeUsuariosDoBanco);
+
+                foreach (var usuarioDoBD in usuarios)
+                {
+                    if (usuarioDoBD.Login == usuario.Login && usuarioDoBD.Senha == usuario.Senha)
+                    {
+                        usuarioExiste = true;
+                    }
+                    else
+                    {
+                        usuarioExiste = false;
+                    }
+
+                }
+            }
+            return usuarioExiste;
         }
     }
 }

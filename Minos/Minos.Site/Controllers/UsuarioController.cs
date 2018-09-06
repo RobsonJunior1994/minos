@@ -52,5 +52,26 @@ namespace Minos.Site.Controllers
 
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string login, string senha)
+        {
+            Usuario usuario = new Usuario("admin", "admin");
+            if (usuario.Existe(usuario))
+            {
+                return View("AdminController");
+            }
+            else
+            {
+                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
+            }
+
+            return View();
+        }
+
     }
 }
