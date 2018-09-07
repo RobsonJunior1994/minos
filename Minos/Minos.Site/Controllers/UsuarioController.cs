@@ -60,10 +60,9 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult Login(string login, string senha)
         {
-            Usuario usuario = new Usuario("admin", "admin");
-            if (usuario.Existe(usuario))
+            if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
             {
-                return View("AdminController");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {

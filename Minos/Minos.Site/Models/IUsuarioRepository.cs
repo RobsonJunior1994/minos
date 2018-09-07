@@ -9,5 +9,6 @@ namespace Minos.Site.Models
     public interface IUsuarioRepository
     {
         void Salvar(Usuario usuario);
+        bool DadosDeLoginSaoValidos(string login, string senha);
     }
 }
