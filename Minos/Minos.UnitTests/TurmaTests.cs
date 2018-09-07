@@ -138,16 +138,16 @@ namespace Minos.UnitTests
         public void DeveriaGerarCodigoTurmaCorretamenteQuandoCodigoTurmaForNulo()
         {
             //var date = new DateTime(2018,05,09,17,03,01);
-            string codigo = DateTime.Now.ToString("yyyyMMddHHmm");
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
 
             var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
             var turma2 = new Turma(Grau.Medio, Serie.Segundo, Turno.Tarde, null);
-            var turma3 = new Turma(Grau.Medio, Serie.Primeiro, Turno.Noite, null);
+            var turma3 = new Turma(Grau.Medio, Serie.Primeiro, Turno.Tarde, null);
 
-            string codigoFinal1 = codigo;
-            string codigoFinal2 = codigo;
-            string codigoFinal3 = codigo;
+            string codigoFinal1 = codigo + "EF9M";
+            string codigoFinal2 = codigo + "EM2T";
+            string codigoFinal3 = codigo + "EM1T";
 
             Assert.True(turma1.CodigoTurma == codigoFinal1);
             Assert.True(turma2.CodigoTurma == codigoFinal2);
@@ -158,12 +158,12 @@ namespace Minos.UnitTests
         [Fact(DisplayName = "Deveria Nao Gerar CodigoTurma Quando CodigoTurma For Diferente Nulo")]
         public void DeveriaNaoGerarCodigoTurmaQuandoCodigoTurmaForDiferenteNulo()
         {
-            string codigo = DateTime.Now.ToString("yyyyMMddHHmm");
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
 
             var turma = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, "BLA");
          
-            string codigoFinal = codigo;
+            string codigoFinal = codigo + "EF9M";
 
             Assert.True(turma.CodigoTurma != codigoFinal && turma.CodigoTurma == "BLA");
         }

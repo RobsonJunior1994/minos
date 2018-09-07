@@ -30,61 +30,79 @@ namespace Minos.Site.Models
 
         public string GerarCodigo()
         {
-            string codigo = DateTime.Now.ToString("yyyyMMddHHmm");
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ","");
 
-            return codigo;
-        }
-
-        public string EscolherTurma()
-        {
             switch (Grau)
             {
                 case Grau.Fundamental:
-                    
+                    codigo += "EF";
                     switch (Serie)
                     {
                         case Serie.Quinto:
+                            codigo += "5";
                             break;
+
                         case Serie.Sexto:
+                            codigo += "6";
                             break;
+
                         case Serie.Setimo:
+                            codigo += "7";
                             break;
+
                         case Serie.Oitavo:
+                            codigo += "8";
                             break;
+
                         case Serie.Nono:
+                            codigo += "9";
                             break;
+
                         default:
                             break;
                     }
                     break;
 
                 case Grau.Medio:
+                    codigo += "EM";
                     switch (Serie)
                     {
                         case Serie.Primeiro:
+                            codigo += "1";
                             break;
+
                         case Serie.Segundo:
+                            codigo += "2";
                             break;
+
                         case Serie.Terceiro:
+                            codigo += "3";
                             break;
+
                         default:
                             break;
                     }
                     break;
+
                 default:
                     break;
             }
             switch (Turno)
             {
                 case Turno.Manha:
+                    codigo += "M";
                     break;
+
                 case Turno.Tarde:
+                    codigo += "T";
                     break;
+
                 default:
                     break;
             }
-            return null;
+
+            return codigo;
         }
 
         public bool EhCodigoValido()
