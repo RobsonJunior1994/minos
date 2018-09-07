@@ -9,7 +9,6 @@ namespace Minos.Site.Models
     {
         Nenhum,
         Manha,
-        Tarde,
-        Noite
+        Tarde
     }
 }

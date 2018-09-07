@@ -27,55 +27,64 @@ namespace Minos.Site.Models
                 CodigoTurma = codigoTurma;
 
         }
-        
-        public bool EhCodigoValido()
-        {
-            if (CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
 
         public string GerarCodigo()
         {
-            string codigo = null;
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
+            codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ","");
+
             switch (Grau)
             {
                 case Grau.Fundamental:
-                    codigo += "A";
+                    codigo += "EF";
+                    switch (Serie)
+                    {
+                        case Serie.Quinto:
+                            codigo += "5";
+                            break;
+
+                        case Serie.Sexto:
+                            codigo += "6";
+                            break;
+
+                        case Serie.Setimo:
+                            codigo += "7";
+                            break;
+
+                        case Serie.Oitavo:
+                            codigo += "8";
+                            break;
+
+                        case Serie.Nono:
+                            codigo += "9";
+                            break;
+
+                        default:
+                            break;
+                    }
                     break;
+
                 case Grau.Medio:
-                    codigo += "B";
+                    codigo += "EM";
+                    switch (Serie)
+                    {
+                        case Serie.Primeiro:
+                            codigo += "1";
+                            break;
+
+                        case Serie.Segundo:
+                            codigo += "2";
+                            break;
+
+                        case Serie.Terceiro:
+                            codigo += "3";
+                            break;
+
+                        default:
+                            break;
+                    }
                     break;
-                default:
-                    break;
-            }
-            switch (Serie)
-            {
-                case Serie.Primeiro:
-                    codigo += 1;
-                    break;
-                case Serie.Segundo:
-                    codigo += 2;
-                    break;
-                case Serie.Terceiro:
-                    codigo += 3;
-                    break;
-                case Serie.Setimo:
-                    codigo += 7;
-                    break;
-                case Serie.Oitavo:
-                    codigo += 8;
-                    break;
-                case Serie.Nono:
-                    codigo += 9;
-                    break;
+
                 default:
                     break;
             }
@@ -84,21 +93,38 @@ namespace Minos.Site.Models
                 case Turno.Manha:
                     codigo += "M";
                     break;
+
                 case Turno.Tarde:
                     codigo += "T";
                     break;
-                case Turno.Noite:
-                    codigo += "N";
-                    break;
+
                 default:
                     break;
             }
+
             return codigo;
+        }
+
+        public bool EhCodigoValido()
+        {
+            if (!CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool EhValida()
         {
-            if (Serie == Serie.Nenhuma || Grau == Grau.Nenhum || Turno == Turno.Nenhum)
+            if (Grau == Grau.Nenhum || Serie == Serie.Nenhuma || Turno == Turno.Nenhum ||
+                (Grau == Grau.Medio && Serie == Serie.Sexto) || (Grau == Grau.Medio && Serie == Serie.Setimo) ||
+                (Grau == Grau.Medio && Serie == Serie.Oitavo) || (Grau == Grau.Medio && Serie == Serie.Nono) ||
+                (Grau == Grau.Fundamental && Serie == Serie.Primeiro) ||
+                (Grau == Grau.Fundamental && Serie == Serie.Segundo) ||
+                (Grau == Grau.Fundamental && Serie == Serie.Terceiro))
             {
                 return false;
             }

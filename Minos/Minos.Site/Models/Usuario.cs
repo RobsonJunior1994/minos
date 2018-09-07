@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 
 namespace Minos.Site.Controllers
 {
@@ -22,7 +21,7 @@ namespace Minos.Site.Controllers
         
        public bool ValidaLogin()
        {
-            if(string.IsNullOrEmpty(Login) || Login.Count() >= 20 || Login.Count() < 5)
+            if(string.IsNullOrEmpty(Login) || Login.Length >= 20 || Login.Length < 5)
             {
                 return false;
             }
@@ -34,7 +33,7 @@ namespace Minos.Site.Controllers
 
         public bool ValidaSenha()
         {
-            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 6)
+            if (string.IsNullOrEmpty(Senha) || Senha.Length >= 15 || Senha.Length < 6)
             {
                 return false;
             }
