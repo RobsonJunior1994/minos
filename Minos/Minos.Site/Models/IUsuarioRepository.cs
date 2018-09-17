@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Models
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository 
     {
         void Salvar(Usuario usuario);
         bool DadosDeLoginSaoValidos(string login, string senha);

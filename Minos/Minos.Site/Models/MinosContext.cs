@@ -13,7 +13,7 @@ namespace Minos.Site.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=MinosDB;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Minos;Trusted_Connection=true");
         }
     }
 }

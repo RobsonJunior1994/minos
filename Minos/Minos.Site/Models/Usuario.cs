@@ -9,6 +9,7 @@ namespace Minos.Site.Controllers
 {
     public class Usuario
     {
+        public int Id { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
 
@@ -16,6 +17,11 @@ namespace Minos.Site.Controllers
         {
             Login = login;
             Senha = senha;
+        }
+
+        public Usuario()
+        {
+
         }
         
         //string exemploEmail = (@"^([\w\-]+\.)*[\w\- ]+@([\w\- ]+\.)+([\w\-]{2,3})$");
@@ -35,7 +41,7 @@ namespace Minos.Site.Controllers
 
         public bool ValidaSenha()
         {
-            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 6)
+            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 5)
             {
                 return false;
             }

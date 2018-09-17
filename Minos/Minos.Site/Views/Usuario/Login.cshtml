@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    var mensagem = ViewData["Message"];
+}
+
+<h2>Login</h2>
+<p class="alert-warning">@mensagem</p>
+<form action="\Usuario\Login" method="post">
+    <table>
+        <tr>
+            <td>Login:</td>
+            <td><input name="login"/></td>
+        </tr>
+        <tr>
+            <td>Senha:</td>
+            <td><input name="senha"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Entrar"/></td>
+        </tr>
+    </table>
+</form>

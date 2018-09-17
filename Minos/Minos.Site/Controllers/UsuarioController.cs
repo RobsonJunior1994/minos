@@ -60,10 +60,15 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult Login(string login, string senha)
         {
-            if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+            Usuario usuario = new Usuario(login, senha);
+            if (usuario.EhValido())
             {
-                return RedirectToAction("Index", "Admin");
+                if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             }
+           
             else
             {
                 ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";

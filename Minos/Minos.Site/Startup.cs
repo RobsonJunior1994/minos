@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Minos.Site.Models;
+using Minos.Site.Repositories;
 
 namespace Minos.Site
 {
@@ -22,6 +24,11 @@ namespace Minos.Site
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
+            services.AddSingleton<ITurmaRepository, TurmaRepository>();
+            services.AddSingleton<IQuestionarioRepository, QuestionarioRepository>();
+            services.AddSingleton<IProfessorRepository, ProfessorRepository>();
+            services.AddSingleton<IPerguntaRepository, PerguntaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +50,7 @@ namespace Minos.Site
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Usuario}/{action=Login}/{id?}");
             });
         }
     }
