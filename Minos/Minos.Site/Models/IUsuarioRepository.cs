@@ -10,6 +10,6 @@ namespace Minos.Site.Models
     {
         void Salvar(Usuario usuario);
         bool DadosDeLoginSaoValidos(string login, string senha);
-        bool Existe(string login, string senha);
+        bool Existe(string login);
     }
 }

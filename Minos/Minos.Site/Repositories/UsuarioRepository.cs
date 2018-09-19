@@ -22,20 +22,16 @@ namespace Minos.Site.Repositories
             return usuarioExiste;
         }
 
-        public bool Existe(string login, string senha)
+        public bool Existe(string login)
         {
             bool usuarioExiste = false;
-            using (var contexto = new MinosContext())
-            {
-                Usuario usuario = new Usuario(login, senha);
-                var teste = contexto.Usuarios.Contains(usuario);
-                if (teste)
-                {
-                    usuarioExiste = true;
-                }
-                usuarioExiste = false;
-            }
 
+            using (var repo = new MinosContext())
+            {
+                var usuarios = repo.Usuarios.SingleOrDefault(x => x.Login == login);
+                
+                usuarioExiste = usuarios != null;
+            }
             return usuarioExiste;
         }
 

@@ -33,7 +33,7 @@ namespace Minos.Site.Controllers
         {
             Usuario usuario = new Usuario(login, senha);
 
-            if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+            if (_usuarioRepository.Existe(login))
             {
                 ViewData["Message"] = "Usuario já existe!";
                 ViewData["Status"] = "bg-danger";
