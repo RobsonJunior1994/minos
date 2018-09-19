@@ -29,23 +29,39 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarUsuario(string login, string senha)
+        public IActionResult CadastrarUsuario(string login, string senha, string repitaSenha)
         {
             Usuario usuario = new Usuario(login, senha);
 
+            if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+            {
+                ViewData["Message"] = "Usuario já existe!";
+                ViewData["Status"] = "bg-danger";
+                return View();
+            }
+
             if (!usuario.ValidaLogin())
             {
-                ViewData["Message"] = "Porfavor Digite um Login!";
+                ViewData["Message"] = "Por favor Digite um Login!";
+                ViewData["Status"] = "bg-danger";
                 return View();
             }
 
             if (!usuario.ValidaSenha())
             {
-                ViewData["Message"] = "Porfavor Digite uma Senha Válida!";
+                ViewData["Message"] = "Por favor Digite uma Senha Válida!";
+                ViewData["Status"] = "bg-danger";
+                return View();
+            }
+            if (senha != repitaSenha)
+            {
+                ViewData["Message"] = "As senhas não são iguais!";
+                ViewData["Status"] = "bg-warning";
                 return View();
             }
 
-            ViewData["Message"] = "Login e Senha Válida";
+            ViewData["Message"] = "Cadastro efetuado com sucesso!";
+            ViewData["Status"] = "bg-success";
             _usuarioRepository.Salvar(usuario);
             
             return View();
@@ -67,13 +83,13 @@ namespace Minos.Site.Controllers
                 {
                     return RedirectToAction("Index", "Admin");
                 }
+                else
+                {
+                    ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
+                    return View();
+                }
             }
            
-            else
-            {
-                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
-            }
-
             return View();
         }
 
