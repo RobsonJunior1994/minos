@@ -22,6 +22,12 @@ namespace Minos.Site.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult QuestionarioAluno(List<Turma> turmas, List<Pergunta> perguntas, Periodo periodo)
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult CadastrarUsuario()
         {
