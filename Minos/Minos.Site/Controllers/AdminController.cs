@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Minos.Site.Models;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Http;
 
 namespace Minos.Site.Controllers
 {
@@ -30,7 +31,14 @@ namespace Minos.Site.Controllers
 
         public IActionResult Index()
         {
+            var logado = ViewBag.Message = HttpContext.Session.GetString("Test");
+            if (logado == null)
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+            
             return View();
+            
         }
         
         [HttpGet]

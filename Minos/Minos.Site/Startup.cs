@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Minos.Site.Models;
 using Minos.Site.Repositories;
 
+
 namespace Minos.Site
 {
     public class Startup
@@ -23,7 +24,12 @@ namespace Minos.Site
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc();
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
             services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
             services.AddSingleton<ITurmaRepository, TurmaRepository>();
             services.AddSingleton<IQuestionarioRepository, QuestionarioRepository>();
@@ -45,6 +51,8 @@ namespace Minos.Site
             }
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

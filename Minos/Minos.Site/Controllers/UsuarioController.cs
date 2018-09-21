@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Minos.Site.Models;
 
@@ -81,7 +82,9 @@ namespace Minos.Site.Controllers
             {
                 if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
                 {
+                    HttpContext.Session.SetString("Test", "Usuario");
                     return RedirectToAction("Index", "Admin");
+
                 }
                 else
                 {
@@ -91,6 +94,13 @@ namespace Minos.Site.Controllers
             }
            
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("Test");
+            return RedirectToAction("Login", "Usuario");
         }
 
     }
