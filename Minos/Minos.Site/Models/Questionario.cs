@@ -10,51 +10,12 @@ namespace Minos.Site.Models
         public Periodo Periodo { get; private set; } // <- para representar uma data!
         public List<Turma> ListaDeTurmas { get; private set; }
         public List<Pergunta> ListaDePerguntas { get; set; }
-        public int Resposta { get; set; }
 
 
-        public Questionario(List<Pergunta> listaDePerguntas,List<Turma> listaDeTurmas, Periodo periodo, int resposta)
+        public Questionario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
             Periodo = periodo;
             ListaDePerguntas = listaDePerguntas;
-            ListaDeTurmas = listaDeTurmas;
-
-            if (resposta == 0)
-                Resposta = ResultadoQuest();
-
-        }
-
-        public int ResultadoQuest()
-        {
-            
-            var resposta1 = false;
-            var resposta2 = false;
-            var resposta3 = false;
-            var resposta4 = false;
-            var resposta5 = false;
-            int result = 0;
-
-            if(resposta1 == true)
-            {
-                result = 1;
-                if(resposta2 == true)
-                {
-                    result = 2;
-                    if(resposta3 == true)
-                    {
-                        result = 3;
-                        if(resposta4 == true)
-                        {
-                            result = 4;
-                            if(resposta5 == true)
-                            {
-                                result = 5;
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
         }
         
         public bool EhValido()

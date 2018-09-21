@@ -1,10 +1,11 @@
 ﻿using Minos.Site.Models;
+using System.Collections.Generic;
 
 namespace Minos.Site.Models
 {
     public interface IQuestionarioRepository
     {
-        Questionario ObterResposta(int _resposta);
+        Questionario ObterListaDePerguntas();
         void Salvar(Questionario Questionario);
     }
 }

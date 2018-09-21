@@ -110,9 +110,9 @@ namespace Minos.Site.Controllers
 
 
         [HttpPost]
-        public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, List<Turma> listaDeTurmas, Periodo periodo, int resposta)
+        public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
-            Questionario questionario = new Questionario(listaDePerguntas, listaDeTurmas, periodo, resposta);
+            Questionario questionario = new Questionario(listaDePerguntas, periodo);
             if (questionario.EhValido())
             {
                 _questionarioRepository.Salvar(questionario);

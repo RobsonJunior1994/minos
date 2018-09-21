@@ -10,15 +10,17 @@ namespace Minos.UnitTests
     public class UsuarioTests
     {
         private Mock<IUsuarioRepository> usuarioRepositoryMock;
+        private Mock<IQuestionarioRepository> questionarioRepositoryMock;
         private UsuarioController sut;
 
         public void CriaMock()
         {
             this.usuarioRepositoryMock = new Mock<IUsuarioRepository>();
+            this.questionarioRepositoryMock = new Mock<IQuestionarioRepository>();
         }
         public void CriaAdminController()
         {
-            this.sut = new UsuarioController(usuarioRepositoryMock.Object);
+            this.sut = new UsuarioController(usuarioRepositoryMock.Object, questionarioRepositoryMock.Object);
         }
 
         //TESTES
