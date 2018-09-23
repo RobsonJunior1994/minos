@@ -3,7 +3,14 @@
     ViewData["Title"] = "CadastrarUsuario";
     var mensagem = ViewData["Message"];
     var status = ViewData["Status"];
-    
+    var nomeUsuario = ViewData["NomeUsuario"];
+    var colocaNome = "";
+    if(ViewData["NomeUsuario"] != null)
+    {
+        colocaNome = "value=" + nomeUsuario +"";
+    }
+
+
 }
 
 <h2>Login</h2>
@@ -12,7 +19,7 @@
     <table>
         <tr>
             <td>Login:</td>
-            <td><input type="text" name="login" /></td>
+            <td><input type="text" name="login" @colocaNome></td>
         </tr>
         <tr>
             <td>Senha:</td>
@@ -23,7 +30,7 @@
             <td><input type="password" name="Repitasenha" /></td>
         </tr>
         <tr>
-            <td><input type="submit" value="Entrar" /></td>
+            <td><input type="submit" value="Entrar" id="cadastrar-usuario" /></td>
         </tr>
     </table>
 </form>

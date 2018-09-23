@@ -29,7 +29,7 @@ namespace Minos.Site.Controllers
         
        public bool ValidaLogin()
        {
-            if(string.IsNullOrEmpty(Login) || Login.Count() >= 20 || Login.Count() < 5)
+            if(string.IsNullOrEmpty(Login) || Login.Count() >= 20 || Login.Count() < 5 || Login.Contains(" "))
             {
                 return false;
             }
@@ -41,7 +41,7 @@ namespace Minos.Site.Controllers
 
         public bool ValidaSenha()
         {
-            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 5)
+            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 5 || Senha.Contains(" "))
             {
                 return false;
             }

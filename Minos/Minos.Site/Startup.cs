@@ -58,7 +58,7 @@ namespace Minos.Site
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Usuario}/{action=Login}/{id?}");
+                    template: "{controller=Usuario}/{action=Index}/{id?}");
             });
         }
     }

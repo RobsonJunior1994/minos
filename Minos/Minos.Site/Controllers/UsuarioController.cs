@@ -20,7 +20,8 @@ namespace Minos.Site.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login");
+
         }
 
         [HttpGet]
@@ -43,7 +44,7 @@ namespace Minos.Site.Controllers
 
             if (!usuario.ValidaLogin())
             {
-                ViewData["Message"] = "Por favor Digite um Login!";
+                ViewData["Message"] = "Por favor Digite um Login valido!";
                 ViewData["Status"] = "bg-danger";
                 return View();
             }
@@ -52,6 +53,7 @@ namespace Minos.Site.Controllers
             {
                 ViewData["Message"] = "Por favor Digite uma Senha Válida!";
                 ViewData["Status"] = "bg-danger";
+                ViewData["NomeUsuario"] = login;
                 return View();
             }
             if (senha != repitaSenha)

@@ -31,7 +31,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Robson", "Senha1");
+            sut.CadastrarUsuario("Robson", "Senha1", "Senha1");
 
 
             //assert
@@ -47,7 +47,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("", "Senha1");
+            sut.CadastrarUsuario("", "Senha1", "Senha1");
 
 
             //assert
@@ -63,7 +63,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario(null, "Senha1");
+            sut.CadastrarUsuario(null, "Senha1", "Senha1");
 
 
             //assert
@@ -79,7 +79,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Enea", "Senha1");
+            sut.CadastrarUsuario("Enea", "Senha1", "Senha1");
 
 
             //assert
@@ -95,7 +95,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("EneasLucasPaulaMarti", "Senha1");
+            sut.CadastrarUsuario("EneasLucasPaulaMarti", "Senha1", "Senha1");
 
 
             //assert
@@ -111,7 +111,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Robson", "");
+            sut.CadastrarUsuario("Robson", "", "");
 
 
             //assert
@@ -127,7 +127,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Robson", null);
+            sut.CadastrarUsuario("Robson", null, null);
 
 
             //assert
@@ -135,15 +135,15 @@ namespace Minos.UnitTests
         }
 
         [Trait("UsuarioController", "Cadastrar Usuario")]
-        [Fact(DisplayName = "Deveria Nao Salvar Usuario Se Senha Eh Menor Que Seis")]
-        public void DeveriaNaoSalvarUsuarioSeSenhaEhMenorQueSeis()
+        [Fact(DisplayName = "Deveria Nao Salvar Usuario Se Senha Eh Menor Que cinco")]
+        public void DeveriaNaoSalvarUsuarioSeSenhaEhMenorQueCinco()
         {
             //arrange
             CriaMock();
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Eneas", "Senha");
+            sut.CadastrarUsuario("Eneas", "Senh", "Senh");
 
 
             //assert
@@ -159,7 +159,39 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarUsuario("Eneas", "Senha0123456789");
+            sut.CadastrarUsuario("Eneas", "Senha0123456789", "Senha0123456789");
+
+
+            //assert
+            usuarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Usuario>()), Times.Never);
+        }
+
+        [Trait("UsuarioController", "Cadastrar Usuario")]
+        [Fact(DisplayName = "Deveria Nao Salvar Usuario Se Usuario Contiver Espacos")]
+        public void DeveriaNaoSalvarUsuarioSeUsuarioContiverEspacos()
+        {
+            //arrange
+            CriaMock();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarUsuario("Eneas Lucas", "Senha0123456789", "Senha0123456789");
+
+
+            //assert
+            usuarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Usuario>()), Times.Never);
+        }
+
+        [Trait("UsuarioController", "Cadastrar Usuario")]
+        [Fact(DisplayName = "Deveria Nao Salvar Usuario Se Senha Contiver Espacos")]
+        public void DeveriaNaoSalvarUsuarioSeSenhaContiverEspacos()
+        {
+            //arrange
+            CriaMock();
+
+            //act
+            CriaAdminController();
+            sut.CadastrarUsuario("EneasLucas", "Senha 0123456789", "Senha 0123456789");
 
 
             //assert
