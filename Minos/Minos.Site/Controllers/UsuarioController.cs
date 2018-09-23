@@ -82,10 +82,25 @@ namespace Minos.Site.Controllers
             Usuario usuario = new Usuario(login, senha);
             if (usuario.EhValido())
             {
+                if(_usuarioRepository.EhAdm(login, senha))
+                {
+                    if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+                    {
+                        HttpContext.Session.SetString("LogarAdm", "Administrador");
+                        return RedirectToAction("Index", "Admin");
+
+                    }
+                    else
+                    {
+                        ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
+                        return View();
+                    }    
+                }
+
                 if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
                 {
-                    HttpContext.Session.SetString("Test", "Usuario");
-                    return RedirectToAction("Index", "Admin");
+                    HttpContext.Session.SetString("LogarAluno", "Aluno");
+                    return RedirectToAction("Index", "Aluno");
 
                 }
                 else
@@ -101,7 +116,8 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("Test");
+            HttpContext.Session.Remove("LogarAdm");
+            HttpContext.Session.Remove("LogarAluno");
             return RedirectToAction("Login", "Usuario");
         }
 

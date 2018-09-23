@@ -43,5 +43,16 @@ namespace Minos.Site.Repositories
                 contexto.SaveChanges();
             }
         }
+
+        public bool EhAdm(string login, string senha)
+        {
+            bool usuarioEhAdm = false;
+            using (var contexto = new MinosContext())
+            {
+                var usuario = contexto.Usuarios.SingleOrDefault(x => x.Login == login && x.Senha == senha && x.Admin == "S");
+                usuarioEhAdm = usuario != null;
+            }
+            return usuarioEhAdm;
+        }
     }
 }

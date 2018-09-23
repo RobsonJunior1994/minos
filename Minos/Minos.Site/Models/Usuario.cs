@@ -12,7 +12,7 @@ namespace Minos.Site.Controllers
         public int Id { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-
+        public string Admin { get; set; }
         public Usuario(string login, string senha)
         {
             Login = login;

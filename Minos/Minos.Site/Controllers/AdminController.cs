@@ -31,8 +31,9 @@ namespace Minos.Site.Controllers
 
         public IActionResult Index()
         {
-            var logado = ViewBag.Message = HttpContext.Session.GetString("Test");
-            if (logado == null)
+            var logado = HttpContext.Session.GetString("LogarAdm");
+
+            if (logado == null || logado.ToString() != logado.ToString())
             {
                 return RedirectToAction("Login", "Usuario");
             }
