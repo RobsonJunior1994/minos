@@ -10,7 +10,6 @@ namespace Minos.UnitTests
     public class Tests
     {
         internal AdminController sut;
-        internal LoginController sutLogin;
         internal Mock<IProfessorRepository> professorRepositoryMock;
         internal List<int> turmaIdVazia = new List<int>();
         internal Mock<ITurmaRepository> turmaRepositoryMock;
@@ -41,11 +40,6 @@ namespace Minos.UnitTests
         {
             sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object);
 
-        }
-
-        public void CriaLoginController()
-        {
-            sutLogin = new LoginController(loginRepositoryMock.Object);
         }
     }
 }
