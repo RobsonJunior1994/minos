@@ -13,6 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Banco\Minos.mdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="Banco\Minos.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
