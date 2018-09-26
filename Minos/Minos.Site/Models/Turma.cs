@@ -13,6 +13,7 @@ namespace Minos.Site.Models
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public IList<Professor> Professores { get; set; }
+        public List<Questionario> Questionarios { get; set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {

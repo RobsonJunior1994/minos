@@ -7,6 +7,10 @@ namespace Minos.Site.Models
 {
     public class QuestionarioAlunoViewModel
     {
-        public List<Questionario> Perguntas { get; set; }
+        public string NomeDoAluno { get; set; }
+        public string CodigoDaTurma { get; set; }
+        public string Matricula { get; set; }
+        public List<string> Professores { get; set; }
+        public List<string> Perguntas { get; set; }
     }
 }

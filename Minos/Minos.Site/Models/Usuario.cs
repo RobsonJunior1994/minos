@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Minos.Site.Controllers
+namespace Minos.Site.Models
 {
     public class Usuario
     {

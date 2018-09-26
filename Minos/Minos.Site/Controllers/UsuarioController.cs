@@ -10,33 +10,15 @@ namespace Minos.Site.Controllers
     public class UsuarioController : Controller
     {
         private IUsuarioRepository _usuarioRepository;
-        private IQuestionarioRepository _questionarioRepository;
 
         public UsuarioController(
-            IUsuarioRepository usuarioRepository,
-            IQuestionarioRepository questionarioRepository)
+            IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
-            _questionarioRepository = questionarioRepository;
         }
 
 
         public IActionResult Index()
-        {
-            return View();
-        }
-        
-        [HttpGet]
-        public IActionResult QuestionarioAluno(Turma turma)
-        {
-            var questionario = _questionarioRepository.ObterListaDePerguntas();
-            var model = new QuestionarioAlunoViewModel();
-            
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult QuestionarioAluno()
         {
             return View();
         }
