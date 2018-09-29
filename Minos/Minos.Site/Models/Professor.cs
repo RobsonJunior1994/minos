@@ -7,6 +7,7 @@ namespace Minos.Site.Models
 {
     public class Professor
     {
+        public string Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public List<Turma> Turmas { get; set; }

@@ -10,7 +10,11 @@ namespace Minos.Site.Repositories
     {
         public void Salvar(Professor professor)
         {
-            throw new NotImplementedException();
+            using (var contexto = new MinosContext())
+            {
+                contexto.Professores.Add(professor);
+                contexto.SaveChanges();
+            }
         }
     }
 }

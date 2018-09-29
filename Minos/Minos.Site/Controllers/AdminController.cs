@@ -45,6 +45,8 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarTurma()
         {
+            var grau = new Grau();
+            ViewData["Grau"] = grau;
             return View();
         }
 
@@ -52,7 +54,7 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarTurma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Turma turma = new Turma(grau, serie, turno, codigoTurma);
-
+            
             if (!turma.EhCodigoValido())
             {
                 ViewData["Message"] = "Por favor, preencha os campos corretamente";
@@ -76,9 +78,8 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarProfessor()
         {
-            List<Turma> turmas = _turmaRepository.ObterTurmasDesteAno();
-
-            return View(turmas);
+            ViewBag.turmas = _turmaRepository.ListarTurmas();
+            return View();
         }
         
         [HttpPost]

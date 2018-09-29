@@ -145,9 +145,9 @@ namespace Minos.UnitTests
             string codigoFinal2 = "B2T";
             string codigoFinal3 = "B1N";
 
-            Assert.True(turma1.CodigoTurma == codigoFinal1);
-            Assert.True(turma2.CodigoTurma == codigoFinal2);
-            Assert.True(turma3.CodigoTurma == codigoFinal3);
+            Assert.True(turma1.CodigoDaTurma == codigoFinal1);
+            Assert.True(turma2.CodigoDaTurma == codigoFinal2);
+            Assert.True(turma3.CodigoDaTurma == codigoFinal3);
         }
 
         [Trait("TurmaController", "Gerar CodigoTurma")]
@@ -158,7 +158,7 @@ namespace Minos.UnitTests
          
             string codigoFinal = "A9M";
 
-            Assert.True(turma.CodigoTurma != codigoFinal && turma.CodigoTurma == "BLA");
+            Assert.True(turma.CodigoDaTurma != codigoFinal && turma.CodigoDaTurma == "BLA");
         }
     }
 }

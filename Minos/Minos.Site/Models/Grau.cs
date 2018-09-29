@@ -11,4 +11,5 @@ namespace Minos.Site.Models
         Fundamental,
         Medio
     }
+
 }

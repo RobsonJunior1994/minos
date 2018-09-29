@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[Usuarios] (
+    [Id]    INT           IDENTITY (1, 1) NOT NULL,
+    [Login] NVARCHAR (19) NOT NULL,
+    [Senha] NVARCHAR (14) NOT NULL,
+    [Admin] CHAR (1)      NULL,
+    CONSTRAINT [PK_Servicos] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Professores] (
+    [Id]           INT            IDENTITY (1, 1) NOT NULL,
+    [Nome]         NVARCHAR (MAX) NOT NULL,
+    [SobreNome]    NVARCHAR (MAX) NOT NULL,
+    [ListaDeTurma] NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_Professores] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Turmas] (
+    [Id]            INT            IDENTITY (1, 1) NOT NULL,
+    [CodigoDaTurma] NVARCHAR (MAX) NULL,
+    [Turno]         INT            NOT NULL,
+    [Serie]         INT            NOT NULL,
+    [Grau]          INT            NOT NULL,
+    [IdProfessores] INT            NULL,
+    CONSTRAINT [PK_Turmas] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

@@ -8,7 +8,7 @@ namespace Minos.Site.Models
     public class Turma
     {
         public int Id { get; set; }
-        public string CodigoTurma { get; set; }
+        public string CodigoDaTurma { get; set; }
         public Turno Turno { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
@@ -22,15 +22,25 @@ namespace Minos.Site.Models
             Professores = new List<Professor>();
 
             if (string.IsNullOrEmpty(codigoTurma))
-                CodigoTurma = GerarCodigo();
+            {
+                CodigoDaTurma = GerarCodigo();
+                return;
+            }
             else
-                CodigoTurma = codigoTurma;
+            {
+                CodigoDaTurma = codigoTurma;
+            }
+
+        }
+
+        public Turma()
+        {
 
         }
         
         public bool EhCodigoValido()
         {
-            if (CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
+            if (CodigoDaTurma.Any(x => char.IsLetterOrDigit(x)))
             {
                 return true;
             }
@@ -58,14 +68,8 @@ namespace Minos.Site.Models
             }
             switch (Serie)
             {
-                case Serie.Primeiro:
-                    codigo += 1;
-                    break;
-                case Serie.Segundo:
-                    codigo += 2;
-                    break;
-                case Serie.Terceiro:
-                    codigo += 3;
+                case Serie.Sexto:
+                    codigo += 6;
                     break;
                 case Serie.Setimo:
                     codigo += 7;
@@ -75,6 +79,15 @@ namespace Minos.Site.Models
                     break;
                 case Serie.Nono:
                     codigo += 9;
+                    break;
+                case Serie.PrimeiroAnoEM:
+                    codigo += 1;
+                    break;
+                case Serie.SegundoAnoEM:
+                    codigo += 2;
+                    break;
+                case Serie.TerceiroAnoEM:
+                    codigo += 3;
                     break;
                 default:
                     break;
