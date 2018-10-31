@@ -97,7 +97,7 @@ namespace Minos.Site.Controllers
                 if (turma == null || turma.Id == 0)
                     return View();
 
-                professor.Turmas.Add(turma);
+                //professor.Turmas.Add(turma);
             }
 
             if (!professor.ValidaProfessor())

@@ -12,14 +12,14 @@ namespace Minos.Site.Models
         public Turno Turno { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
-        public IList<Professor> Professores { get; set; }
+        public IList<ProfessorTurma> Professores { get; set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Grau = grau;
             Serie = serie;
             Turno = turno;
-            Professores = new List<Professor>();
+            Professores = new List<ProfessorTurma>();
 
             if (string.IsNullOrEmpty(codigoTurma))
             {
@@ -50,7 +50,7 @@ namespace Minos.Site.Models
             }
         }
 
-
+        
 
         public string GerarCodigo()
         {

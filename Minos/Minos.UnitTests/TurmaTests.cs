@@ -138,8 +138,8 @@ namespace Minos.UnitTests
         public void DeveriaGerarCodigoTurmaCorretamenteQuandoCodigoTurmaForNulo()
         {
             var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
-            var turma2 = new Turma(Grau.Medio, Serie.Segundo, Turno.Tarde, null);
-            var turma3 = new Turma(Grau.Medio, Serie.Primeiro, Turno.Noite, null);
+            var turma2 = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Tarde, null);
+            var turma3 = new Turma(Grau.Medio, Serie.SegundoAnoEM, Turno.Noite, null);
 
             string codigoFinal1 = "A9M";
             string codigoFinal2 = "B2T";

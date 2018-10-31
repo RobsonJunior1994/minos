@@ -13,6 +13,12 @@ namespace Minos.Site.Models
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Professor> Professores { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProfessorTurma>().HasKey(pt => new { pt.ProfessorId, pt.TurmaId });
+            base.OnModelCreating(modelBuilder);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Minos;Trusted_Connection=true");

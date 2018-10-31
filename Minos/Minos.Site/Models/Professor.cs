@@ -10,13 +10,13 @@ namespace Minos.Site.Models
         public string Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public List<Turma> Turmas { get; set; }
+        public IList<ProfessorTurma> Turmas { get; set; }
 
         public Professor(string nome, string sobrenome)
         {
             Nome = nome;
             Sobrenome = sobrenome;
-            Turmas = new List<Turma>();
+            Turmas = new List<ProfessorTurma>();
         }
 
         public bool ValidaProfessor()
