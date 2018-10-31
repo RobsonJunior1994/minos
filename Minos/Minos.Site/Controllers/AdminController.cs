@@ -26,6 +26,7 @@ namespace Minos.Site.Controllers
             _perguntaRepository = perguntaRepository;
             
         }
+        
 
         public IActionResult Index()
         {
@@ -42,23 +43,22 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarTurma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Turma turma = new Turma(grau, serie, turno, codigoTurma);
+            var mensagem = new Mensagem();
 
             if (!turma.EhCodigoValido())
             {
-                ViewData["Message"] = "Por favor, preencha os campos corretamente";
-                return View();
+                return View(mensagem.TurmaCodigoInvalido());
             }
 
             if (!turma.EhValida())
-            {  
-                ViewData["Message"] = "Por favor, preencha todos os campos necessários!";
-                return View();
+            {
+                return View(mensagem.CadastroTurmaInvalido());
             }
             else
             {
                 _turmaRepository.Salvar(turma);
             }
-            return View();
+            return View(mensagem.CadastroTurmaValido());
 
         }
 
@@ -89,10 +89,11 @@ namespace Minos.Site.Controllers
                 professor.Turmas.Add(turma);
             }
 
+            var mensagem = new Mensagem();
+
             if (!professor.ValidaProfessor())
             {
-                ViewData["Message"] = "Envie os dados do professor de forma correta!";
-                return View();
+                return View(mensagem.CadastroProfessorIncorreto());
             }
             else
             {
@@ -113,13 +114,14 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, Periodo periodo)
         {
             Questionario questionario = new Questionario(listaDePerguntas, periodo);
+            var mensagem = new Mensagem();
             if (questionario.EhValido())
             {
                 _questionarioRepository.Salvar(questionario);
             }
             else
             {
-                ViewData["Message"] = "O cadastro de questionario está incorreto, por favor envie os paramatros necessários!";
+                return View(mensagem.CadastroQuestionarioIncorreto());
             }
 
             return View();
@@ -135,6 +137,7 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarPergunta(string perguntaEnviada)
         {
             Pergunta pergunta = new Pergunta(perguntaEnviada);
+            var mensagem = new Mensagem();
 
             if (pergunta.EhValida())
             {
@@ -142,7 +145,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                ViewData["Message"] = "O cadastro de pergunta está incorreto, por favor envie os paramatros necessários!";
+                return View(mensagem.CadastroPerguntaIncorreto());
             }
 
             return View();

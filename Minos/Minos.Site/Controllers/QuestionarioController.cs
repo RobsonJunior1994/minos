@@ -12,6 +12,11 @@ namespace Minos.Site.Controllers
     {
         private IAlunoRepository _alunoRepository;
 
+        public QuestionarioController(IAlunoRepository alunoRepository)
+        {
+            _alunoRepository = alunoRepository;
+        }
+
         public IActionResult Index(string matriculaDoAluno)
         {
             var aluno = _alunoRepository.ObterAlunoPorMatricula(matriculaDoAluno);
@@ -20,19 +25,22 @@ namespace Minos.Site.Controllers
                 aluno
                 .Turma
                 .Questionarios
-                .FirstOrDefault(x =>
-                    x.Periodo.DataInicial >= DateTime.Now &&
-                    x.Periodo.DataFinal <= DateTime.Now);
+                .FirstOrDefault(x => x.Periodo.DataInicial.Date <= DateTime.Now.Date && x.Periodo.DataFinal.Date >= DateTime.Now.Date);
 
-            if (questionario == null) { }
-            //retorna mensagem de erro
-            ViewData["Message"] = "Questinário não existe.";
+            var mensagem = new Mensagem();
+
+            if (questionario == null)
+            {
+                return View(mensagem.QuestionarioNaoExiste());
+            }
 
             var viewModel = new QuestionarioAlunoViewModel()
             {
                 CodigoDaTurma = aluno.Turma.CodigoTurma,
                 Matricula = aluno.Matricula,
-                NomeDoAluno = aluno.Nome + " " + aluno.Sobrenome
+                NomeDoAluno = aluno.Nome + " " + aluno.Sobrenome,
+                Perguntas = new List<string>(),
+                Professores = new List<string>()
             };
 
             foreach (var perguntaClasse in questionario.ListaDePerguntas)
@@ -40,7 +48,7 @@ namespace Minos.Site.Controllers
 
             foreach (var professor in aluno.Turma.Professores)
                 viewModel.Professores.Add(professor.Nome + " " + professor.Sobrenome);
-
+               
             return View(viewModel);
         }
     }

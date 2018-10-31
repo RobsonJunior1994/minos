@@ -7,22 +7,8 @@ using Xunit;
 
 namespace Minos.UnitTests
 {
-    public class UsuarioTests
+    public class UsuarioTests : Tests
     {
-        private Mock<IUsuarioRepository> usuarioRepositoryMock;
-        private Mock<IQuestionarioRepository> questionarioRepositoryMock;
-        private UsuarioController sut;
-
-        public void CriaMock()
-        {
-            this.usuarioRepositoryMock = new Mock<IUsuarioRepository>();
-            this.questionarioRepositoryMock = new Mock<IQuestionarioRepository>();
-        }
-        public void CriaAdminController()
-        {
-            this.sut = new UsuarioController(usuarioRepositoryMock.Object, questionarioRepositoryMock.Object);
-        }
-
         //TESTES
         [Trait("UsuarioController", "Cadastrar Usuario")]
         [Fact(DisplayName = "Deveria Salvar Usuario Chamando Repository Uma Vez")]
@@ -32,8 +18,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Robson", "Senha1");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Robson", "Senha1");
 
 
             //assert
@@ -48,8 +34,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("", "Senha1");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("", "Senha1");
 
 
             //assert
@@ -64,8 +50,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario(null, "Senha1");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario(null, "Senha1");
 
 
             //assert
@@ -80,8 +66,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Enea", "Senha1");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Enea", "Senha1");
 
 
             //assert
@@ -96,8 +82,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("EneasLucasPaulaMarti", "Senha1");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("EneasLucasPaulaMarti", "Senha1");
 
 
             //assert
@@ -112,8 +98,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Robson", "");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Robson", "");
 
 
             //assert
@@ -128,8 +114,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Robson", null);
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Robson", null);
 
 
             //assert
@@ -144,8 +130,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Eneas", "Senha");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Eneas", "Senha");
 
 
             //assert
@@ -160,8 +146,8 @@ namespace Minos.UnitTests
             CriaMock();
 
             //act
-            CriaAdminController();
-            sut.CadastrarUsuario("Eneas", "Senha0123456789");
+            CriaUsuarioController();
+            sut3.CadastrarUsuario("Eneas", "Senha0123456789");
 
 
             //assert

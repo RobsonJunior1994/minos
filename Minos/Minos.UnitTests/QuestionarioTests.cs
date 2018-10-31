@@ -1,4 +1,5 @@
-﻿using Minos.Site.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using Minos.Site.Controllers;
 using Minos.Site.Models;
 using Moq;
 using System;
@@ -194,6 +195,71 @@ namespace Minos.UnitTests
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
+        }
+
+        [Trait("QuestionarioController", "Exibir Questionario")]
+        [Fact(DisplayName = "Deveria Retornar View")]
+        public void DeveriaRetornarView()
+        {
+            //arrange
+            CriaMock();
+
+            //act
+            CriaQuestionarioController();
+
+            var turma = new Turma(Grau.Medio, Serie.Primeiro, Turno.Manha, "EM1M");
+            alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
+
+            var listaDePerguntas = new List<Pergunta>();
+            Pergunta pergunta = new Pergunta("Voce se da bem com o seu professor?");
+            listaDePerguntas.Add(pergunta);
+
+            var periodo = new Periodo() { DataInicial = DateTime.Now, DataFinal = DateTime.Now};
+
+            var questionario = new Questionario(listaDePerguntas, periodo);
+            //{
+            //    ListaDePerguntas = listaDePerguntas
+            //};
+
+            turma.Questionarios = new List<Questionario>();
+            turma.Questionarios.Add(questionario);
+
+            IActionResult result = sut2.Index("1");
+            
+
+            //assert
+            Object.Equals(result, typeof(ViewResult));
+        }
+
+        [Trait("QuestionarioController", "Exibir Questionario")]
+        [Fact(DisplayName = "Deveria Retornar Mensagem De Erro Se Questionario Eh Null")]
+        public void Deveria()
+        {
+            //arrange
+            CriaMock();
+
+            //act
+            CriaQuestionarioController();
+
+            var turma = new Turma(Grau.Medio, Serie.Primeiro, Turno.Manha, "EM1M");
+            alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
+
+            var listaDePerguntas = new List<Pergunta>();
+            Pergunta pergunta = new Pergunta("Voce se da bem com o seu professor?");
+            listaDePerguntas.Add(pergunta);
+
+            var periodo = new Periodo() { DataInicial = DateTime.Now.AddDays(1), DataFinal = DateTime.Now };
+
+            var questionario = new Questionario(listaDePerguntas, periodo);
+
+            turma.Questionarios = new List<Questionario>();
+            turma.Questionarios.Add(questionario);
+
+            IActionResult result = sut2.Index("1");
+            string mensagem = "Questionario não existe!";
+
+            //assert
+            Object.Equals(mensagem, typeof(ViewResult));
         }
     }
 }
