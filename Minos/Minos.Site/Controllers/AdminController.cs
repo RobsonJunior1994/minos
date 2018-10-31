@@ -115,7 +115,7 @@ namespace Minos.Site.Controllers
                 _professorRepository.Salvar(professor);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
         [HttpGet]
