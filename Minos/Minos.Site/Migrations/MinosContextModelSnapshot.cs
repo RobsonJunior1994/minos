@@ -26,9 +26,11 @@ namespace Minos.Site.Migrations
 
                     b.Property<string>("Admin");
 
-                    b.Property<string>("Login");
+                    b.Property<string>("Login")
+                        .IsRequired();
 
-                    b.Property<string>("Senha");
+                    b.Property<string>("Senha")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -37,12 +39,15 @@ namespace Minos.Site.Migrations
 
             modelBuilder.Entity("Minos.Site.Models.Professor", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired();
 
-                    b.Property<string>("Sobrenome");
+                    b.Property<string>("Sobrenome")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -55,11 +60,7 @@ namespace Minos.Site.Migrations
 
                     b.Property<int>("TurmaId");
 
-                    b.Property<string>("ProfessorId1");
-
                     b.HasKey("ProfessorId", "TurmaId");
-
-                    b.HasIndex("ProfessorId1");
 
                     b.HasIndex("TurmaId");
 
@@ -72,7 +73,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoDaTurma");
+                    b.Property<string>("CodigoDaTurma")
+                        .IsRequired();
 
                     b.Property<int>("Grau");
 
@@ -89,7 +91,8 @@ namespace Minos.Site.Migrations
                 {
                     b.HasOne("Minos.Site.Models.Professor", "Professor")
                         .WithMany("Turmas")
-                        .HasForeignKey("ProfessorId1");
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Minos.Site.Models.Turma", "Turma")
                         .WithMany("Professores")

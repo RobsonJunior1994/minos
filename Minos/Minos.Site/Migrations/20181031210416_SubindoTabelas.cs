@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Minos.Site.Migrations
 {
-    public partial class TurmaUsuarioProfessorProfessorTurma : Migration
+    public partial class SubindoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +11,10 @@ namespace Minos.Site.Migrations
                 name: "Professores",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(nullable: true),
-                    Sobrenome = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: false),
+                    Sobrenome = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,7 +27,7 @@ namespace Minos.Site.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CodigoDaTurma = table.Column<string>(nullable: true),
+                    CodigoDaTurma = table.Column<string>(nullable: false),
                     Turno = table.Column<int>(nullable: false),
                     Serie = table.Column<int>(nullable: false),
                     Grau = table.Column<int>(nullable: false)
@@ -42,8 +43,8 @@ namespace Minos.Site.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Login = table.Column<string>(nullable: true),
-                    Senha = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: false),
+                    Senha = table.Column<string>(nullable: false),
                     Admin = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -56,18 +57,17 @@ namespace Minos.Site.Migrations
                 columns: table => new
                 {
                     ProfessorId = table.Column<int>(nullable: false),
-                    ProfessorId1 = table.Column<string>(nullable: true),
                     TurmaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProfessorTurma", x => new { x.ProfessorId, x.TurmaId });
                     table.ForeignKey(
-                        name: "FK_ProfessorTurma_Professores_ProfessorId1",
-                        column: x => x.ProfessorId1,
+                        name: "FK_ProfessorTurma_Professores_ProfessorId",
+                        column: x => x.ProfessorId,
                         principalTable: "Professores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProfessorTurma_Turmas_TurmaId",
                         column: x => x.TurmaId,
@@ -75,11 +75,6 @@ namespace Minos.Site.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProfessorTurma_ProfessorId1",
-                table: "ProfessorTurma",
-                column: "ProfessorId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProfessorTurma_TurmaId",

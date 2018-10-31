@@ -97,7 +97,12 @@ namespace Minos.Site.Controllers
                 if (turma == null || turma.Id == 0)
                     return View();
 
-                //professor.Turmas.Add(turma);
+                var professorturma = new ProfessorTurma();
+
+                professorturma.ProfessorId = professor.Id;
+                professorturma.TurmaId = turma.Id;
+
+                professor.Turmas.Add(professorturma);
             }
 
             if (!professor.ValidaProfessor())
@@ -109,8 +114,8 @@ namespace Minos.Site.Controllers
             {
                 _professorRepository.Salvar(professor);
             }
-                  
-            return View();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

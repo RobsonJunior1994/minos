@@ -4,15 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Minos.Site.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Minos.Site.Controllers
 {
     public class Usuario
     {
         public int Id { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Senha { get; set; }
         public string Admin { get; set; }
+
         public Usuario(string login, string senha)
         {
             Login = login;

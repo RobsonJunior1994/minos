@@ -13,10 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20181031182613_ProfessorTurma.cs" />
-    <Compile Remove="Migrations\20181031182613_ProfessorTurma.Designer.cs" />
-    <Compile Remove="Migrations\20181031184248_Turma-Usuario-Professor-ProfessorTurma.cs" />
-    <Compile Remove="Migrations\20181031184248_Turma-Usuario-Professor-ProfessorTurma.Designer.cs" />
+    <Compile Remove="Migrations\20181031205547_SubindoClasses.cs" />
+    <Compile Remove="Migrations\20181031205547_SubindoClasses.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
