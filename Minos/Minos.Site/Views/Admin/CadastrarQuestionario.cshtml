@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "CadastrarQuestionario";
+    var mensagem = ViewData["Message"];
+}
+
+<h2>CadastrarQuestionario</h2>
+
+<form action="\Admin\CadastrarQuestionario" method="post">
+    <table>
+        <!--@foreach (var item in ViewBag.periodos)
+        {
+            <tr>
+                <td>
+                    <input type="radio" name="periodoId" value="@item.Id"/>
+                    @item.DataInicial - @item.DataFinal
+                </td>
+            </tr>
+        }-->
+
+        <tr>
+            <td>Data Inicial</td>
+            <td><input type="datetime-local" name="periodoInicial"</td>
+        </tr>
+        <tr>
+            <td>Data final</td>
+            <td><input type="datetime-local" name="periodoFinal"</td>
+        </tr>
+
+        @foreach (var item in ViewBag.perguntas)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="listaDeIdDePerguntas" value="@item.Id" />@item.Texto
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td><input type="submit" /></td>
+        </tr>
+    </table>
+    </form>

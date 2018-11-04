@@ -10,7 +10,11 @@ namespace Minos.Site.Repositories
     {
         public void Salvar(Questionario Questionario)
         {
-            throw new NotImplementedException();
+            using (var contexto = new MinosContext())
+            {
+                contexto.Add(Questionario);
+                contexto.SaveChanges();
+            }
         }
     }
 }

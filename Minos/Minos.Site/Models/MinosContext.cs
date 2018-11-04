@@ -12,10 +12,15 @@ namespace Minos.Site.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Professor> Professores { get; set; }
+        public DbSet<Questionario> Questionarios { get; set; }
+        public DbSet<Pergunta> Perguntas { get; set; }
+        public DbSet<Periodo> Periodo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProfessorTurma>().HasKey(pt => new { pt.ProfessorId, pt.TurmaId });
+            modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
+
             base.OnModelCreating(modelBuilder);
         }
 

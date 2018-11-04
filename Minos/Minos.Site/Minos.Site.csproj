@@ -15,6 +15,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181031205547_SubindoClasses.cs" />
     <Compile Remove="Migrations\20181031205547_SubindoClasses.Designer.cs" />
+    <Compile Remove="Migrations\20181104044039_TabelaPerguntas.cs" />
+    <Compile Remove="Migrations\20181104044039_TabelaPerguntas.Designer.cs" />
+    <Compile Remove="Migrations\20181104061847_TabelaQuestionariosEPerguntas.cs" />
+    <Compile Remove="Migrations\20181104061847_TabelaQuestionariosEPerguntas.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

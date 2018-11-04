@@ -15,17 +15,20 @@ namespace Minos.Site.Controllers
         private ITurmaRepository _turmaRepository;
         private IQuestionarioRepository _questionarioRepository;
         private IPerguntaRepository _perguntaRepository;
+        private IPeriodoRepository _periodoRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
             ITurmaRepository turmaRepository,
             IQuestionarioRepository questionarioRepository,
-            IPerguntaRepository perguntaRepository)
+            IPerguntaRepository perguntaRepository,
+            IPeriodoRepository periodoRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
+            _periodoRepository = periodoRepository;
             
         }
 
@@ -121,14 +124,40 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarQuestionario()
         {
+            ViewBag.periodos = _periodoRepository.ListarPeriodos();
+            ViewBag.perguntas = _perguntaRepository.ListarPergunras();
             return View();
         }
 
 
         [HttpPost]
-        public IActionResult CadastrarQuestionario(List<Pergunta> listaDePerguntas, Periodo periodo)
+        public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
         {
-            Questionario questionario = new Questionario(listaDePerguntas, periodo);
+
+            //Periodo periodo = _periodoRepository.ObterPeriodoPeloId(periodoId);
+            Periodo periodo = new Periodo();
+            periodo.DataInicial = periodoInicial;
+            periodo.DataFinal = periodoFinal;
+
+            Questionario questionario = new Questionario(periodo);
+            if(listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
+            {
+                return View();
+            }
+
+            foreach (var perguntaId in listaDeIdDePerguntas)
+            {
+                Pergunta pergunta = new Pergunta();
+                pergunta = _perguntaRepository.ObterPerguntaPeloId(perguntaId);
+                if (pergunta == null || pergunta.Id == 0) return View();
+
+                var questionarioPergunta = new QuestionarioPergunta();
+                questionarioPergunta.PerguntaId = pergunta.Id;
+                questionarioPergunta.QuestionarioId = questionario.Id;
+
+                questionario.Perguntas.Add(questionarioPergunta);
+            }
+            
             if (questionario.EhValido())
             {
                 _questionarioRepository.Salvar(questionario);
@@ -138,7 +167,7 @@ namespace Minos.Site.Controllers
                 ViewData["Message"] = "O cadastro de questionario está incorreto, por favor envie os paramatros necessários!";
             }
 
-            return View();
+            return RedirectToAction("CadastrarQuestionario", "Admin");
         }
 
         [HttpGet]
@@ -161,6 +190,18 @@ namespace Minos.Site.Controllers
                 ViewData["Message"] = "O cadastro de pergunta está incorreto, por favor envie os paramatros necessários!";
             }
 
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarPeriodo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarPeriodo(DateTime inicial, DateTime final)
+        {
             return View();
         }
     }
