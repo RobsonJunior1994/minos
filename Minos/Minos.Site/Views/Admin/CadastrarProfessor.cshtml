@@ -1,30 +1,61 @@
 ﻿
 @{
-    ViewData["Title"] = "CadastrarProfessor";
+    ViewData["Title"] = "Cadastrar Professor";
 }
 
-<h2>CadastrarProfessor</h2>
-<form action="\Admin\CadastrarProfessor" method="post">
-    <table>
-        <tr>
-            <td>Nome:</td>
-            <td><input type="text" name="nome" /></td>
-        </tr>
-        <tr>
-            <td>Sobrenome:</td>
-            <td><input type="text" name="sobrenome" /></td>
-        </tr>
+<div class="principal">
+    <div class="cadastro">
+        <h2>Cadastrar Professor</h2>
+        <form action="\Admin\CadastrarProfessor" method="post">
+            <table>
+                <tr >
+                    <td>Nome:</td>
+                    <td><input type="text" name="nome" /></td>
+                </tr>
+                <tr>
+                    <td>Sobrenome:</td>
+                    <td><input type="text" name="sobrenome" /></td>
+                </tr>
 
-        <tr>
-            <td>Turmas:</td>
-        </tr>
+                <tr>
+                    <td>Turmas:</td>
+                </tr>
+                @{
+                    var listaDeTurmas = ViewBag.turmas;
+                    foreach (var item in listaDeTurmas)
+                    {
+                        <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
+                    }
+                }
+                <tr><td><input type="submit" value="Cadastrar" /></td></tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="lista">
+        <h2>Lista de Professores</h2>
+        <table>
+            <tr>
+                <td>Nome</td>
+                <td>Sobrenome</td>
+                <td>turmas</td>
+            </tr>
             @{
-                var listaDeTurmas = ViewBag.turmas;
-                foreach (var item in listaDeTurmas)
+                var listaDeProfessores = ViewBag.professores;
+                foreach (var item in listaDeProfessores)
                 {
-                    <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id"/>@item.Serie</td></tr>
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.Sobrenome</td>
+                        <td>
+                            @foreach (var turma in @item.Turmas)
+                            {
+                                @turma
+                            }
+                        </td>
+                    </tr>
                 }
             }
-        <tr><td><input type="submit" value="Cadastrar"/></td></tr>
-    </table>
-</form>
+        </table>
+    </div>
+</div>

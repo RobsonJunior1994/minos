@@ -16,5 +16,14 @@ namespace Minos.Site.Repositories
                 contexto.SaveChanges();
             }
         }
+
+        public List<Professor> ListarProfessores()
+        {
+            using (var contexto = new MinosContext())
+            {
+                var professores = contexto.Professores.ToList();
+                return professores;
+            }
+        }
     }
 }

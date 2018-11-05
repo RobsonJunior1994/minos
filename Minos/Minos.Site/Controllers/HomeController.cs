@@ -12,7 +12,7 @@ namespace Minos.Site.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Admin");
         }
 
         public IActionResult About()

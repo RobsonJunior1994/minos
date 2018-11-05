@@ -82,6 +82,7 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarProfessor()
         {
             ViewBag.turmas = _turmaRepository.ListarTurmas();
+            ViewBag.professores = _professorRepository.ListarProfessores();
             return View();
         }
         
