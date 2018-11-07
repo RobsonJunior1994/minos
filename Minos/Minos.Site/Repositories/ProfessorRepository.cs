@@ -30,5 +30,34 @@ namespace Minos.Site.Repositories
                 return professores;
             }
         }
+
+        public Professor ObterProfessorPeloId(int turmaId)
+        {
+            using (var contexto = new MinosContext())
+            {
+                var professor = contexto.Professores.First(x => x.Id == turmaId);
+                return professor;
+            }
+        }
+
+        //public void Excluir(int id)
+        //{
+        //    var professor = ObterProfessorPeloId(id);
+        //    using (var contexto = new MinosContext())
+        //    {
+        //        contexto.Remove(professor);
+        //        contexto.SaveChanges();
+        //    }
+        //}
+
+        public void Excluir(int id)
+        {
+            using (var contexto = new MinosContext())
+            {
+                var professor = contexto.Professores.Where(p => p.Id == id).First();
+                contexto.Professores.Remove(professor);
+                contexto.SaveChanges();
+            }
+        }
     }
 }

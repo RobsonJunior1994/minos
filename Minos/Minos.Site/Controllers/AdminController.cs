@@ -193,17 +193,15 @@ namespace Minos.Site.Controllers
 
             return View();
         }
-
-        [HttpGet]
-        public IActionResult CadastrarPeriodo()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
-        public IActionResult CadastrarPeriodo(DateTime inicial, DateTime final)
+        public IActionResult ExcluirProfessor(int idDoProfessor)
         {
-            return View();
+            if(idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            {
+                _professorRepository.Excluir(idDoProfessor);
+            }
+            return RedirectToAction("CadastrarProfessor", "Admin");
         }
     }
 }
