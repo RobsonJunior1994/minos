@@ -1,4 +1,5 @@
-﻿using Minos.Site.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Minos.Site.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,11 @@ namespace Minos.Site.Repositories
         {
             using (var contexto = new MinosContext())
             {
-                var professores = contexto.Professores.ToList();
+                var professores = contexto
+                    .Professores
+                    .Include(p => p.Turmas)
+                    .ThenInclude(pt => pt.Turma)
+                    .ToList();
                 return professores;
             }
         }

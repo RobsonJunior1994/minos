@@ -34,11 +34,12 @@
 
     <div class="lista">
         <h2>Lista de Professores</h2>
-        <table>
+        <table border="1">
             <tr>
                 <td>Nome</td>
                 <td>Sobrenome</td>
                 <td>turmas</td>
+                <td colspan="2">Ações</td>
             </tr>
             @{
                 var listaDeProfessores = ViewBag.professores;
@@ -48,11 +49,25 @@
                         <td>@item.Nome</td>
                         <td>@item.Sobrenome</td>
                         <td>
-                            @foreach (var turma in @item.Turmas)
+                            @foreach (var ProfessorTurma in @item.Turmas)
                             {
-                                @turma
+                                @ProfessorTurma.Turma.Serie;<span>,</span>
                             }
                         </td>
+                    
+                        <td>
+                            <form action="#" method="post">
+                                <input hidden name="idDoProfessor" value="@item.Id" />
+                                <input type="submit" value="Editar" />
+                            </form>
+                        </td>
+                        <td>
+                            <form action="#" method="post">
+                                <input hidden name="idDoProfessor" value="@item.Id" />
+                                <input type="submit" value="Excluir" />
+                            </form>
+                        </td>
+                    
                     </tr>
                 }
             }
