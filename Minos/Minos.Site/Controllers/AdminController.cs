@@ -203,5 +203,25 @@ namespace Minos.Site.Controllers
             }
             return RedirectToAction("CadastrarProfessor", "Admin");
         }
+
+        [HttpPost]
+        public IActionResult EditarProfessor(int idDoprofessor)
+        {
+            var professor = _professorRepository.ObterProfessorPeloId(idDoprofessor);
+            ViewBag.professor = professor;
+            ViewBag.turmas = _turmaRepository.ListarTurmas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizaProfessor(int idDoProfessor)
+        {
+            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            {
+                _professorRepository.Excluir(idDoProfessor);
+            }
+            return RedirectToAction("CadastrarProfessor", "Admin");
+        }
+
     }
 }

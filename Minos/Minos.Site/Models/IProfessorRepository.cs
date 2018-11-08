@@ -10,5 +10,6 @@ namespace Minos.Site.Models
         void Salvar(Professor professor);
         List<Professor> ListarProfessores();
         void Excluir(int id);
+        Professor ObterProfessorPeloId(int id);
     }
 }

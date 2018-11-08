@@ -31,24 +31,15 @@ namespace Minos.Site.Repositories
             }
         }
 
-        public Professor ObterProfessorPeloId(int turmaId)
+        public Professor ObterProfessorPeloId(int id)
         {
             using (var contexto = new MinosContext())
             {
-                var professor = contexto.Professores.First(x => x.Id == turmaId);
+                var professor = contexto.Professores.Include(p => p.Turmas)
+                    .ThenInclude(pt => pt.Turma).Where(p => p.Id == id).First();
                 return professor;
             }
         }
-
-        //public void Excluir(int id)
-        //{
-        //    var professor = ObterProfessorPeloId(id);
-        //    using (var contexto = new MinosContext())
-        //    {
-        //        contexto.Remove(professor);
-        //        contexto.SaveChanges();
-        //    }
-        //}
 
         public void Excluir(int id)
         {
