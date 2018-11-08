@@ -11,12 +11,17 @@ namespace Minos.Site.Controllers
     public class QuestionarioController : Controller
     {
         private IAlunoRepository _alunoRepository;
+        private IRespostaRepository _respostaRepository;
 
-        public QuestionarioController(IAlunoRepository alunoRepository)
+        public QuestionarioController(
+            IAlunoRepository alunoRepository,
+            IRespostaRepository respostaRepository)
         {
             _alunoRepository = alunoRepository;
+            _respostaRepository = respostaRepository;
         }
-
+        
+        [HttpGet]
         public IActionResult Index(string matriculaDoAluno)
         {
             var aluno = _alunoRepository.ObterAlunoPorMatricula(matriculaDoAluno);
@@ -48,8 +53,25 @@ namespace Minos.Site.Controllers
 
             foreach (var professor in aluno.Turma.Professores)
                 viewModel.Professores.Add(professor.Nome + " " + professor.Sobrenome);
-               
+            
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index()
+        {
+            Resposta resposta = new Resposta();
+            var mensagem = new Mensagem();
+
+            if (resposta.EhRespostaValida())
+            {
+                _respostaRepository.Salvar(resposta.Resultado());
+            }
+            else
+            {
+                return View(mensagem.RespostaIncorreta());
+            }
+            return View();
         }
     }
 }

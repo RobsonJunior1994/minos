@@ -18,6 +18,7 @@ namespace Minos.UnitTests
         internal Mock<IQuestionarioRepository> questionarioRepositoryMock;
         internal Mock<IPerguntaRepository> perguntaRepositoryMock;
         internal Mock<IAlunoRepository> alunoRepositoryMock;
+        internal Mock<IRespostaRepository> respostaRepositoryMock;
         internal List<int> turmaIdVazia = new List<int>();
         internal List<int> turmaId;
         internal Turma turmaNull;
@@ -37,6 +38,7 @@ namespace Minos.UnitTests
             this.questionarioRepositoryMock = new Mock<IQuestionarioRepository>();
             this.perguntaRepositoryMock = new Mock<IPerguntaRepository>();
             this.alunoRepositoryMock = new Mock<IAlunoRepository>();
+            this.respostaRepositoryMock = new Mock<IRespostaRepository>();
 
         }
 
@@ -47,7 +49,7 @@ namespace Minos.UnitTests
 
         public void CriaQuestionarioController()
         {
-            sut2 = new QuestionarioController(alunoRepositoryMock.Object);
+            sut2 = new QuestionarioController(alunoRepositoryMock.Object, respostaRepositoryMock.Object);
         }
 
         public void CriaUsuarioController()
