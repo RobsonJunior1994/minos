@@ -8,7 +8,7 @@
         <h2>Cadastrar Professor</h2>
         <form action="\Admin\CadastrarProfessor" method="post">
             <table>
-                <tr >
+                <tr>
                     <td>Nome:</td>
                     <td><input type="text" name="nome" /></td>
                 </tr>
@@ -21,11 +21,13 @@
                     <td>Turmas:</td>
                 </tr>
                 @{
+
                     var listaDeTurmas = ViewBag.turmas;
                     foreach (var item in listaDeTurmas)
                     {
                         <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
                     }
+
                 }
                 <tr><td><input type="submit" value="Cadastrar" /></td></tr>
             </table>

@@ -214,13 +214,40 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult AtualizaProfessor(int idDoProfessor)
+        public IActionResult AtualizarProfessor(int id, string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
-            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
+
+            Professor professor = new Professor(nome, sobrenome);
+            professor.Id = id;
+            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
+                return View();
+
+            foreach (var turmaId in listaDeIdDasTurmas)
             {
-                _professorRepository.Excluir(idDoProfessor);
+                Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
+
+                if (turma == null || turma.Id == 0)
+                    return View();
+
+                var professorturma = new ProfessorTurma();
+
+                professorturma.ProfessorId = professor.Id;
+                professorturma.TurmaId = turma.Id;
+
+                professor.Turmas.Add(professorturma);
             }
-            return RedirectToAction("CadastrarProfessor", "Admin");
+
+            if (!professor.ValidaProfessor())
+            {
+                ViewData["Message"] = "Envie os dados do professor de forma correta!";
+                return View();
+            }
+            else
+            {
+                _professorRepository.Atualizar(professor);
+            }
+
+            return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
     }

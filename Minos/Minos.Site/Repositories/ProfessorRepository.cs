@@ -50,5 +50,14 @@ namespace Minos.Site.Repositories
                 contexto.SaveChanges();
             }
         }
+
+        public void Atualizar(Professor professor)
+        {
+            using (var contexto = new MinosContext())
+            {
+                contexto.Professores.Update(professor);
+                contexto.SaveChanges();
+            }
+        }
     }
 }
