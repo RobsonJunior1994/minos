@@ -1,4 +1,5 @@
-﻿using Minos.Site.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Minos.Site.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Minos.Site.Repositories
         {
             using (var contexto = new MinosContext())
             {
-                var turma = contexto.Turmas.First(x => x.Id == turmaId);
+                var turma = contexto.Turmas.FirstOrDefault(x => x.Id == turmaId);
                 return turma;
             }
         }

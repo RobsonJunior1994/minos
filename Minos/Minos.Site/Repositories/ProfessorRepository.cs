@@ -9,55 +9,50 @@ namespace Minos.Site.Repositories
 {
     public class ProfessorRepository : IProfessorRepository
     {
+
+
+        private MinosContext _context;
+
+        public ProfessorRepository(MinosContext contexto)
+        {
+            _context = contexto;
+        }
+
         public void Salvar(Professor professor)
         {
-            using (var contexto = new MinosContext())
-            {
-                contexto.Professores.Add(professor);
-                contexto.SaveChanges();
-            }
+            _context.Professores.Add(professor);
+            _context.SaveChanges();
         }
 
         public List<Professor> ListarProfessores()
         {
-            using (var contexto = new MinosContext())
-            {
-                var professores = contexto
-                    .Professores
-                    .Include(p => p.Turmas)
-                    .ThenInclude(pt => pt.Turma)
-                    .ToList();
-                return professores;
-            }
+            var professores = _context
+                .Professores
+                .Include(p => p.Turmas)
+                .ThenInclude(pt => pt.Turma)
+                .ToList();
+            return professores;
         }
 
         public Professor ObterProfessorPeloId(int id)
         {
-            using (var contexto = new MinosContext())
-            {
-                var professor = contexto.Professores.Include(p => p.Turmas)
-                    .ThenInclude(pt => pt.Turma).Where(p => p.Id == id).First();
-                return professor;
-            }
+            var professor = _context.Professores.Include(x => x.Turmas).FirstOrDefault(p => p.Id == id);
+            _context.SaveChanges();
+            return professor;
         }
 
         public void Excluir(int id)
         {
-            using (var contexto = new MinosContext())
-            {
-                var professor = contexto.Professores.Where(p => p.Id == id).First();
-                contexto.Professores.Remove(professor);
-                contexto.SaveChanges();
-            }
+            var professor = _context.Professores.Where(p => p.Id == id).First();
+            _context.Professores.Remove(professor);
+            _context.SaveChanges();
         }
 
         public void Atualizar(Professor professor)
         {
-            using (var contexto = new MinosContext())
-            {
-                contexto.Professores.Update(professor);
-                contexto.SaveChanges();
-            }
+            _context.Professores.Update(professor);
+            _context.SaveChanges();
+
         }
     }
 }

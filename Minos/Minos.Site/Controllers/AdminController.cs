@@ -207,6 +207,7 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult EditarProfessor(int idDoprofessor)
         {
+            _professorRepository.BeginContext();
             var professor = _professorRepository.ObterProfessorPeloId(idDoprofessor);
             ViewBag.professor = professor;
             ViewBag.turmas = _turmaRepository.ListarTurmas();
@@ -216,11 +217,15 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult AtualizarProfessor(int id, string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
-
-            Professor professor = new Professor(nome, sobrenome);
-            professor.Id = id;
+            //_professorRepository.BeginContext();
+            var professor = _professorRepository.ObterProfessorPeloId(id);
+            professor.Nome = nome;
+            professor.Sobrenome = sobrenome;
+            
             if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
                 return View();
+
+            professor.Turmas = new List<ProfessorTurma>();
 
             foreach (var turmaId in listaDeIdDasTurmas)
             {
@@ -229,12 +234,11 @@ namespace Minos.Site.Controllers
                 if (turma == null || turma.Id == 0)
                     return View();
 
-                var professorturma = new ProfessorTurma();
+                //var professorturma = new ProfessorTurma();
+                //
+                //professorturma.TurmaId = turma.Id;
 
-                professorturma.ProfessorId = professor.Id;
-                professorturma.TurmaId = turma.Id;
-
-                professor.Turmas.Add(professorturma);
+                professor.Turmas.Add(new ProfessorTurma() { TurmaId = turma.Id });
             }
 
             if (!professor.ValidaProfessor())
@@ -246,6 +250,8 @@ namespace Minos.Site.Controllers
             {
                 _professorRepository.Atualizar(professor);
             }
+
+            //_professorRepository.EndContext();
 
             return RedirectToAction("cadastrarprofessor", "Admin");
         }

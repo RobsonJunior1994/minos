@@ -19,6 +19,16 @@ namespace Minos.Site.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProfessorTurma>().HasKey(pt => new { pt.ProfessorId, pt.TurmaId });
+            modelBuilder.Entity<ProfessorTurma>()
+                .HasOne(pt => pt.Professor)
+                .WithMany(p => p.Turmas)
+                .HasForeignKey(pt => pt.ProfessorId);
+
+            modelBuilder.Entity<ProfessorTurma>()
+                .HasOne(pt => pt.Turma)
+                .WithMany(p => p.Professores)
+                .HasForeignKey(pt => pt.TurmaId);
+
             modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
 
             base.OnModelCreating(modelBuilder);

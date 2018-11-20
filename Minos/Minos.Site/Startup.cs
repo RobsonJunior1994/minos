@@ -36,6 +36,7 @@ namespace Minos.Site
             services.AddSingleton<IProfessorRepository, ProfessorRepository>();
             services.AddSingleton<IPerguntaRepository, PerguntaRepository>();
             services.AddSingleton<IPeriodoRepository, PeriodoRepository>();
+            services.AddSingleton<MinosContext, MinosContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
