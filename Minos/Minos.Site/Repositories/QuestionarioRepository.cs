@@ -8,13 +8,17 @@ namespace Minos.Site.Repositories
 {
     public class QuestionarioRepository : IQuestionarioRepository
     {
+        private MinosContext _context;
+
+        public QuestionarioRepository(MinosContext contexto)
+        {
+            _context = contexto;
+        }
+
         public void Salvar(Questionario Questionario)
         {
-            using (var contexto = new MinosContext())
-            {
-                contexto.Add(Questionario);
-                contexto.SaveChanges();
-            }
+            _context.Add(Questionario);
+            _context.SaveChanges();
         }
     }
 }

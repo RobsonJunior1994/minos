@@ -8,22 +8,23 @@ namespace Minos.Site.Repositories
 {
     public class PeriodoRepository : IPeriodoRepository
     {
+        private MinosContext _context;
+
+        public PeriodoRepository(MinosContext contexto)
+        {
+            _context = contexto;
+        }
+
         public List<Periodo> ListarPeriodos()
         {
-            using (var contexto = new MinosContext())
-            {
-                var periodos = contexto.Periodo.ToList();
-                return periodos;
-            }
+            var periodos = _context.Periodo.ToList();
+            return periodos;
         }
 
         public Periodo ObterPeriodoPeloId(int turmaId)
         {
-            using (var contexto = new MinosContext())
-            {
-                var periodo = contexto.Periodo.First(x => x.Id == turmaId);
-                return periodo;
-            }
+            var periodo = _context.Periodo.First(x => x.Id == turmaId);
+            return periodo;
         }
     }
 }

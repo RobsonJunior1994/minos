@@ -9,23 +9,23 @@ namespace Minos.Site.Repositories
 {
     public class TurmaRepository : ITurmaRepository
     {
+        private MinosContext _context;
+
+        public TurmaRepository(MinosContext contexto)
+        {
+            _context = contexto;
+        }
+
         public List<Turma> ListarTurmas()
         {
-            using (var contexto = new MinosContext())
-            {
-                var turmas = contexto.Turmas.ToList();
-                return turmas;
-            }
-
+            var turmas = _context.Turmas.ToList();
+            return turmas;
         }
 
         public Turma ObterTurmaPeloId(int turmaId)
         {
-            using (var contexto = new MinosContext())
-            {
-                var turma = contexto.Turmas.FirstOrDefault(x => x.Id == turmaId);
-                return turma;
-            }
+            var turma = _context.Turmas.FirstOrDefault(x => x.Id == turmaId);
+            return turma;
         }
 
         public List<Turma> ObterTurmasDesteAno()
@@ -35,12 +35,9 @@ namespace Minos.Site.Repositories
 
         public void Salvar(Turma turma)
         {
-            using (var contexto = new MinosContext())
-            {
-                contexto.Turmas.Add(turma);
-                contexto.SaveChanges();
-            }
-            
+            _context.Turmas.Add(turma);
+            _context.SaveChanges();
+
         }
 
         public void Salvar(string CodigoTurma)

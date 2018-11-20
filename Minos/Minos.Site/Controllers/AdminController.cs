@@ -207,7 +207,7 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult EditarProfessor(int idDoprofessor)
         {
-            _professorRepository.BeginContext();
+            //_professorRepository.BeginContext();
             var professor = _professorRepository.ObterProfessorPeloId(idDoprofessor);
             ViewBag.professor = professor;
             ViewBag.turmas = _turmaRepository.ListarTurmas();

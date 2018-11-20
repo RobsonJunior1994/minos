@@ -9,16 +9,21 @@ namespace Minos.Site.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
+        private MinosContext _context;
+
+        public UsuarioRepository(MinosContext contexto)
+        {
+            _context = contexto;
+        }
+
         public bool DadosDeLoginSaoValidos(string login, string senha)
         {
             bool usuarioExiste = false;
 
-            using (var repo = new MinosContext())
-            {
-                var usuarios = repo.Usuarios.SingleOrDefault(x => x.Login == login && x.Senha == senha);
+            var usuarios = _context.Usuarios.SingleOrDefault(x => x.Login == login && x.Senha == senha);
 
-                usuarioExiste = usuarios != null;
-            }
+            usuarioExiste = usuarios != null;
+
             return usuarioExiste;
         }
 
@@ -26,32 +31,27 @@ namespace Minos.Site.Repositories
         {
             bool usuarioExiste = false;
 
-            using (var repo = new MinosContext())
-            {
-                var usuarios = repo.Usuarios.SingleOrDefault(x => x.Login == login);
-                
-                usuarioExiste = usuarios != null;
-            }
+            var usuarios = _context.Usuarios.SingleOrDefault(x => x.Login == login);
+
+            usuarioExiste = usuarios != null;
+
             return usuarioExiste;
         }
 
         public void Salvar(Usuario usuario)
         {
-            using (var contexto = new MinosContext())
-            {
-                contexto.Usuarios.Add(usuario);
-                contexto.SaveChanges();
-            }
+            _context.Usuarios.Add(usuario);
+            _context.SaveChanges();
+
         }
 
         public bool EhAdm(string login, string senha)
         {
             bool usuarioEhAdm = false;
-            using (var contexto = new MinosContext())
-            {
-                var usuario = contexto.Usuarios.SingleOrDefault(x => x.Login == login && x.Senha == senha && x.Admin == "S");
-                usuarioEhAdm = usuario != null;
-            }
+
+            var usuario = _context.Usuarios.SingleOrDefault(x => x.Login == login && x.Senha == senha && x.Admin == "S");
+            usuarioEhAdm = usuario != null;
+
             return usuarioEhAdm;
         }
     }
