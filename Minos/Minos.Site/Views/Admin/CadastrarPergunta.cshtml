@@ -1,19 +1,38 @@
 ﻿
 @{
     ViewData["Title"] = "CadastrarPergunta";
+    var listaDePerguntas = ViewBag.perguntas;
 }
 
-<h2>CadastrarPergunta</h2>
+<div>
+    <h2 class="text-center">Cadastrar Pergunta</h2>
+    <div class="form-group">
+        <form method="post" action="CadastrarPergunta">
+            <table class="table">
+                <tr>
+                    <td><input class="form-control" type="text" name="perguntaEnviada" placeholder="Digite sua pergunta aqui..."/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" class="btn btn-primary form-control" value="Cadastrar Pergunta"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
-<form method="post" action="CadastrarPergunta">
-    <table>
-        <tr>
-            <td>Pergunta</td>
-            <td><input type="text" name="perguntaEnviada"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" /></td>
-        </tr>
+    <div class="form-group">
+        <form method="post" action="DeletarPergunta">
+            <table class="table table-striped ">
+                @{ foreach (var pergunta in listaDePerguntas)
+                    {
+                        <input type="hidden" name="id" value="@pergunta.Id" />
+                        <tr>
+                            <td><p>@pergunta.Texto</p></td>
 
-    </table>
-</form>
+                            <td><input type="submit" class="btn btn-danger" value="Deletar" /></td>
+                        </tr>
+                    }
+                }
+            </table>
+        </form>
+    </div>
+</div>

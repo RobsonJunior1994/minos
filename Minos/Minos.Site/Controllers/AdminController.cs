@@ -174,7 +174,8 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarPergunta()
         {
-            return View();
+            ViewBag.perguntas = _perguntaRepository.ListarPergunras();
+            return View();           
         }
 
         [HttpPost]
@@ -191,9 +192,21 @@ namespace Minos.Site.Controllers
                 ViewData["Message"] = "O cadastro de pergunta está incorreto, por favor envie os paramatros necessários!";
             }
 
-            return View();
+            return RedirectToAction("CadastrarPergunta", "Admin");
         }
-        
+
+        [HttpPost]
+        public IActionResult DeletarPergunta(int id)
+        {
+
+            if (id > 0 && id.ToString() != "")
+            {
+                _perguntaRepository.Deletar(id);
+            }
+
+            return RedirectToAction("CadastrarPergunta", "Admin");
+        }
+
         [HttpPost]
         public IActionResult ExcluirProfessor(int idDoProfessor)
         {

@@ -16,6 +16,13 @@ namespace Minos.Site.Repositories
             _context = contexto;
         }
 
+        public void Deletar(int id)
+        {
+            var pergunta = ObterPerguntaPeloId(id);
+            _context.Perguntas.Remove(pergunta);
+            _context.SaveChanges();
+        }
+
         public List<Pergunta> ListarPergunras()
         {
             var perguntas = _context.Perguntas.ToList();
