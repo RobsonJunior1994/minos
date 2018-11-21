@@ -1,25 +1,29 @@
-﻿@{
+﻿@model Minos.Site.Models.QuestionarioAlunoViewModel
+@{
     ViewData["Title"] = "QuestionarioView";
 }
-<!DOCTYPE html>
+<html>
 <head>
-	
+
 </head>
 
 <body>
     <div>
-		<h1>Informações do aluno</h1>
+        <h1>Informações do aluno</h1>
     </div>
-	<div>
-		<table>
-			<td>
-				<h2>Perguntas</h2>
-			</td>
-			<td>
-				<h3>Repostas</h3>
-			</td>
-		</table>
+    <div>
+        
+        @foreach (var perguntaClasse in Model.Perguntas)
+        {
+            <li>@perguntaClasse</li>
+        }
+    </div>
+    <div>
+        @foreach (var professor in Model.Professores)
+        {
+            <li>@professor</li>
+        }
     </div>
 </body>
-</html
+</html>
 
