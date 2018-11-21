@@ -4,51 +4,54 @@
     var grau = ViewData["Grau"];
 }
 
-<h2>Cadastrar Turma</h2>
+<h2 class="text-center">Cadastrar Turma</h2>
 
-<form action="\Admin\CadastrarTurma" method="post">
-    <table>
-        <tr>
-            <td>
-                Grau
-            </td>
-        </tr>
-        <tr>
-            <td><input type="radio" name="grau" value="Fundamental"> Fundamental </td>
-            <td><input type="radio" name="grau" value="Medio"> Médio </td>
-        </tr>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-5">
+        <form action="\Admin\CadastrarTurma" method="post">
+            <table class="table">
+                <tr>
+                    <td>
+                        <h2>Grau</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="grau" value="Fundamental"> Fundamental </td>
+                    <td><input type="radio" name="grau" value="Medio"> Médio </td>
+                </tr>
 
-        <tr>
-            <td>
-                Série
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select name="serie">
-                    <option value="Sexto">6º Do Ensino Fundamental</option>
-                    <option value="Setimo">7º Do Ensino Fundamental</option>
-                    <option value="Oitavo">8º Do Ensino Fundamental</option>
-                    <option value="Nono">9º Do Ensino Fundamental</option>
-                    <option value="PrimeiroAnoEM">1º Do Ensino Médio</option>
-                    <option value="SegundoAnoEM">2º Do Ensino Médio</option>
-                    <option value="TerceiroAnoEM">3º Do Ensino Médio</option>
-                </select>
-            </td>
-        </tr>
+                <tr>
+                    <td>
+                        <h2>Série</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="serie">
+                            <option value="Sexto">6º Do Ensino Fundamental</option>
+                            <option value="Setimo">7º Do Ensino Fundamental</option>
+                            <option value="Oitavo">8º Do Ensino Fundamental</option>
+                            <option value="Nono">9º Do Ensino Fundamental</option>
+                            <option value="PrimeiroAnoEM">1º Do Ensino Médio</option>
+                            <option value="SegundoAnoEM">2º Do Ensino Médio</option>
+                            <option value="TerceiroAnoEM">3º Do Ensino Médio</option>
+                        </select>
+                    </td>
+                </tr>
 
-        <tr>
-            <td>
-                Turno
-            </td>
-        </tr>
-        <tr>
-            <td><input type="radio" name="turno" value="Manha">Manha</td>
-            <td><input type="radio" name="turno" value="Tarde">Tarde</td>
-            <td><input type="radio" name="turno" value="Noite">Noite</td>
-        </tr>
-
-        <tr><td><input type="submit" value="Cadastrar" /></td></tr>
-    </table>
-
-</form>
+                <tr>
+                    <td>
+                        <h2>Turno</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="turno" value="Manha">Manha</td>
+                    <td><input type="radio" name="turno" value="Tarde">Tarde</td>
+                    <td><input type="radio" name="turno" value="Noite">Noite</td>
+                </tr>
+            </table>
+            <input class="btn btn-primary form-control" type="submit" value="Cadastrar" />
+        </form>
+    </div>
+</div>

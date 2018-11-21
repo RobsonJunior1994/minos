@@ -4,20 +4,24 @@
     var mensagem = ViewData["Message"];
 }
 
-<h2>Login</h2>
+<h2 class="text-center">Acessar o sistema</h2>
 <p class="alert-warning">@mensagem</p>
-<form action="\Usuario\Login" method="post">
-    <table>
-        <tr>
-            <td>Login:</td>
-            <td><input name="login"/></td>
-        </tr>
-        <tr>
-            <td>Senha:</td>
-            <td><input name="senha"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Entrar"/></td>
-        </tr>
-    </table>
-</form>
+
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <form action="\Usuario\Login" method="post">
+            <div class="form-group">
+                <label>Login:</label>
+                <input class="form-control" placeholder="Usuário" name="login" />
+            </div>
+
+            <div class="form-group">
+                <label>Senha:</label>
+                <input class="form-control" placeholder="Senha" type="password" name="senha" />
+            </div>
+
+            <input class="btn btn-primary form-control" type="submit" value="Entrar" />
+        </form>
+    </div>
+</div>
