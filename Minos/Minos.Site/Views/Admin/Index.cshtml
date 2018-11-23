@@ -6,15 +6,22 @@
 <h2>Minos Software</h2>
 <p>Seja bem vindo ao painel administrativo do Minos Software!</p>
 
-<form action="\Usuario\Logout" method="post">
+<div class="justify-content-center">
+ 
 
-    <input type="submit" value="Sair" />
 
-</form>
+        <ul class="list-group navbar-btn m">
+            <li><a class="btn btn-primary form-control" href="\Admin\CadastrarTurma">Cadastrar turma</a></li>
+            <li><a class="btn btn-primary form-control" href="\Admin\CadastrarProfessor" ">Cadastrar professor</a></li>
+            <li><a class="btn btn-primary form-control" href="\Admin\CadastrarQuestionario" ">Cadastrar questionario</a></li>
+            <li><a class="btn btn-primary form-control" href="\Admin\CadastrarPergunta" ">Cadastrar pergunta</a></li>
+            <li>
+                <form action="\Usuario\Logout" method="post">
+                    <input class="btn btn-danger form-control" type="submit" value="Sair" />
+                </form>
+            </li>
+        </ul>
+    
+</div>
 
-<ul>
-    <li><a href="\Admin\CadastrarTurma">Cadastrar turma</a></li>
-    <li><a href="\Admin\CadastrarProfessor"">Cadastrar professor</a></li>
-    <li><a href="\Admin\CadastrarQuestionario"">Cadastrar questionario</a></li>
-    <li><a href="\Admin\CadastrarPergunta"">Cadastrar pergunta</a></li>
-</ul>
+
