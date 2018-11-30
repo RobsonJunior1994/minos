@@ -17,8 +17,7 @@ namespace Minos.Site.Models
             Periodo = periodo;
             ListaDePerguntas = listaDePerguntas;
         }
-
-
+        
         public bool EhValido()
         {
             if (Periodo == null || Periodo.DataInicial == default || 

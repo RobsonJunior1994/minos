@@ -11,7 +11,8 @@ namespace Minos.Site.Controllers
     {
         private IUsuarioRepository _usuarioRepository;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository)
+        public UsuarioController(
+            IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
         }
@@ -32,23 +33,21 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarUsuario(string login, string senha)
         {
             Usuario usuario = new Usuario(login, senha);
+            var mensagem = new Mensagem();
 
             if (!usuario.ValidaLogin())
             {
-                ViewData["Message"] = "Porfavor Digite um Login!";
-                return View();
+                return View(mensagem.LoginInvalido());
             }
 
             if (!usuario.ValidaSenha())
             {
-                ViewData["Message"] = "Porfavor Digite uma Senha Válida!";
-                return View();
+                return View(mensagem.SenhaInvalida());
             }
-
-            ViewData["Message"] = "Login e Senha Válida";
+            
             _usuarioRepository.Salvar(usuario);
             
-            return View();
+            return View(mensagem.SenhaLoginValido());
 
         }
 
