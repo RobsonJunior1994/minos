@@ -15,6 +15,11 @@ namespace Minos.Site.Repositories
             _context = contexto;
         }
 
+        public Questionario ObterListaDePerguntas()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Salvar(Questionario Questionario)
         {
             _context.Add(Questionario);

@@ -48,11 +48,11 @@ namespace Minos.Site.Controllers
                 Professores = new List<string>()
             };
 
-            foreach (var perguntaClasse in questionario.ListaDePerguntas)
-                viewModel.Perguntas.Add(perguntaClasse.pergunta);
+            foreach (var perguntaClasse in questionario.Perguntas)
+                viewModel.Perguntas.Add(perguntaClasse.Pergunta.Texto);
 
-            foreach (var professor in aluno.Turma.Professores)
-                viewModel.Professores.Add(professor.Nome + " " + professor.Sobrenome);
+            foreach (var professorTurma in aluno.Turma.Professores)
+                viewModel.Professores.Add(professorTurma.Professor.Nome + " " + professorTurma.Professor.Sobrenome);
             
             return View(viewModel);
         }

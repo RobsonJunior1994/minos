@@ -40,7 +40,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "123");
 
 
             //assert
@@ -91,7 +91,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Nenhum, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Nenhum, "123");
 
 
             //assert
@@ -108,7 +108,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "123");
 
 
             //assert
@@ -125,7 +125,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "****");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "****");
 
 
             //assert
@@ -143,15 +143,15 @@ namespace Minos.UnitTests
 
             var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
             var turma2 = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Tarde, null);
-            var turma3 = new Turma(Grau.Medio, Serie.SegundoAnoEM, Turno.Noite, null);
+            
 
             string codigoFinal1 = codigo + "EF9M";
-            string codigoFinal2 = codigo + "EM2T";
-            string codigoFinal3 = codigo + "EM1T";
+            string codigoFinal2 = codigo + "EM1T";
+            
 
-            Assert.True(turma1.CodigoDaTurma == codigoFinal1);
-            Assert.True(turma2.CodigoDaTurma == codigoFinal2);
-            Assert.True(turma3.CodigoDaTurma == codigoFinal3);
+            Assert.True(turma1.CodigoTurma == codigoFinal1);
+            Assert.True(turma2.CodigoTurma == codigoFinal2);
+            
         }
 
         [Trait("TurmaController", "Gerar CodigoTurma")]
@@ -165,7 +165,7 @@ namespace Minos.UnitTests
          
             string codigoFinal = codigo + "EF9M";
 
-            Assert.True(turma.CodigoDaTurma != codigoFinal && turma.CodigoDaTurma == "BLA");
+            Assert.True(turma.CodigoTurma != codigoFinal && turma.CodigoTurma == "BLA");
         }
     }
 }

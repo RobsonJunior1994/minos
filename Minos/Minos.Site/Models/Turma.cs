@@ -10,11 +10,12 @@ namespace Minos.Site.Models
     {
         public int Id { get; set; }
         [Required]
-        public string CodigoDaTurma { get; set; }
+        public string CodigoTurma { get; set; }
         public Turno Turno { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public virtual IList<ProfessorTurma> Professores { get; set; }
+        public virtual IList<Questionario> Questionarios { get; set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
@@ -25,12 +26,12 @@ namespace Minos.Site.Models
 
             if (string.IsNullOrEmpty(codigoTurma))
             {
-                CodigoDaTurma = GerarCodigo();
+                CodigoTurma = GerarCodigo();
                 return;
             }
             else
             {
-                CodigoDaTurma = codigoTurma;
+                CodigoTurma = codigoTurma;
             }
 
         }
@@ -40,7 +41,7 @@ namespace Minos.Site.Models
 
         }
 
-        public string GerarCodigo()
+       public string GerarCodigo()
         {
             string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ","");
@@ -51,10 +52,6 @@ namespace Minos.Site.Models
                     codigo += "EF";
                     switch (Serie)
                     {
-                        case Serie.Quinto:
-                            codigo += "5";
-                            break;
-
                         case Serie.Sexto:
                             codigo += "6";
                             break;
@@ -63,43 +60,40 @@ namespace Minos.Site.Models
                             codigo += "7";
                             break;
 
-        public string GerarCodigo()
-        {
-            string codigo = null;
-            switch (Grau)
-            {
-                case Grau.Fundamental:
-                    codigo += "A";
+                        case Serie.Oitavo:
+                            codigo += "8";
+                            break;
+
+                        case Serie.Nono:
+                            codigo += "9";
+                            break;
+
+                        default:
+                            break;
+                    }
                     break;
+
                 case Grau.Medio:
-                    codigo += "B";
+                    codigo += "EM";
+                    switch (Serie)
+                    {
+                        case Serie.PrimeiroAnoEM:
+                            codigo += "1";
+                            break;
+
+                        case Serie.SegundoAnoEM:
+                            codigo += "2";
+                            break;
+
+                        case Serie.TerceiroAnoEM:
+                            codigo += "3";
+                            break;
+
+                        default:
+                            break;
+                    }
                     break;
-                default:
-                    break;
-            }
-            switch (Serie)
-            {
-                case Serie.Sexto:
-                    codigo += 6;
-                    break;
-                case Serie.Setimo:
-                    codigo += 7;
-                    break;
-                case Serie.Oitavo:
-                    codigo += 8;
-                    break;
-                case Serie.Nono:
-                    codigo += 9;
-                    break;
-                case Serie.PrimeiroAnoEM:
-                    codigo += 1;
-                    break;
-                case Serie.SegundoAnoEM:
-                    codigo += 2;
-                    break;
-                case Serie.TerceiroAnoEM:
-                    codigo += 3;
-                    break;
+
                 default:
                     break;
             }
@@ -119,7 +113,6 @@ namespace Minos.Site.Models
 
             return codigo;
         }
-
         public bool EhCodigoValido()
         {
             if (!CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
@@ -137,9 +130,9 @@ namespace Minos.Site.Models
             if (Grau == Grau.Nenhum || Serie == Serie.Nenhuma || Turno == Turno.Nenhum ||
                 (Grau == Grau.Medio && Serie == Serie.Sexto) || (Grau == Grau.Medio && Serie == Serie.Setimo) ||
                 (Grau == Grau.Medio && Serie == Serie.Oitavo) || (Grau == Grau.Medio && Serie == Serie.Nono) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Primeiro) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Segundo) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Terceiro))
+                (Grau == Grau.Fundamental && Serie == Serie.PrimeiroAnoEM) ||
+                (Grau == Grau.Fundamental && Serie == Serie.SegundoAnoEM) ||
+                (Grau == Grau.Fundamental && Serie == Serie.TerceiroAnoEM))
             {
                 return false;
             }

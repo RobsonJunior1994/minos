@@ -9,17 +9,17 @@ namespace Minos.Site.Models
     public class Questionario
     {
         public int Id { get; set; }
-        public Periodo Periodo { get; private set; } // <- para representar uma data!
+        public Periodo Periodo { get; set; } // <- para representar uma data!
         public List<Turma> ListaDeTurmas { get; private set; }
         [Required]
         public List<QuestionarioPergunta> Perguntas { get; set; }
 
         public Questionario() { }
 
-        public Questionario(Periodo periodo)
+        public Questionario(List<QuestionarioPergunta> perguntas, Periodo periodo)
         {
             Periodo = periodo;
-            Perguntas = new List<QuestionarioPergunta>();
+            Perguntas = perguntas ?? new List<QuestionarioPergunta>();
         }
         
         public bool EhValido()
