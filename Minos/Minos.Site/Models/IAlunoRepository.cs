@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Models
 {
-    public enum Turno
+    public interface IAlunoRepository
     {
-        Nenhum,
-        Manha,
-        Tarde
+        Aluno ObterAlunoPorMatricula(string matriculaDoAluno);
     }
 }

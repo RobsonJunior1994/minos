@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Minos.Site.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Text.RegularExpressions;
 using Minos.Site.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Minos.Site.Controllers
+namespace Minos.Site.Models
 {
     public class Usuario
     {

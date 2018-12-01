@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Models
 {
-    public enum Turno
+    public interface IRespostaRepository
     {
-        Nenhum,
-        Manha,
-        Tarde
+        void Salvar(int Resultado);
     }
 }

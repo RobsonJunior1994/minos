@@ -21,8 +21,7 @@ namespace Minos.Site.Models
             Periodo = periodo;
             Perguntas = new List<QuestionarioPergunta>();
         }
-
-
+        
         public bool EhValido()
         {
             if (Periodo == null || Periodo.DataInicial == default || 

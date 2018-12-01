@@ -40,7 +40,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "123");
 
 
             //assert
@@ -57,7 +57,7 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nenhuma, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Nenhuma, Turno.Manha, "123");
 
 
             //assert
@@ -74,7 +74,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Nenhum, Serie.Nono, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Nenhum, Serie.Nono, Turno.Manha, "123");
 
 
             //assert
@@ -91,7 +91,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Nenhum, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Nenhum, "123");
 
 
             //assert
@@ -108,7 +108,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "A1T");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "123");
 
 
             //assert
@@ -125,7 +125,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.Nono, Turno.Manha, "****");
+            sut.CadastrarTurma(Grau.Medio, Serie.Primeiro, Turno.Manha, "****");
 
 
             //assert
@@ -137,13 +137,17 @@ namespace Minos.UnitTests
         [Fact(DisplayName = "Deveria Gerar CodigoTurma Corretamente Quando CodigoTurma For Nulo")]
         public void DeveriaGerarCodigoTurmaCorretamenteQuandoCodigoTurmaForNulo()
         {
+            //var date = new DateTime(2018,05,09,17,03,01);
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
+            codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
+
             var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
             var turma2 = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Tarde, null);
             var turma3 = new Turma(Grau.Medio, Serie.SegundoAnoEM, Turno.Noite, null);
 
-            string codigoFinal1 = "A9M";
-            string codigoFinal2 = "B2T";
-            string codigoFinal3 = "B1N";
+            string codigoFinal1 = codigo + "EF9M";
+            string codigoFinal2 = codigo + "EM2T";
+            string codigoFinal3 = codigo + "EM1T";
 
             Assert.True(turma1.CodigoDaTurma == codigoFinal1);
             Assert.True(turma2.CodigoDaTurma == codigoFinal2);
@@ -154,9 +158,12 @@ namespace Minos.UnitTests
         [Fact(DisplayName = "Deveria Nao Gerar CodigoTurma Quando CodigoTurma For Diferente Nulo")]
         public void DeveriaNaoGerarCodigoTurmaQuandoCodigoTurmaForDiferenteNulo()
         {
+            string codigo = DateTime.Now.ToString("yyMMddHHmm");
+            codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
+
             var turma = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, "BLA");
          
-            string codigoFinal = "A9M";
+            string codigoFinal = codigo + "EF9M";
 
             Assert.True(turma.CodigoDaTurma != codigoFinal && turma.CodigoDaTurma == "BLA");
         }
