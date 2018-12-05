@@ -61,7 +61,8 @@ namespace Minos.Site.Models
             if(ValidaLogin() && ValidaSenha())
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }

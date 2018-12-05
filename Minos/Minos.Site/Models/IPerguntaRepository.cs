@@ -9,7 +9,7 @@ namespace Minos.Site.Models
     {
         void Salvar(Pergunta pergunta);
         Pergunta ObterPerguntaPeloId(int id);
-        List<Pergunta> ListarPergunras();
+        List<Pergunta> ListarPerguntas();
         void Deletar(int id);
     }
 }

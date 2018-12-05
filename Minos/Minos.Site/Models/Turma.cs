@@ -52,19 +52,19 @@ namespace Minos.Site.Models
                     codigo += "EF";
                     switch (Serie)
                     {
-                        case Serie.Sexto:
+                        case Serie.SextoAno:
                             codigo += "6";
                             break;
 
-                        case Serie.Setimo:
+                        case Serie.SetimoAno:
                             codigo += "7";
                             break;
 
-                        case Serie.Oitavo:
+                        case Serie.OitavoAno:
                             codigo += "8";
                             break;
 
-                        case Serie.Nono:
+                        case Serie.NonoAno:
                             codigo += "9";
                             break;
 
@@ -77,15 +77,15 @@ namespace Minos.Site.Models
                     codigo += "EM";
                     switch (Serie)
                     {
-                        case Serie.PrimeiroAnoEM:
+                        case Serie.PrimeiroAno:
                             codigo += "1";
                             break;
 
-                        case Serie.SegundoAnoEM:
+                        case Serie.SegundoAno:
                             codigo += "2";
                             break;
 
-                        case Serie.TerceiroAnoEM:
+                        case Serie.TerceiroAno:
                             codigo += "3";
                             break;
 
@@ -128,11 +128,11 @@ namespace Minos.Site.Models
         public bool EhValida()
         {
             if (Grau == Grau.Nenhum || Serie == Serie.Nenhuma || Turno == Turno.Nenhum ||
-                (Grau == Grau.Medio && Serie == Serie.Sexto) || (Grau == Grau.Medio && Serie == Serie.Setimo) ||
-                (Grau == Grau.Medio && Serie == Serie.Oitavo) || (Grau == Grau.Medio && Serie == Serie.Nono) ||
-                (Grau == Grau.Fundamental && Serie == Serie.PrimeiroAnoEM) ||
-                (Grau == Grau.Fundamental && Serie == Serie.SegundoAnoEM) ||
-                (Grau == Grau.Fundamental && Serie == Serie.TerceiroAnoEM))
+                (Grau == Grau.Medio && Serie == Serie.SextoAno) || (Grau == Grau.Medio && Serie == Serie.SetimoAno) ||
+                (Grau == Grau.Medio && Serie == Serie.OitavoAno) || (Grau == Grau.Medio && Serie == Serie.NonoAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.PrimeiroAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.SegundoAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.TerceiroAno))
             {
                 return false;
             }

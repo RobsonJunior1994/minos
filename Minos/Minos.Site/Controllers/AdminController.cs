@@ -127,7 +127,7 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarQuestionario()
         {
             ViewBag.periodos = _periodoRepository.ListarPeriodos();
-            ViewBag.perguntas = _perguntaRepository.ListarPergunras();
+            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
             return View();
         }
 
@@ -178,7 +178,7 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarPergunta()
         {
-            ViewBag.perguntas = _perguntaRepository.ListarPergunras();
+            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
             return View();           
         }
 

@@ -8,12 +8,12 @@ namespace Minos.Site.Models
     public enum Serie
     {
         Nenhuma,
-        Sexto,
-        Setimo,
-        Oitavo,
-        Nono,
-        PrimeiroAnoEM,
-        SegundoAnoEM,
-        TerceiroAnoEM
+        SextoAno,
+        SetimoAno,
+        OitavoAno,
+        NonoAno,
+        PrimeiroAno,
+        SegundoAno,
+        TerceiroAno
     }
 }

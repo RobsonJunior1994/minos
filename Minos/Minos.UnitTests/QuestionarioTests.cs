@@ -181,7 +181,7 @@ namespace Minos.UnitTests
             //act
             CriaQuestionarioController();
 
-            var turma = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "EM1M");
+            var turma = new Turma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "EM1M");
             alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
 
             var listaDePerguntas = new List<QuestionarioPergunta>();
@@ -215,7 +215,7 @@ namespace Minos.UnitTests
             //act
             CriaQuestionarioController();
 
-            var turma = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "EM1M");
+            var turma = new Turma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "EM1M");
             alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
 
             var listaDePerguntas = new List<QuestionarioPergunta>();

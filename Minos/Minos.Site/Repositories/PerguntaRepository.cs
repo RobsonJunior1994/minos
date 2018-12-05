@@ -23,7 +23,7 @@ namespace Minos.Site.Repositories
             _context.SaveChanges();
         }
 
-        public List<Pergunta> ListarPergunras()
+        public List<Pergunta> ListarPerguntas()
         {
             var perguntas = _context.Perguntas.ToList();
             return perguntas;

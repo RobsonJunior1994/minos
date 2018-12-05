@@ -40,7 +40,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "123");
 
 
             //assert
@@ -74,7 +74,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Nenhum, Serie.Nono, Turno.Manha, "123");
+            sut.CadastrarTurma(Grau.Nenhum, Serie.NonoAno, Turno.Manha, "123");
 
 
             //assert
@@ -91,7 +91,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Nenhum, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAno, Turno.Nenhum, "123");
 
 
             //assert
@@ -108,7 +108,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "123");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "123");
 
 
             //assert
@@ -125,7 +125,7 @@ namespace Minos.UnitTests
             
             //act
             CriaAdminController();
-            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Manha, "****");
+            sut.CadastrarTurma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "****");
 
 
             //assert
@@ -141,8 +141,8 @@ namespace Minos.UnitTests
             string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
 
-            var turma1 = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, null);
-            var turma2 = new Turma(Grau.Medio, Serie.PrimeiroAnoEM, Turno.Tarde, null);
+            var turma1 = new Turma(Grau.Fundamental, Serie.NonoAno, Turno.Manha, null);
+            var turma2 = new Turma(Grau.Medio, Serie.PrimeiroAno, Turno.Tarde, null);
             
 
             string codigoFinal1 = codigo + "EF9M";
@@ -161,7 +161,7 @@ namespace Minos.UnitTests
             string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ", "");
 
-            var turma = new Turma(Grau.Fundamental, Serie.Nono, Turno.Manha, "BLA");
+            var turma = new Turma(Grau.Fundamental, Serie.NonoAno, Turno.Manha, "BLA");
          
             string codigoFinal = codigo + "EF9M";
 
