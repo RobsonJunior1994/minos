@@ -13,9 +13,9 @@ namespace Minos.Site.Models
         public string Texto { get; set; }
         public List<QuestionarioPergunta> Questionario { get; set; }
 
-        public Pergunta(string _pergunta)
+        public Pergunta(string pergunta)
         {
-            Texto = _pergunta;
+            Texto = pergunta;
         }
 
         public Pergunta()

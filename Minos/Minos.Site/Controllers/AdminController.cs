@@ -142,6 +142,7 @@ namespace Minos.Site.Controllers
             periodo.DataFinal = periodoFinal;
 
             Questionario questionario = new Questionario() { Periodo = periodo };
+
             if(listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
             {
                 return View();
@@ -156,7 +157,8 @@ namespace Minos.Site.Controllers
                 var questionarioPergunta = new QuestionarioPergunta();
                 questionarioPergunta.PerguntaId = pergunta.Id;
                 questionarioPergunta.QuestionarioId = questionario.Id;
-
+                
+                questionario.Perguntas = new List<QuestionarioPergunta>();
                 questionario.Perguntas.Add(questionarioPergunta);
             }
             

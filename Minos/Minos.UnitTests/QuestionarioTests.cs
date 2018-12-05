@@ -96,15 +96,13 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            perguntaRepositoryMock.Setup(x => x.ObterPerguntaPeloId(It.IsAny<int>())).Returns(new Pergunta("blablabla"));
-
-            sut.CadastrarProfessor("Robson", "Junior", turmaId);
-            //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-
+            
+            int n = 1;
             var listaDeIdDePerguntas = new List<int>();
-            //Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDeIdDePerguntas.Add(1);
-           
+            listaDeIdDePerguntas.Add(n);
+            
+            perguntaRepositoryMock.Setup(x => x.ObterPerguntaPeloId(n)).Returns(new Pergunta("blablablabla") {Id = n});
+            
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
             periodo.DataFinal = new DateTime(2019, 8, 16, 8, 30, 52);
