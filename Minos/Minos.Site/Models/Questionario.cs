@@ -10,7 +10,6 @@ namespace Minos.Site.Models
     {
         public int Id { get; set; }
         public Periodo Periodo { get; set; } // <- para representar uma data!
-        public List<Turma> ListaDeTurmas { get; private set; }
         [Required]
         public List<QuestionarioPergunta> Perguntas { get; set; }
 
@@ -24,9 +23,10 @@ namespace Minos.Site.Models
         
         public bool EhValido()
         {
-            if (Periodo == null || Periodo.DataInicial == default || 
+            if (Periodo == null || Periodo.DataInicial == default || Periodo.DataInicial == null ||
+                Periodo.DataFinal == null ||
                 Periodo.DataFinal == default || Perguntas == null || 
-                Perguntas.Count == 0 || Periodo.DataInicial.Date > Periodo.DataFinal.Date ||
+                Perguntas.Count <= 0 || Periodo.DataInicial.Date > Periodo.DataFinal.Date ||
                 Periodo.DataInicial.Date > DateTime.Now.Date)
             {
                 return false;
