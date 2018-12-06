@@ -19,25 +19,6 @@ namespace Minos.Site.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Minos.Site.Controllers.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Admin");
-
-                    b.Property<string>("Login")
-                        .IsRequired();
-
-                    b.Property<string>("Senha")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios");
-                });
-
             modelBuilder.Entity("Minos.Site.Models.Pergunta", b =>
                 {
                     b.Property<int>("Id")
@@ -105,9 +86,13 @@ namespace Minos.Site.Migrations
 
                     b.Property<int?>("PeriodoId");
 
+                    b.Property<int?>("TurmaId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PeriodoId");
+
+                    b.HasIndex("TurmaId");
 
                     b.ToTable("Questionarios");
                 });
@@ -131,12 +116,10 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CodigoDaTurma")
+                    b.Property<string>("CodigoTurma")
                         .IsRequired();
 
                     b.Property<int>("Grau");
-
-                    b.Property<int?>("QuestionarioId");
 
                     b.Property<int>("Serie");
 
@@ -144,9 +127,26 @@ namespace Minos.Site.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionarioId");
-
                     b.ToTable("Turmas");
+                });
+
+            modelBuilder.Entity("Minos.Site.Models.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Admin");
+
+                    b.Property<string>("Login")
+                        .IsRequired();
+
+                    b.Property<string>("Senha")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.ProfessorTurma", b =>
@@ -167,6 +167,10 @@ namespace Minos.Site.Migrations
                     b.HasOne("Minos.Site.Models.Periodo", "Periodo")
                         .WithMany()
                         .HasForeignKey("PeriodoId");
+
+                    b.HasOne("Minos.Site.Models.Turma")
+                        .WithMany("Questionarios")
+                        .HasForeignKey("TurmaId");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.QuestionarioPergunta", b =>
@@ -180,13 +184,6 @@ namespace Minos.Site.Migrations
                         .WithMany("Perguntas")
                         .HasForeignKey("QuestionarioId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Minos.Site.Models.Turma", b =>
-                {
-                    b.HasOne("Minos.Site.Models.Questionario")
-                        .WithMany("ListaDeTurmas")
-                        .HasForeignKey("QuestionarioId");
                 });
 #pragma warning restore 612, 618
         }

@@ -62,19 +62,19 @@ namespace Minos.Site.Controllers
 
             if (!turma.EhCodigoValido())
             {
-                return View(mensagem.TurmaCodigoInvalido());
+                return View();
             }
 
             if (!turma.EhValida())
             {
-                return View(mensagem.CadastroTurmaInvalido());
+                return View();
             }
             else
             {
                 _turmaRepository.Salvar(turma);
             }
-            return View(mensagem.CadastroTurmaValido());
-
+            
+            return View();
         }
 
        
@@ -113,7 +113,7 @@ namespace Minos.Site.Controllers
 
             if (!professor.ValidaProfessor())
             {
-                return View(mensagem.CadastroProfessorIncorreto());
+                return View();
             }
             else
             {
@@ -169,7 +169,7 @@ namespace Minos.Site.Controllers
             else
             {
                 var mensagem = new Mensagem();
-                return View(mensagem.CadastroQuestionarioIncorreto());
+                return View();
             }
 
             return RedirectToAction("CadastrarQuestionario", "Admin");
@@ -194,7 +194,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                return View(mensagem.CadastroPerguntaIncorreto());
+                return View();
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");

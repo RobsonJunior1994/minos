@@ -46,7 +46,7 @@ namespace Minos.Site.Controllers
 
             if (!usuario.ValidaLogin())
             {
-                return View(mensagem.LoginInvalido());
+                return View();
             }
 
             if (!usuario.ValidaSenha())
