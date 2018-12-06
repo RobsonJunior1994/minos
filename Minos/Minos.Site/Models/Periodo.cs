@@ -7,7 +7,10 @@ namespace Minos.Site.Models
 {
     public class Periodo
     {
+        public int Id { get; set; }
         public DateTime DataInicial { get; set; }
         public DateTime DataFinal { get; set; }
+
+        public Periodo() { }
     }
 }

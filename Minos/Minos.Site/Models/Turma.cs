@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,28 +9,39 @@ namespace Minos.Site.Models
     public class Turma
     {
         public int Id { get; set; }
+        [Required]
         public string CodigoTurma { get; set; }
         public Turno Turno { get; set; }
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
-        public IList<Professor> Professores { get; set; }
-        public List<Questionario> Questionarios { get; set; }
+        public virtual IList<ProfessorTurma> Professores { get; set; }
+        public virtual IList<Questionario> Questionarios { get; set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {
             Grau = grau;
             Serie = serie;
             Turno = turno;
-            Professores = new List<Professor>();
+            Professores = new List<ProfessorTurma>();
 
             if (string.IsNullOrEmpty(codigoTurma))
+            {
                 CodigoTurma = GerarCodigo();
+                return;
+            }
             else
+            {
                 CodigoTurma = codigoTurma;
+            }
 
         }
 
-        public string GerarCodigo()
+        public Turma()
+        {
+
+        }
+
+       public string GerarCodigo()
         {
             string codigo = DateTime.Now.ToString("yyMMddHHmm");
             codigo = codigo.Replace("/", "").Replace(":", "").Replace(" ","");
@@ -40,23 +52,19 @@ namespace Minos.Site.Models
                     codigo += "EF";
                     switch (Serie)
                     {
-                        case Serie.Quinto:
-                            codigo += "5";
-                            break;
-
-                        case Serie.Sexto:
+                        case Serie.SextoAno:
                             codigo += "6";
                             break;
 
-                        case Serie.Setimo:
+                        case Serie.SetimoAno:
                             codigo += "7";
                             break;
 
-                        case Serie.Oitavo:
+                        case Serie.OitavoAno:
                             codigo += "8";
                             break;
 
-                        case Serie.Nono:
+                        case Serie.NonoAno:
                             codigo += "9";
                             break;
 
@@ -69,15 +77,15 @@ namespace Minos.Site.Models
                     codigo += "EM";
                     switch (Serie)
                     {
-                        case Serie.Primeiro:
+                        case Serie.PrimeiroAno:
                             codigo += "1";
                             break;
 
-                        case Serie.Segundo:
+                        case Serie.SegundoAno:
                             codigo += "2";
                             break;
 
-                        case Serie.Terceiro:
+                        case Serie.TerceiroAno:
                             codigo += "3";
                             break;
 
@@ -105,7 +113,6 @@ namespace Minos.Site.Models
 
             return codigo;
         }
-
         public bool EhCodigoValido()
         {
             if (!CodigoTurma.Any(x => char.IsLetterOrDigit(x)))
@@ -121,11 +128,11 @@ namespace Minos.Site.Models
         public bool EhValida()
         {
             if (Grau == Grau.Nenhum || Serie == Serie.Nenhuma || Turno == Turno.Nenhum ||
-                (Grau == Grau.Medio && Serie == Serie.Sexto) || (Grau == Grau.Medio && Serie == Serie.Setimo) ||
-                (Grau == Grau.Medio && Serie == Serie.Oitavo) || (Grau == Grau.Medio && Serie == Serie.Nono) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Primeiro) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Segundo) ||
-                (Grau == Grau.Fundamental && Serie == Serie.Terceiro))
+                (Grau == Grau.Medio && Serie == Serie.SextoAno) || (Grau == Grau.Medio && Serie == Serie.SetimoAno) ||
+                (Grau == Grau.Medio && Serie == Serie.OitavoAno) || (Grau == Grau.Medio && Serie == Serie.NonoAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.PrimeiroAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.SegundoAno) ||
+                (Grau == Grau.Fundamental && Serie == Serie.TerceiroAno))
             {
                 return false;
             }

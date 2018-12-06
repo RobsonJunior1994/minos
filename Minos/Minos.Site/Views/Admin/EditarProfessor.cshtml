@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "Editar Professor";
+
+    var professor = ViewBag.professor;
+}
+
+
+
+<div class="principal">
+    <div class="cadastro">
+        <h2>Editar Professor</h2>
+        <form action="\Admin\AtualizarProfessor" method="post">
+            <table>
+                <tr>
+                    <input type="hidden" name="id" value="@professor.Id" />
+                    <td>Nome:</td>
+                    <td><input type="text" name="nome" value="@professor.Nome" /></td>
+                </tr>
+                <tr>
+                    <td>Sobrenome:</td>
+                    <td><input type="text" name="sobrenome" value="@professor.Sobrenome" /></td>
+                </tr>
+
+                <tr>
+                    <td>Turmas:</td>
+                </tr>
+                @{
+                    var listaDeTurmas = ViewBag.turmas;
+                    foreach (var item in listaDeTurmas)
+                    {
+                        bool ehTurmaProfessor = false;
+                        for (var i = 0; i < professor.Turmas.Count; i++)
+                        {
+                            if (professor.Turmas[i].TurmaId == item.Id)
+                            {
+                                ehTurmaProfessor = true;
+                                <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" checked />@item.Serie</td></tr>
+
+                            }
+
+                        }
+                        if (!ehTurmaProfessor)
+                        {
+                            <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
+                        }
+                    }
+                }
+                <tr><td><input type="submit" value="Atualizar" /></td></tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+@*@{
+    var listaDeTurmas = ViewBag.turmas;
+    foreach (var item in listaDeTurmas)
+    {
+        for (var i = 0; i < professor.Turmas.Count; i++)
+        {
+            if (professor.Turmas[i].TurmaId == item.Id)
+            {
+                <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" checked />@item.Serie</td></tr>
+            }
+
+        }
+        <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
+    }
+}*@

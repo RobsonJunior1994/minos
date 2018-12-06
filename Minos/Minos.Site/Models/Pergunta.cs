@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,16 +8,24 @@ namespace Minos.Site.Models
 {
     public class Pergunta
     {
-        public string pergunta;
+        public int Id { get; set; }
+        [Required]
+        public string Texto { get; set; }
+        public List<QuestionarioPergunta> Questionario { get; set; }
 
-        public Pergunta(string _pergunta)
+        public Pergunta(string pergunta)
         {
-            pergunta = _pergunta;
+            Texto = pergunta;
+        }
+
+        public Pergunta()
+        {
+
         }
 
         internal bool EhValida()
         {
-            if (pergunta == null || pergunta.Length <= 10)
+            if (Texto == null || Texto.Length <= 10)
             {
                 return false;
             }

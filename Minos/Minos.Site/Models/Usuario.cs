@@ -3,18 +3,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Minos.Site.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Minos.Site.Models
 {
     public class Usuario
     {
+        public int Id { get; set; }
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Senha { get; set; }
+        public string Admin { get; set; }
 
         public Usuario(string login, string senha)
         {
             Login = login;
             Senha = senha;
+        }
+
+        public Usuario()
+        {
+
         }
         
         //string exemploEmail = (@"^([\w\-]+\.)*[\w\- ]+@([\w\- ]+\.)+([\w\-]{2,3})$");
@@ -22,7 +34,7 @@ namespace Minos.Site.Models
         
        public bool ValidaLogin()
        {
-            if(string.IsNullOrEmpty(Login) || Login.Length >= 20 || Login.Length < 5)
+            if(string.IsNullOrEmpty(Login) || Login.Count() >= 20 || Login.Count() < 5 || Login.Contains(" "))
             {
                 return false;
             }
@@ -34,7 +46,7 @@ namespace Minos.Site.Models
 
         public bool ValidaSenha()
         {
-            if (string.IsNullOrEmpty(Senha) || Senha.Length >= 15 || Senha.Length < 6)
+            if (string.IsNullOrEmpty(Senha) || Senha.Count() >= 15 || Senha.Count() < 5 || Senha.Contains(" "))
             {
                 return false;
             }
@@ -43,5 +55,18 @@ namespace Minos.Site.Models
                 return true;
             }
         }
+
+        public bool EhValido()
+        {
+            if(ValidaLogin() && ValidaSenha())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

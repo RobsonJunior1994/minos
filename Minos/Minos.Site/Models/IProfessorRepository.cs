@@ -8,5 +8,9 @@ namespace Minos.Site.Models
     public interface IProfessorRepository
     {
         void Salvar(Professor professor);
+        List<Professor> ListarProfessores();
+        void Excluir(int id);
+        Professor ObterProfessorPeloId(int id);
+        void Atualizar(Professor professor);
     }
 }

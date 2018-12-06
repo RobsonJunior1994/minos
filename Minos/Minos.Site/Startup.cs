@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Minos.Site.Models;
+using Minos.Site.Repositories;
+
 
 namespace Minos.Site
 {
@@ -21,7 +24,19 @@ namespace Minos.Site
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc();
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
+            services.AddSingleton<ITurmaRepository, TurmaRepository>();
+            services.AddSingleton<IQuestionarioRepository, QuestionarioRepository>();
+            services.AddSingleton<IProfessorRepository, ProfessorRepository>();
+            services.AddSingleton<IPerguntaRepository, PerguntaRepository>();
+            services.AddSingleton<IPeriodoRepository, PeriodoRepository>();
+            services.AddSingleton<MinosContext, MinosContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,11 +54,13 @@ namespace Minos.Site
 
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Usuario}/{action=Index}/{id?}");
             });
         }
     }

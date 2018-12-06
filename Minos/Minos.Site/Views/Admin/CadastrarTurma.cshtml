@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "CadastrarTurma";
+    var grau = ViewData["Grau"];
+}
+
+<h2 class="text-center">Cadastrar Turma</h2>
+
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-5">
+        <form action="\Admin\CadastrarTurma" method="post">
+            <table class="table">
+                <tr>
+                    <td>
+                        <h2>Grau</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="grau" value="Fundamental"> Fundamental </td>
+                    <td><input type="radio" name="grau" value="Medio"> Médio </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h2>Série</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="serie">
+                            <option value="SextoAno">6º Do Ensino Fundamental</option>
+                            <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                            <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                            <option value="NonoAno">9º Do Ensino Fundamental</option>
+                            <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                            <option value="SegundoAno">2º Do Ensino Médio</option>
+                            <option value="TerceiroAno">3º Do Ensino Médio</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h2>Turno</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="radio" name="turno" value="Manha">Manha</td>
+                    <td><input type="radio" name="turno" value="Tarde">Tarde</td>
+                    <td><input type="radio" name="turno" value="Noite">Noite</td>
+                </tr>
+            </table>
+            <input class="btn btn-primary form-control" type="submit" value="Cadastrar" />
+        </form>
+    </div>
+</div>

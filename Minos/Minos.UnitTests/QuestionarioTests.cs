@@ -23,13 +23,13 @@ namespace Minos.UnitTests
             turmaRepositoryMock.Setup(x => x.ObterTurmaPeloId(It.IsAny<int>())).Returns(new Turma(Grau.Nenhum, Serie.Nenhuma, Turno.Nenhum, ""));
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
+            var listaDePerguntas = new List<int>();
 
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
             periodo.DataFinal = new DateTime(2008, 5, 1, 8, 30, 52);
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
+            sut.CadastrarQuestionario(listaDePerguntas, periodo.DataInicial, periodo.DataFinal);
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
@@ -45,49 +45,23 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            
+
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            List<Pergunta> listaDePerguntas = null;
+            List<int> listaDePerguntas = null;
 
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
             periodo.DataFinal = new DateTime(2008, 5, 1, 8, 30, 52);
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo); ;
+            sut.CadastrarQuestionario(listaDePerguntas, periodo.DataInicial, periodo.DataFinal);
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
         }
 
         [Trait("QuestionarioController", "Cadastrar Questionario")]
-        [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Periodo For null")]
-        public void DeveriaNaoSalvarQuestionarioQuandoPeriodoForNull()
-        {
-            //arrange
-            CriaMock();
-            PopulaTurmaId();
-
-            //act
-            CriaAdminController();
-            
-            sut.CadastrarProfessor("Robson", "Junior", turmaId);
-            //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
-            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
-
-            Periodo periodo = null;
-
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
-
-            //assert
-            questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
-        }
-
-
-        [Trait("QuestionarioController", "Cadastrar Questionario")]
-        [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Periodo For Vazia")]
+        [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Periodo Inicial Ou Final For Default")]
         public void DeveriaNaoSalvarQuestionarioQuandoPeriodoForVazia()
         {
             //arrange
@@ -96,17 +70,17 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            
+
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
+            var listaDePerguntas = new List<int>();
             Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
+            listaDePerguntas.Add(1);
 
             var periodo = new Periodo();
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
-
+            sut.CadastrarQuestionario(listaDePerguntas, periodo.DataInicial, periodo.DataFinal);
+            
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
         }
@@ -123,17 +97,18 @@ namespace Minos.UnitTests
             //act
             CriaAdminController();
             
-            sut.CadastrarProfessor("Robson", "Junior", turmaId);
-            //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
-            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
-
+            int n = 1;
+            var listaDeIdDePerguntas = new List<int>();
+            listaDeIdDePerguntas.Add(n);
+            
+            perguntaRepositoryMock.Setup(x => x.ObterPerguntaPeloId(n)).Returns(new Pergunta("blablablabla") {Id = n});
+            
             var periodo = new Periodo();
             periodo.DataInicial = DateTime.Now;
             periodo.DataFinal = new DateTime(2019, 8, 16, 8, 30, 52);
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
+            sut.CadastrarQuestionario(listaDeIdDePerguntas, periodo.DataInicial, periodo.DataFinal);
+            
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Once);
@@ -149,12 +124,12 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            
+
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
-            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
+            var listaDePerguntas = new List<int>();
+            //Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
+            listaDePerguntas.Add(1);
 
             var periodo = new Periodo()
             {
@@ -162,12 +137,12 @@ namespace Minos.UnitTests
                 DataFinal = DateTime.Now.AddDays(4)
             };
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
+            sut.CadastrarQuestionario(listaDePerguntas, periodo.DataInicial, periodo.DataFinal);
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
         }
-        
+
         [Trait("QuestionarioController", "Cadastrar Questionario")]
         [Fact(DisplayName = "Deveria Nao Salvar Questionario Quando Data Final For Anterior A DataInicial")]
         public void DeveriaNaoSalvarQuestionarioQuandoDataFinalForAnteriorADataInicial()
@@ -178,12 +153,11 @@ namespace Minos.UnitTests
 
             //act
             CriaAdminController();
-            
+
             sut.CadastrarProfessor("Robson", "Junior", turmaId);
             //sut.CadastrarQuestionario(new List<Perguntas>(), new Periodo());
-            var listaDePerguntas = new List<Pergunta>();
-            Pergunta pergunta = new Pergunta("Você se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
+            var listaDePerguntas = new List<int>();
+            listaDePerguntas.Add(1);
 
             var periodo = new Periodo()
             {
@@ -191,7 +165,7 @@ namespace Minos.UnitTests
                 DataFinal = DateTime.Now.AddDays(-3)
             };
 
-            sut.CadastrarQuestionario(listaDePerguntas, periodo);
+            sut.CadastrarQuestionario(listaDePerguntas, periodo.DataInicial, periodo.DataFinal);
 
             //assert
             questionarioRepositoryMock.Verify(x => x.Salvar(It.IsAny<Questionario>()), Times.Never);
@@ -207,14 +181,14 @@ namespace Minos.UnitTests
             //act
             CriaQuestionarioController();
 
-            var turma = new Turma(Grau.Medio, Serie.Primeiro, Turno.Manha, "EM1M");
+            var turma = new Turma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "EM1M");
             alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
 
-            var listaDePerguntas = new List<Pergunta>();
+            var listaDePerguntas = new List<QuestionarioPergunta>();
             Pergunta pergunta = new Pergunta("Voce se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
+            listaDePerguntas.Add(new QuestionarioPergunta() { Pergunta = pergunta });
 
-            var periodo = new Periodo() { DataInicial = DateTime.Now, DataFinal = DateTime.Now};
+            var periodo = new Periodo() { DataInicial = DateTime.Now, DataFinal = DateTime.Now };
 
             var questionario = new Questionario(listaDePerguntas, periodo);
             //{
@@ -225,7 +199,7 @@ namespace Minos.UnitTests
             turma.Questionarios.Add(questionario);
 
             IActionResult result = sut2.Index("1");
-            
+
 
             //assert
             Object.Equals(result, typeof(ViewResult));
@@ -241,12 +215,12 @@ namespace Minos.UnitTests
             //act
             CriaQuestionarioController();
 
-            var turma = new Turma(Grau.Medio, Serie.Primeiro, Turno.Manha, "EM1M");
+            var turma = new Turma(Grau.Medio, Serie.PrimeiroAno, Turno.Manha, "EM1M");
             alunoRepositoryMock.Setup(x => x.ObterAlunoPorMatricula(It.IsAny<string>())).Returns(new Aluno("Eneas", "Lucas", turma));
 
-            var listaDePerguntas = new List<Pergunta>();
+            var listaDePerguntas = new List<QuestionarioPergunta>();
             Pergunta pergunta = new Pergunta("Voce se da bem com o seu professor?");
-            listaDePerguntas.Add(pergunta);
+            listaDePerguntas.Add(new QuestionarioPergunta() { Pergunta = pergunta });
 
             var periodo = new Periodo() { DataInicial = DateTime.Now.AddDays(1), DataFinal = DateTime.Now };
 

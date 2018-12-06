@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastrar Professor";
+}
+
+<div class="principal">
+    <div class="cadastro">
+        <h2>Cadastrar Professor</h2>
+        <form action="\Admin\CadastrarProfessor" method="post">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Nome:</td>
+                        <td><input class="form-control" type="text" name="nome" /></td>
+                    </tr>
+                    <tr>
+                        <td>Sobrenome:</td>
+                        <td><input class="form-control" type="text" name="sobrenome" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>Turmas:</td>
+                    </tr>
+                    @{
+
+                        var listaDeTurmas = ViewBag.turmas;
+                        foreach (var item in listaDeTurmas)
+                        {
+                            <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
+                        }
+
+                    }
+                    <tr><td><input class="btn btn-primary form-control" type="submit" value="Cadastrar" /></td></tr>
+                </table>
+        </form>
+    </div>
+
+    <div class="lista">
+        <h2>Lista de Professores</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr aling="center">
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>turmas</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var listaDeProfessores = ViewBag.professores;
+                    foreach (var item in listaDeProfessores)
+                    {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td>@item.Sobrenome</td>
+                            <td>
+                                @foreach (var ProfessorTurma in @item.Turmas)
+                                {
+                                    @ProfessorTurma.Turma.Serie;<span>,</span>
+                                }
+                            </td>
+
+                            <td>
+                                <form action="\Admin\EditarProfessor" method="post">
+                                    <input hidden name="idDoProfessor" value="@item.Id" />
+                                    <input class="btn btn-warning" type="submit" value="Editar" />
+                                </form>
+                            </td>
+                            <td>
+                                <form action="\Admin\ExcluirProfessor" method="post">
+                                    <input hidden name="idDoProfessor" value="@item.Id" />
+                                    <input class="btn btn-danger" type="submit" value="Excluir" />
+                                </form>
+                            </td>
+
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using Minos.Site.Models;
+﻿using Minos.Site.Controllers;
+using Minos.Site.Models;
 using System.Collections.Generic;
 
 namespace Minos.Site.Models
