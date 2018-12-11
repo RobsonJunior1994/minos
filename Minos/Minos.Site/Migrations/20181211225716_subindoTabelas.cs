@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Minos.Site.Migrations
 {
-    public partial class SubidoTabelas : Migration
+    public partial class subindoTabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

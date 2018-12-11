@@ -51,19 +51,3 @@
         </form>
     </div>
 </div>
-
-@*@{
-    var listaDeTurmas = ViewBag.turmas;
-    foreach (var item in listaDeTurmas)
-    {
-        for (var i = 0; i < professor.Turmas.Count; i++)
-        {
-            if (professor.Turmas[i].TurmaId == item.Id)
-            {
-                <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" checked />@item.Serie</td></tr>
-            }
-
-        }
-        <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
-    }
-}*@

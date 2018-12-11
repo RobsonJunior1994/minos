@@ -123,6 +123,68 @@ namespace Minos.Site.Controllers
             return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
+        [HttpPost]
+        public IActionResult ExcluirProfessor(int idDoProfessor)
+        {
+            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            {
+                _professorRepository.Excluir(idDoProfessor);
+            }
+            return RedirectToAction("CadastrarProfessor", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult EditarProfessor(int idDoprofessor)
+        {
+            //_professorRepository.BeginContext();
+            var professor = _professorRepository.ObterProfessorPeloId(idDoprofessor);
+            ViewBag.professor = professor;
+            ViewBag.turmas = _turmaRepository.ListarTurmas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarProfessor(int id, string nome, string sobrenome, List<int> listaDeIdDasTurmas)
+        {
+            //_professorRepository.BeginContext();
+            var professor = _professorRepository.ObterProfessorPeloId(id);
+            professor.Nome = nome;
+            professor.Sobrenome = sobrenome;
+
+            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
+                return View();
+
+            professor.Turmas = new List<ProfessorTurma>();
+
+            foreach (var turmaId in listaDeIdDasTurmas)
+            {
+                Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
+
+                if (turma == null || turma.Id == 0)
+                    return View();
+
+                //var professorturma = new ProfessorTurma();
+                //
+                //professorturma.TurmaId = turma.Id;
+
+                professor.Turmas.Add(new ProfessorTurma() { TurmaId = turma.Id });
+            }
+
+            if (!professor.ValidaProfessor())
+            {
+                ViewData["Message"] = "Envie os dados do professor de forma correta!";
+                return View();
+            }
+            else
+            {
+                _professorRepository.Atualizar(professor);
+            }
+
+            //_professorRepository.EndContext();
+
+            return RedirectToAction("cadastrarprofessor", "Admin");
+        }
+
         [HttpGet]
         public IActionResult CadastrarQuestionario()
         {
@@ -130,7 +192,6 @@ namespace Minos.Site.Controllers
             ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
             return View();
         }
-
 
         [HttpPost]
         public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
@@ -210,68 +271,6 @@ namespace Minos.Site.Controllers
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");
-        }
-
-        [HttpPost]
-        public IActionResult ExcluirProfessor(int idDoProfessor)
-        {
-            if(idDoProfessor > 0 && idDoProfessor.ToString() != "")
-            {
-                _professorRepository.Excluir(idDoProfessor);
-            }
-            return RedirectToAction("CadastrarProfessor", "Admin");
-        }
-
-        [HttpPost]
-        public IActionResult EditarProfessor(int idDoprofessor)
-        {
-            //_professorRepository.BeginContext();
-            var professor = _professorRepository.ObterProfessorPeloId(idDoprofessor);
-            ViewBag.professor = professor;
-            ViewBag.turmas = _turmaRepository.ListarTurmas();
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AtualizarProfessor(int id, string nome, string sobrenome, List<int> listaDeIdDasTurmas)
-        {
-            //_professorRepository.BeginContext();
-            var professor = _professorRepository.ObterProfessorPeloId(id);
-            professor.Nome = nome;
-            professor.Sobrenome = sobrenome;
-            
-            if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
-                return View();
-
-            professor.Turmas = new List<ProfessorTurma>();
-
-            foreach (var turmaId in listaDeIdDasTurmas)
-            {
-                Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
-
-                if (turma == null || turma.Id == 0)
-                    return View();
-
-                //var professorturma = new ProfessorTurma();
-                //
-                //professorturma.TurmaId = turma.Id;
-
-                professor.Turmas.Add(new ProfessorTurma() { TurmaId = turma.Id });
-            }
-
-            if (!professor.ValidaProfessor())
-            {
-                ViewData["Message"] = "Envie os dados do professor de forma correta!";
-                return View();
-            }
-            else
-            {
-                _professorRepository.Atualizar(professor);
-            }
-
-            //_professorRepository.EndContext();
-
-            return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
     }

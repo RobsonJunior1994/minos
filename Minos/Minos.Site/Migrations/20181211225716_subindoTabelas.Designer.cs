@@ -10,14 +10,14 @@ using Minos.Site.Models;
 namespace Minos.Site.Migrations
 {
     [DbContext(typeof(MinosContext))]
-    [Migration("20181206231519_SubidoTabelas")]
-    partial class SubidoTabelas
+    [Migration("20181211225716_subindoTabelas")]
+    partial class subindoTabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
