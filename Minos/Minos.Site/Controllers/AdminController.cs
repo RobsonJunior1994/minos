@@ -32,7 +32,6 @@ namespace Minos.Site.Controllers
             
         }
         
-
         public IActionResult Index()
         {
             var logado = HttpContext.Session.GetString("LogarAdm");
@@ -45,7 +44,7 @@ namespace Minos.Site.Controllers
             return View();
             
         }
-        
+
         [HttpGet]
         public IActionResult CadastrarTurma()
         {
@@ -73,11 +72,11 @@ namespace Minos.Site.Controllers
             {
                 _turmaRepository.Salvar(turma);
             }
-            
+
             return View();
         }
 
-       
+
         [HttpGet]
         public IActionResult CadastrarProfessor()
         {
@@ -85,7 +84,7 @@ namespace Minos.Site.Controllers
             ViewBag.professores = _professorRepository.ListarProfessores();
             return View();
         }
-        
+
         [HttpPost]
         public IActionResult CadastrarProfessor(string nome, string sobrenome, List<int> listaDeIdDasTurmas)
         {
@@ -123,106 +122,17 @@ namespace Minos.Site.Controllers
             return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
-        [HttpGet]
-        public IActionResult CadastrarQuestionario()
-        {
-            ViewBag.periodos = _periodoRepository.ListarPeriodos();
-            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
-            return View();
-        }
-
-
-        [HttpPost]
-        public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
-        {
-
-            //Periodo periodo = _periodoRepository.ObterPeriodoPeloId(periodoId);
-            Periodo periodo = new Periodo();
-            periodo.DataInicial = periodoInicial;
-            periodo.DataFinal = periodoFinal;
-
-            Questionario questionario = new Questionario() { Periodo = periodo };
-
-            if(listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
-            {
-                return View();
-            }
-
-            foreach (var perguntaId in listaDeIdDePerguntas)
-            {
-                Pergunta pergunta = new Pergunta();
-                pergunta = _perguntaRepository.ObterPerguntaPeloId(perguntaId);
-                if (pergunta == null || pergunta.Id == 0) return View();
-
-                var questionarioPergunta = new QuestionarioPergunta();
-                questionarioPergunta.PerguntaId = pergunta.Id;
-                questionarioPergunta.QuestionarioId = questionario.Id;
-                
-                questionario.Perguntas = new List<QuestionarioPergunta>();
-                questionario.Perguntas.Add(questionarioPergunta);
-            }
-            
-            if (questionario.EhValido())
-            {
-                _questionarioRepository.Salvar(questionario);
-            }
-            else
-            {
-                var mensagem = new Mensagem();
-                return View();
-            }
-
-            return RedirectToAction("CadastrarQuestionario", "Admin");
-        }
-
-        [HttpGet]
-        public IActionResult CadastrarPergunta()
-        {
-            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
-            return View();           
-        }
-
-        [HttpPost]
-        public IActionResult CadastrarPergunta(string perguntaEnviada)
-        {
-            Pergunta pergunta = new Pergunta(perguntaEnviada);
-            var mensagem = new Mensagem();
-
-            if (pergunta.EhValida())
-            {
-                _perguntaRepository.Salvar(pergunta);
-            }
-            else
-            {
-                return View();
-            }
-
-            return RedirectToAction("CadastrarPergunta", "Admin");
-        }
-
-        [HttpPost]
-        public IActionResult DeletarPergunta(int id)
-        {
-
-            if (id > 0 && id.ToString() != "")
-            {
-                _perguntaRepository.Deletar(id);
-            }
-
-            return RedirectToAction("CadastrarPergunta", "Admin");
-        }
-
         [HttpPost]
         public IActionResult ExcluirProfessor(int idDoProfessor)
         {
-            if(idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
             {
                 _professorRepository.Excluir(idDoProfessor);
             }
             return RedirectToAction("CadastrarProfessor", "Admin");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult EditarProfessor(int idDoprofessor)
         {
             //_professorRepository.BeginContext();
@@ -239,7 +149,7 @@ namespace Minos.Site.Controllers
             var professor = _professorRepository.ObterProfessorPeloId(id);
             professor.Nome = nome;
             professor.Sobrenome = sobrenome;
-            
+
             if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
                 return View();
 
@@ -272,6 +182,94 @@ namespace Minos.Site.Controllers
             //_professorRepository.EndContext();
 
             return RedirectToAction("cadastrarprofessor", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarQuestionario()
+        {
+            ViewBag.periodos = _periodoRepository.ListarPeriodos();
+            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
+        {
+
+            //Periodo periodo = _periodoRepository.ObterPeriodoPeloId(periodoId);
+            Periodo periodo = new Periodo();
+            periodo.DataInicial = periodoInicial;
+            periodo.DataFinal = periodoFinal;
+
+            Questionario questionario = new Questionario() { Periodo = periodo };
+
+            if (listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
+            {
+                return View();
+            }
+
+            foreach (var perguntaId in listaDeIdDePerguntas)
+            {
+                Pergunta pergunta = new Pergunta();
+                pergunta = _perguntaRepository.ObterPerguntaPeloId(perguntaId);
+                if (pergunta == null || pergunta.Id == 0) return View();
+
+                var questionarioPergunta = new QuestionarioPergunta();
+                questionarioPergunta.PerguntaId = pergunta.Id;
+                questionarioPergunta.QuestionarioId = questionario.Id;
+
+                questionario.Perguntas = new List<QuestionarioPergunta>();
+                questionario.Perguntas.Add(questionarioPergunta);
+            }
+
+            if (questionario.EhValido())
+            {
+                _questionarioRepository.Salvar(questionario);
+            }
+            else
+            {
+                var mensagem = new Mensagem();
+                return View();
+            }
+
+            return RedirectToAction("CadastrarQuestionario", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarPergunta()
+        {
+            ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarPergunta(string perguntaEnviada)
+        {
+            Pergunta pergunta = new Pergunta(perguntaEnviada);
+            var mensagem = new Mensagem();
+
+            if (pergunta.EhValida())
+            {
+                _perguntaRepository.Salvar(pergunta);
+            }
+            else
+            {
+                return View();
+            }
+
+            return RedirectToAction("CadastrarPergunta", "Admin");
+        }
+
+        [HttpPost]
+        public IActionResult DeletarPergunta(int id)
+        {
+
+            if (id > 0 && id.ToString() != "")
+            {
+                _perguntaRepository.Deletar(id);
+            }
+
+            return RedirectToAction("CadastrarPergunta", "Admin");
         }
 
     }
