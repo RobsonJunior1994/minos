@@ -66,7 +66,7 @@ namespace Minos.Site.Controllers
             ViewData["Message"] = "Cadastro efetuado com sucesso!";
             ViewData["Status"] = "bg-success";
             _usuarioRepository.Salvar(usuario);
-            
+
             return View();
 
         }
@@ -80,38 +80,49 @@ namespace Minos.Site.Controllers
         public IActionResult Login(string login, string senha)
         {
             Usuario usuario = new Usuario(login, senha);
-            if (usuario.EhValido())
+            if (usuario.ValidaLogin() == false || usuario.ValidaSenha() == false)
             {
-                if(_usuarioRepository.EhAdm(login, senha))
+                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
+                return View();
+            }
+
+            else
+            {
+                if (usuario.EhValido())
                 {
+                    if (_usuarioRepository.EhAdm(login, senha))
+                    {
+                        if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+                        {
+                            HttpContext.Session.SetString("LogarAdm", "Administrador");
+                            return RedirectToAction("Index", "Admin");
+
+                        }
+                        else
+                        {
+                            ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
+                            return View();
+                        }
+                    }
+
                     if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
                     {
-                        HttpContext.Session.SetString("LogarAdm", "Administrador");
-                        return RedirectToAction("Index", "Admin");
+                        HttpContext.Session.SetString("LogarAluno", "Aluno");
+                        return RedirectToAction("Index", "Aluno");
 
                     }
                     else
                     {
                         ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
                         return View();
-                    }    
-                }
-
-                if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
-                {
-                    HttpContext.Session.SetString("LogarAluno", "Aluno");
-                    return RedirectToAction("Index", "Aluno");
-
-                }
-                else
-                {
-                    ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
-                    return View();
+                    }
                 }
             }
-           
+
             return View();
         }
+
+
 
         [HttpPost]
         public IActionResult Logout()
