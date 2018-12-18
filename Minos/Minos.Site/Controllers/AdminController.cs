@@ -272,5 +272,22 @@ namespace Minos.Site.Controllers
             return RedirectToAction("CadastrarPergunta", "Admin");
         }
 
+        [HttpGet]
+        public IActionResult PaginaDeAtualizarPergunta(int id)
+        {
+            ViewBag.Pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarPergunta(string texto, int id)
+        {
+            Pergunta pergunta = null;
+            pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Texto = texto;
+            _perguntaRepository.Atualizar(pergunta);
+            return RedirectToAction("CadastrarPergunta", "Admin");
+        }
+
     }
 }
