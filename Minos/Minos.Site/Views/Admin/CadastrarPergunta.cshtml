@@ -1,15 +1,13 @@
 ﻿
 @{
     ViewData["Title"] = "CadastrarPergunta";
-    var mensagem = ViewBag.Mensagem;
     var listaDePerguntas = ViewBag.perguntas;
 }
 
 
 <div>
     <h2 class="text-center">Cadastrar Pergunta</h2>
-        <p class="alert-warning">@mensagem</p>
-    
+    <p class="alert-warning">@TempData["Mensagem"]</p>
     <div class="form-group">
         <form method="post" action="CadastrarPergunta">
             <table class="table">
@@ -42,7 +40,7 @@
                         </td>
 
                         <td>
-                            <form method="get" action="\Admin\PaginaDeAtualizarPergunta">
+                            <form method="get" action="\Admin\AtualizarPergunta">
                                 <input type="hidden" name="id" value="@pergunta.Id" />
                                 <input type="submit" class="btn btn-warning" value="Atualizar" />
                             </form>

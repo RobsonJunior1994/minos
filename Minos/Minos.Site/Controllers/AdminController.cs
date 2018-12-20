@@ -273,7 +273,7 @@ namespace Minos.Site.Controllers
         }
 
         [HttpGet]
-        public IActionResult PaginaDeAtualizarPergunta(int id)
+        public IActionResult AtualizarPergunta(int id)
         {
             ViewBag.Pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
             return View();
@@ -292,11 +292,12 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                ViewBag.Mensagem = "Tentativa de atualizar pergunta inválida!";
+                TempData["Mensagem"] = "Tentativa de atualizar pergunta inválida!";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");
+            
         }
 
     }
