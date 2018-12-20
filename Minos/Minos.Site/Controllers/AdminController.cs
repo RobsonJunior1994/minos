@@ -83,6 +83,18 @@ namespace Minos.Site.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AtualizarTurma(int id)
+        {
+            ViewBag.Turma = _turmaRepository.ObterTurmaPeloId(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarTurma()
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult CadastrarProfessor()

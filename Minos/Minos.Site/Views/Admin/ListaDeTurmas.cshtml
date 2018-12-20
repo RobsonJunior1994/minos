@@ -22,7 +22,8 @@
                     <td>@turma.Serie</td>
                     <td>@turma.Grau</td>
                     <td>
-                        <form>
+                        <form action="AtualizarTurma" method="get">
+                            <input type="hidden" name="id" value="@turma.Id" />
                             <input type="submit" value="Editar" class="btn btn-warning" />
                         </form>
                     </td>
