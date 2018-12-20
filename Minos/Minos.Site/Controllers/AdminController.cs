@@ -46,13 +46,6 @@ namespace Minos.Site.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListaDeTurmas()
-        {
-            ViewBag.Turmas = _turmaRepository.ListarTurmas();
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult CadastrarTurma()
         {
             var grau = new Grau();
