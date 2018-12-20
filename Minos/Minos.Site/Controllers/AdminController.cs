@@ -29,9 +29,9 @@ namespace Minos.Site.Controllers
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
-            
+
         }
-        
+
         public IActionResult Index()
         {
             var logado = HttpContext.Session.GetString("LogarAdm");
@@ -40,9 +40,16 @@ namespace Minos.Site.Controllers
             {
                 return RedirectToAction("Login", "Usuario");
             }
-            
+
             return View();
-            
+
+        }
+
+        [HttpGet]
+        public IActionResult ListaDeTurmas()
+        {
+            ViewBag.Turmas = _turmaRepository.ListarTurmas();
+            return View();
         }
 
         [HttpGet]
