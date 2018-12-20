@@ -91,9 +91,14 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult AtualizarTurma()
+        public IActionResult AtualizarTurma(int id, Grau grau, Serie serie, Turno turno)
         {
-            return View();
+            Turma turma = _turmaRepository.ObterTurmaPeloId(id);
+            turma.Grau = grau;
+            turma.Serie = serie;
+            turma.Turno = turno;
+            _turmaRepository.Atualizar(turma);
+            return RedirectToAction("ListaDeTurmas", "Admin");
         }
 
         [HttpGet]
