@@ -295,7 +295,7 @@ namespace Minos.Site.Controllers
                 TempData["Mensagem"] = "Tentativa de atualizar pergunta inválida!";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
-
+            TempData["Sucesso"] = "Pergunta atualizada com sucesso!";
             return RedirectToAction("CadastrarPergunta", "Admin");
             
         }
