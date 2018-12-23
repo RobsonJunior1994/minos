@@ -200,9 +200,9 @@ namespace Minos.Site.Controllers
             
             Questionario questionario = new Questionario() { Periodo = periodo };
 
-            if (!questionario.EhValido())
+            if (listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
             {
-                TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
+                TempData["ErroPerguntaVazia"] = "O questionario precisa de perguntas para ser cadastrado.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
 
