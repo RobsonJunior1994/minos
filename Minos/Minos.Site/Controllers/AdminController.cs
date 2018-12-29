@@ -232,6 +232,7 @@ namespace Minos.Site.Controllers
                 TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
+
             TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
             return RedirectToAction("CadastrarQuestionario", "Admin");
         }
