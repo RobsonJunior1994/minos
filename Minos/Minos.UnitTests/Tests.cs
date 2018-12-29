@@ -42,7 +42,6 @@ namespace Minos.UnitTests
             this.perguntaRepositoryMock = new Mock<IPerguntaRepository>();
             this.alunoRepositoryMock = new Mock<IAlunoRepository>();
             this.respostaRepositoryMock = new Mock<IRespostaRepository>();
-
             this.loginRepositoryMock = new Mock<ILoginRepository>();
             this.periodoRepositoryMock = new Mock<IPeriodoRepository>();
         }
