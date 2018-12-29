@@ -205,7 +205,8 @@ namespace Minos.Site.Controllers
 
             if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
             {
-                return View();
+                TempData["ErroPerguntaVazia"] = "O questionario precisa de perguntas para ser cadastrado.";
+                return RedirectToAction("CadastrarQuestionario", "Admin");
             }
 
             foreach (var perguntaId in questionarioCadastro.ListaDeIdDePerguntas)
@@ -228,9 +229,10 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                return View();
+                TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
+                return RedirectToAction("CadastrarQuestionario", "Admin");
             }
-
+            TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
             return RedirectToAction("CadastrarQuestionario", "Admin");
         }
 

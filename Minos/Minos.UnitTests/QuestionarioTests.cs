@@ -114,11 +114,13 @@ namespace Minos.UnitTests
             var listaDeIdDePerguntas = new List<int>();
             listaDeIdDePerguntas.Add(n);
             
-            perguntaRepositoryMock.Setup(x => x.ObterPerguntaPeloId(n)).Returns(new Pergunta("blablablabla") {Id = n});
-            
-            var periodo = new Periodo();
-            periodo.DataInicial = DateTime.Now;
-            periodo.DataFinal = new DateTime(2019, 8, 16, 8, 30, 52);
+            perguntaRepositoryMock.Setup(x => x.ObterPerguntaPeloId(n)).Returns(new Pergunta("blablablabla") {Id = 1});
+
+            var periodo = new Periodo()
+            {
+                DataInicial = DateTime.Now,
+                DataFinal = DateTime.Now.AddDays(4)
+            };
 
             var cadastroQuestionario = new QuestionarioCadastroViewModel()
             {  

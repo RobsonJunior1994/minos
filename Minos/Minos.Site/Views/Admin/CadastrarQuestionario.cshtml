@@ -2,8 +2,10 @@
     ViewData["Title"] = "CadastrarQuestionario";
 }
 
-<h2 class="text-center">Cadastro de Questionario</h2>
-
+<h2 class="text-center">Cadastrar Questionario</h2>
+<p class="alert-warning">@TempData["ErroQuestionario"]</p>
+<p class="alert-warning">@TempData["ErroPerguntaVazia"]</p>
+<p class="alert-success">@TempData["SucessoQuestionario"]</p>
 <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8">
