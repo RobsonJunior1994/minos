@@ -1,4 +1,5 @@
-﻿using Minos.Site.Controllers;
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Minos.Site.Controllers;
 using Minos.Site.Models;
 using Moq;
 using System;
@@ -21,6 +22,7 @@ namespace Minos.UnitTests
         internal Mock<IRespostaRepository> respostaRepositoryMock;
         internal Mock<ILoginRepository> loginRepositoryMock;
         internal Mock<IPeriodoRepository> periodoRepositoryMock;
+        internal Mock<ITempDataDictionary> tempDataMock;
 
         internal List<int> turmaIdVazia = new List<int>();
         internal List<int> turmaId;
@@ -45,11 +47,15 @@ namespace Minos.UnitTests
 
             this.loginRepositoryMock = new Mock<ILoginRepository>();
             this.periodoRepositoryMock = new Mock<IPeriodoRepository>();
+            this.tempDataMock = new Mock<ITempDataDictionary>();
         }
 
         public void CriaAdminController()
         {
-            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object, periodoRepositoryMock.Object);
+            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object, periodoRepositoryMock.Object)
+            {
+                TempData = tempDataMock.Object,
+            };
         }
 
         public void CriaQuestionarioController()

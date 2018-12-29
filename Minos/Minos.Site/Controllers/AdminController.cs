@@ -187,7 +187,6 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult CadastrarQuestionario()
         {
-            ViewBag.periodos = _periodoRepository.ListarPeriodos();
             ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
             return View();
         }
@@ -195,17 +194,16 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
         {
-
-            //Periodo periodo = _periodoRepository.ObterPeriodoPeloId(periodoId);
             Periodo periodo = new Periodo();
             periodo.DataInicial = periodoInicial;
             periodo.DataFinal = periodoFinal;
-
+            
             Questionario questionario = new Questionario() { Periodo = periodo };
 
             if (listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
             {
-                return View();
+                TempData["ErroPerguntaVazia"] = "O questionario precisa de perguntas para ser cadastrado.";
+                return RedirectToAction("CadastrarQuestionario", "Admin");
             }
 
             foreach (var perguntaId in listaDeIdDePerguntas)
@@ -228,10 +226,10 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                var mensagem = new Mensagem();
-                return View();
+                TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
+                return RedirectToAction("CadastrarQuestionario", "Admin");
             }
-
+            TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
             return RedirectToAction("CadastrarQuestionario", "Admin");
         }
 

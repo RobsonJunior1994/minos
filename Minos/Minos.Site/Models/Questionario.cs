@@ -24,9 +24,9 @@ namespace Minos.Site.Models
         public bool EhValido()
         {
             if (Periodo == null || Periodo.DataInicial == default || Periodo.DataInicial == null ||
-                Periodo.DataFinal == null || Periodo.DataFinal == default || Perguntas == null || 
-                Perguntas.Count <= 0 || Periodo.DataInicial.Date > Periodo.DataFinal.Date ||
-                Periodo.DataInicial.Date > DateTime.Now.Date)
+                 Periodo.DataFinal == null || Periodo.DataFinal == default || Perguntas == null ||
+                 Perguntas.Count <= 0 || Periodo.DataInicial.Date > Periodo.DataFinal.Date ||
+                 Periodo.DataInicial.Date > DateTime.Now.Date)
             {
                 return false;
             }
