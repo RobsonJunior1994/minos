@@ -192,21 +192,24 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarQuestionario(List<int> listaDeIdDePerguntas, DateTime periodoInicial, DateTime periodoFinal)
+        public IActionResult CadastrarQuestionario(QuestionarioCadastroViewModel questionarioCadastro)
         {
+            string Nome = questionarioCadastro.NomeDoQuestionario;
+
             Periodo periodo = new Periodo();
-            periodo.DataInicial = periodoInicial;
-            periodo.DataFinal = periodoFinal;
+            periodo.DataInicial = questionarioCadastro.PeriodoInicial;
+            periodo.DataFinal = questionarioCadastro.PeriodoFinal;
             
             Questionario questionario = new Questionario() { Periodo = periodo };
+            questionario.Nome = Nome;
 
-            if (listaDeIdDePerguntas == null || listaDeIdDePerguntas.Count() == 0)
+            if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
             {
                 TempData["ErroPerguntaVazia"] = "O questionario precisa de perguntas para ser cadastrado.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
 
-            foreach (var perguntaId in listaDeIdDePerguntas)
+            foreach (var perguntaId in questionarioCadastro.ListaDeIdDePerguntas)
             {
                 Pergunta pergunta = new Pergunta();
                 pergunta = _perguntaRepository.ObterPerguntaPeloId(perguntaId);
@@ -229,8 +232,37 @@ namespace Minos.Site.Controllers
                 TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
+
             TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
             return RedirectToAction("CadastrarQuestionario", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult ListarQuestionario()
+        {
+            var questionarios = _questionarioRepository.ListarQuestionarios();
+
+            var mensagem = new Mensagem();
+            if (questionarios == null)
+                return View(mensagem.QuestionarioNaoExiste());
+
+            var viewModel = new QuestionarioListaViewModel()
+            {
+                NomeDoQuestionario = new List<string>(),
+                Questionarios = new List<int>()
+            };
+
+            foreach (var nome in questionarios)
+                viewModel.NomeDoQuestionario.Add(nome.Nome);
+            if (viewModel.NomeDoQuestionario == null)
+                return View(mensagem.QuestionarioNaoExiste());
+
+            foreach (var questionario in questionarios)
+                viewModel.Questionarios.Add(questionario.Id);
+            if (viewModel.Questionarios == null)
+                return View(mensagem.QuestionarioNaoExiste());
+                        
+            return View(viewModel);
         }
 
         [HttpGet]

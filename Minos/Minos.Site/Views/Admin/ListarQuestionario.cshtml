@@ -1,0 +1,38 @@
+﻿@model Minos.Site.Models.QuestionarioListaViewModel
+@{
+    ViewData["Title"] = "ListarQuestionario";
+}
+
+<div class="lista">
+    <h2>Lista de Questionarios</h2>
+    <form action="\Admin\ListarQuestionario" method="get">
+        <table class="table table-hover">
+            <thead>
+                <tr aling="center">
+                    <th>Nome</th>
+                    <th class="text-right">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var questionario in Model.NomeDoQuestionario)
+                {
+                <tr>
+                    <td>@questionario</td>
+                    @*<td>
+                        <form action="\Admin\EditarQuestionario" method="get">
+                            <input hidden name="idDoQuestionario" value="" />
+                            <input class="btn btn-warning" type="submit" value="Editar" />
+                        </form>
+                    </td>
+                    <td>
+                        <form action="\Admin\ExcluirQuestionario" method="post">
+                            <input hidden name="idDoQuestionario" value="" />
+                            <input class="btn btn-danger" type="submit" value="Excluir" />
+                        </form>
+                    </td>*@
+                </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>
