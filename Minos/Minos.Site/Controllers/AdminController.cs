@@ -98,6 +98,7 @@ namespace Minos.Site.Controllers
             turma.Serie = serie;
             turma.Turno = turno;
             _turmaRepository.Atualizar(turma);
+            TempData["Menssagem"] = "Turma Atualizada com sucesso";
             return RedirectToAction("ListaDeTurmas", "Admin");
         }
 
