@@ -1,38 +1,56 @@
 ﻿
 @{
     ViewData["Title"] = "CadastrarPergunta";
+    var mensagem = ViewBag.Mensagem;
     var listaDePerguntas = ViewBag.perguntas;
 }
 
+
 <div>
     <h2 class="text-center">Cadastrar Pergunta</h2>
+        <p class="alert-warning">@mensagem</p>
+    
     <div class="form-group">
         <form method="post" action="CadastrarPergunta">
             <table class="table">
                 <tr>
-                    <td><input class="form-control" type="text" name="perguntaEnviada" placeholder="Digite sua pergunta aqui..."/></td>
+                    <td><input class="form-control" type="text" name="perguntaEnviada" placeholder="Digite sua pergunta aqui..." /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" class="btn btn-primary form-control" value="Cadastrar Pergunta"/></td>
+                    <td><input type="submit" class="btn btn-primary form-control" value="Cadastrar Pergunta" /></td>
                 </tr>
             </table>
         </form>
     </div>
 
     <div class="form-group">
-        <form method="post" action="DeletarPergunta">
-            <table class="table table-striped ">
-                @{ foreach (var pergunta in listaDePerguntas)
-                    {
-                        <input type="hidden" name="id" value="@pergunta.Id" />
-                        <tr>
-                            <td><p>@pergunta.Texto</p></td>
 
-                            <td><input type="submit" class="btn btn-danger" value="Deletar" /></td>
-                        </tr>
-                    }
+        <table class="table table-striped ">
+            @{ foreach (var pergunta in listaDePerguntas)
+                {
+
+                    <tr>
+                        <td>
+                            <p>@pergunta.Texto</p>
+                        </td>
+
+                        <td>
+                            <form method="post" action="DeletarPergunta">
+                                <input type="hidden" name="id" value="@pergunta.Id" />
+                                <input type="submit" class="btn btn-danger" value="Deletar" />
+                            </form>
+                        </td>
+
+                        <td>
+                            <form method="get" action="\Admin\PaginaDeAtualizarPergunta">
+                                <input type="hidden" name="id" value="@pergunta.Id" />
+                                <input type="submit" class="btn btn-warning" value="Atualizar" />
+                            </form>
+                        </td>
+                    </tr>
                 }
-            </table>
-        </form>
+            }
+        </table>
+
     </div>
 </div>

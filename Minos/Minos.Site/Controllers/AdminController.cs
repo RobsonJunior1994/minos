@@ -29,9 +29,9 @@ namespace Minos.Site.Controllers
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
-            
+
         }
-        
+
         public IActionResult Index()
         {
             var logado = HttpContext.Session.GetString("LogarAdm");
@@ -40,9 +40,16 @@ namespace Minos.Site.Controllers
             {
                 return RedirectToAction("Login", "Usuario");
             }
-            
+
             return View();
-            
+
+        }
+
+        [HttpGet]
+        public IActionResult ListaDeTurmas()
+        {
+            ViewBag.Turmas = _turmaRepository.ListarTurmas();
+            return View();
         }
 
         [HttpGet]
@@ -297,6 +304,33 @@ namespace Minos.Site.Controllers
             if (id > 0 && id.ToString() != "")
             {
                 _perguntaRepository.Deletar(id);
+            }
+
+            return RedirectToAction("CadastrarPergunta", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult PaginaDeAtualizarPergunta(int id)
+        {
+            ViewBag.Pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarPergunta(string texto, int id)
+        {
+
+            Pergunta pergunta = new Pergunta { Texto = texto, Id = id };
+            if (pergunta.EhValida())
+            {
+                pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+                pergunta.Texto = texto;
+                _perguntaRepository.Atualizar(pergunta);
+            }
+            else
+            {
+                ViewBag.Mensagem = "Tentativa de atualizar pergunta inválida!";
+                return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");

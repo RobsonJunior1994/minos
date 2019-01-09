@@ -42,5 +42,11 @@ namespace Minos.Site.Repositories
             _context.SaveChanges();
 
         }
+
+        public void Atualizar(Pergunta pergunta)
+        {
+            _context.Update(pergunta);
+            _context.SaveChanges();
+        }
     }
 }
