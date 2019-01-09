@@ -25,7 +25,7 @@ namespace Minos.Site.Models
 
         internal bool EhValida()
         {
-            if (Texto == "" ||Texto == null || Texto.Length <= 10)
+            if (string.IsNullOrEmpty(Texto) || Texto.Length <= 10)
             {
                 return false;
             }
