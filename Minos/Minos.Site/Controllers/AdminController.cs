@@ -282,20 +282,11 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult AtualizarPergunta(string texto, int id)
         {
-
-            //Pergunta pergunta = null;
-            //pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
-            //pergunta.Texto = texto;
-            //if (pergunta.EhValida())
-            //{
-            //    _perguntaRepository.Atualizar(pergunta);
-            //}
-
-            Pergunta pergunta = new Pergunta { Texto = texto, Id = id };
+            Pergunta pergunta = null;
+            pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Texto = texto;
             if (pergunta.EhValida())
             {
-                pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
-                pergunta.Texto = texto;
                 _perguntaRepository.Atualizar(pergunta);
             }
             else

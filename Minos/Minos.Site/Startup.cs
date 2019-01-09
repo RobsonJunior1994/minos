@@ -30,13 +30,13 @@ namespace Minos.Site
             services.AddDistributedMemoryCache();
             services.AddSession();
 
-            services.AddSingleton<IUsuarioRepository, UsuarioRepository>();
-            services.AddSingleton<ITurmaRepository, TurmaRepository>();
-            services.AddSingleton<IQuestionarioRepository, QuestionarioRepository>();
-            services.AddSingleton<IProfessorRepository, ProfessorRepository>();
-            services.AddSingleton<IPerguntaRepository, PerguntaRepository>();
-            services.AddSingleton<IPeriodoRepository, PeriodoRepository>();
-            services.AddSingleton<MinosContext, MinosContext>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ITurmaRepository, TurmaRepository>();
+            services.AddScoped<IQuestionarioRepository, QuestionarioRepository>();
+            services.AddScoped<IProfessorRepository, ProfessorRepository>();
+            services.AddScoped<IPerguntaRepository, PerguntaRepository>();
+            services.AddScoped<IPeriodoRepository, PeriodoRepository>();
+            services.AddScoped<MinosContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
