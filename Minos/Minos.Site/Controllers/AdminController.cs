@@ -97,8 +97,18 @@ namespace Minos.Site.Controllers
             turma.Grau = grau;
             turma.Serie = serie;
             turma.Turno = turno;
-            _turmaRepository.Atualizar(turma);
-            TempData["Menssagem"] = "Turma Atualizada com sucesso";
+            if (turma.EhValida())
+            {
+                _turmaRepository.Atualizar(turma);
+
+            }
+            else
+            {
+                TempData["MenssagemDanger"] = "Turma não foi atualizada";
+                return RedirectToAction("ListaDeTurmas", "Admin");
+            }
+
+            TempData["MenssagemSucesso"] = "Turma Atualizada com sucesso";
             return RedirectToAction("ListaDeTurmas", "Admin");
         }
 
