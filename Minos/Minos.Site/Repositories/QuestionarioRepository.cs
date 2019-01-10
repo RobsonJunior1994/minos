@@ -14,6 +14,12 @@ namespace Minos.Site.Repositories
         {
             _context = contexto;
         }
+    
+        public List<Questionario> ListarQuestionarios()
+        {
+            var questionarios = _context.Questionarios.ToList();
+            return questionarios;
+        }
 
         public Questionario ObterListaDePerguntas()
         {

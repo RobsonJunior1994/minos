@@ -1,23 +1,29 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "CadastrarQuestionario";
-    var mensagem = ViewData["Message"];
 }
 
 <h2 class="text-center">Cadastrar Questionario</h2>
-
+<p class="alert-warning">@TempData["ErroQuestionario"]</p>
+<p class="alert-warning">@TempData["ErroPerguntaVazia"]</p>
+<p class="alert-success">@TempData["SucessoQuestionario"]</p>
 <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8">
+            <form action="\Admin\ListarQuestionario" method="get">
+                <input class="btn btn-warning" type="submit" value="Lista de Questionarios" />
+            </form>
         <form action="\Admin\CadastrarQuestionario" method="post">
             <table class="table table-striped table-hover table-bordered">
                 <tr>
+                    <td><input class="form-control" type="text" name="nome" placeholder="Nome ou breve descrição..." /></td>
+                </tr>
+                <tr>
                     <td>Data Inicial</td>
-                    <td><input type="datetime-local" name="periodoInicial"</td>
+                    <td><input type="datetime-local" name="periodoInicial" /></td>
                 </tr>
                 <tr>
                     <td>Data final</td>
-                    <td><input type="datetime-local" name="periodoFinal"</td>
+                    <td><input type="datetime-local" name="periodoFinal" /></td>
                 </tr>
                 <tr>
                     <td><h2 class="text-center">Perguntas</h2></td>
