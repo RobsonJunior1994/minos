@@ -12,5 +12,6 @@ namespace Minos.Site.Models
         List<Turma> ObterTurmasDesteAno();
         void Salvar(Turma turma);
         void Salvar(string CodigoTurma);
+        void Atualizar(Turma turma);
     }
 }
