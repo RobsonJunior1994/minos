@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "AtualizarTurma";
+    var turma = ViewBag.Turma;
+}
+
+<h2>AtualizarTurma</h2>
+
+<div>
+        
+        <form action="\Admin\AtualizarTurma" method="post">
+            <input type="hidden" name="id" value="@turma.Id" />
+            <table class="table">
+                <tr>
+                    <td>
+                        <h2>Grau</h2>
+                    </td>
+                </tr>
+                <tr>
+                    @{
+                        if (turma.Grau == Grau.Fundamental)
+                        {
+                            <td><input type="radio" name="grau" value="Fundamental" checked> Fundamental </td>
+                            <td><input type="radio" name="grau" value="Medio"> Médio </td>
+                        }
+                        else
+                        {
+                            <td><input type="radio" name="grau" value="Fundamental"> Fundamental </td>
+                            <td><input type="radio" name="grau" value="Medio" checked> Médio </td>
+                        }
+                    }
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <h2>Série</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="serie">
+                            @{
+                                if (turma.Serie == Serie.SextoAno)
+                                {
+                                    <option selected value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.SetimoAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option selected value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.OitavoAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option selected value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.NonoAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option selected value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.PrimeiroAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option selected value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.SegundoAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option selected value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.TerceiroAno)
+                                {
+                                    <option value="SextoAno">6º Do Ensino Fundamental</option>
+                                    <option value="SetimoAno">7º Do Ensino Fundamental</option>
+                                    <option value="OitavoAno">8º Do Ensino Fundamental</option>
+                                    <option value="NonoAno">9º Do Ensino Fundamental</option>
+                                    <option value="PrimeiroAno">1º Do Ensino Médio</option>
+                                    <option value="SegundoAno">2º Do Ensino Médio</option>
+                                    <option selected value="TerceiroAno">3º Do Ensino Médio</option>
+                                }
+                                if (turma.Serie == Serie.Nenhuma)
+                                {
+                                    <option selected value="Nenhum">Nenhum</option>
+
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h2>Turno</h2>
+                    </td>
+                </tr>
+                <tr>
+                    @{
+                        if (turma.Turno == Turno.Manha)
+                        {
+                            <td><input type="radio" name="turno" value="Manha" checked>Manha</td>
+                            <td><input type="radio" name="turno" value="Tarde">Tarde</td>
+                            <td><input type="radio" name="turno" value="Noite">Noite</td>
+                        }
+
+                        if (turma.Turno == Turno.Tarde)
+                        {
+                            <td><input type="radio" name="turno" value="Manha" >Manha</td>
+                            <td><input type="radio" name="turno" value="Tarde" checked>Tarde</td>
+                            <td><input type="radio" name="turno" value="Noite">Noite</td>
+                        }
+                        if(turma.Turno != Turno.Tarde && turma.Turno != Turno.Manha)
+                        {
+                            <td><input type="radio" name="turno" value="Manha" >Manha</td>
+                            <td><input type="radio" name="turno" value="Tarde">Tarde</td>
+                            <td><input type="radio" name="turno" value="Noite" checked>Noite</td>
+                        }
+                    }
+
+                </tr>
+            </table>
+            <input class="btn btn-primary form-control" type="submit" value="Atualizar" />
+        </form>
+</div>
+
