@@ -36,7 +36,7 @@ namespace Minos.Site
             services.AddScoped<IProfessorRepository, ProfessorRepository>();
             services.AddScoped<IPerguntaRepository, PerguntaRepository>();
             services.AddScoped<IPeriodoRepository, PeriodoRepository>();
-            services.AddScoped<MinosContext, MinosContext>();
+            services.AddScoped<MinosContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
