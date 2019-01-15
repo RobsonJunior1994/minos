@@ -11,5 +11,6 @@ namespace Minos.Site.Models
         Pergunta ObterPerguntaPeloId(int id);
         List<Pergunta> ListarPerguntas();
         void Deletar(int id);
+        void Atualizar(Pergunta pergunta);
     }
 }

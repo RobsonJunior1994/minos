@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "PaginaDeAtualizarPergunta";
+    var pergunta = ViewBag.Pergunta;
+}
+
+<h2>PaginaDeAtualizarPergunta</h2>
+
+<div>
+    <form action="AtualizarPergunta" method="post">
+        <input type="hidden" name="id" value="@pergunta.Id" />
+        <input type="text" name="texto" value="@pergunta.Texto"/>
+        <input type="submit" value="Atualizar" />
+    </form>
+</div>

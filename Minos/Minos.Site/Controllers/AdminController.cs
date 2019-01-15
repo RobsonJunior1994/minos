@@ -29,9 +29,9 @@ namespace Minos.Site.Controllers
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
-            
+
         }
-        
+
         public IActionResult Index()
         {
             var logado = HttpContext.Session.GetString("LogarAdm");
@@ -40,9 +40,16 @@ namespace Minos.Site.Controllers
             {
                 return RedirectToAction("Login", "Usuario");
             }
-            
+
             return View();
-            
+
+        }
+
+        [HttpGet]
+        public IActionResult ListaDeTurmas()
+        {
+            ViewBag.Turmas = _turmaRepository.ListarTurmas();
+            return View();
         }
 
         [HttpGet]
@@ -76,6 +83,34 @@ namespace Minos.Site.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult AtualizarTurma(int id)
+        {
+            ViewBag.Turma = _turmaRepository.ObterTurmaPeloId(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarTurma(int id, Grau grau, Serie serie, Turno turno)
+        {
+            Turma turma = _turmaRepository.ObterTurmaPeloId(id);
+            turma.Grau = grau;
+            turma.Serie = serie;
+            turma.Turno = turno;
+            if (turma.EhValida())
+            {
+                _turmaRepository.Atualizar(turma);
+
+            }
+            else
+            {
+                TempData["MenssagemDanger"] = "Turma não foi atualizada";
+                return RedirectToAction("ListaDeTurmas", "Admin");
+            }
+
+            TempData["MenssagemSucesso"] = "Turma Atualizada com sucesso";
+            return RedirectToAction("ListaDeTurmas", "Admin");
+        }
 
         [HttpGet]
         public IActionResult CadastrarProfessor()
@@ -340,6 +375,33 @@ namespace Minos.Site.Controllers
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");
+        }
+
+        [HttpGet]
+        public IActionResult AtualizarPergunta(int id)
+        {
+            ViewBag.Pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AtualizarPergunta(string texto, int id)
+        {
+            Pergunta pergunta = null;
+            pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Texto = texto;
+            if (pergunta.EhValida())
+            {
+                _perguntaRepository.Atualizar(pergunta);
+            }
+            else
+            {
+                TempData["Mensagem"] = "Tentativa de atualizar pergunta inválida!";
+                return RedirectToAction("CadastrarPergunta", "Admin");
+            }
+            TempData["Sucesso"] = "Pergunta atualizada com sucesso!";
+            return RedirectToAction("CadastrarPergunta", "Admin");
+            
         }
 
     }

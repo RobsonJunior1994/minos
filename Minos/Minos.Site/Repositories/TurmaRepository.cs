@@ -16,6 +16,12 @@ namespace Minos.Site.Repositories
             _context = contexto;
         }
 
+        public void Atualizar(Turma turma)
+        {
+            _context.Update(turma);
+            _context.SaveChanges();
+        }
+
         public List<Turma> ListarTurmas()
         {
             var turmas = _context.Turmas.ToList();
