@@ -240,29 +240,69 @@ namespace Minos.Site.Controllers
         [HttpGet]
         public IActionResult ListarQuestionario()
         {
-            var questionarios = _questionarioRepository.ListarQuestionarios();
+            var listaQuestionarios = _questionarioRepository.ListarQuestionarios();
 
-            var mensagem = new Mensagem();
-            if (questionarios == null)
-                return View(mensagem.QuestionarioNaoExiste());
+            var viewModelLista = new List<QuestionarioViewModel>();
 
-            var viewModel = new QuestionarioListaViewModel()
+            foreach (var questionario in listaQuestionarios)
             {
-                NomeDoQuestionario = new List<string>(),
-                Questionarios = new List<int>()
+                var questionarioViewModel = new QuestionarioViewModel()
+                {
+                    IdDoQuestionario = questionario.Id,
+                    NomeDoQuestionario = questionario.Nome
+                };
+                viewModelLista.Add(questionarioViewModel);
+            }
+
+            return View(viewModelLista);
+        }
+
+        [HttpGet]
+        public IActionResult EditarQuestionario(int id)
+        {
+            var listaDePerguntas = _perguntaRepository.ListarPerguntas();
+            var idQuestionario = _questionarioRepository.ObterQuestionarioPeloId(id);
+
+            if(idQuestionario.Id <= 0 || idQuestionario == null)
+            {
+                TempData["ErroNaoExisteQuestionario"] = "Por favor verifique se o questionario existe.";
+                return RedirectToAction("ListarQuestionario", "Admin");
+            }
+
+            var viewModel = new QuestionarioUpdateViewModel()
+            {
+                NomeDoQuestionario = idQuestionario.Nome,
+                IdDoQuestionario = idQuestionario.Id,
+                Perguntas = new List<string>(),
+                IdDePerguntas = new List<int>()
             };
 
-            foreach (var nome in questionarios)
-                viewModel.NomeDoQuestionario.Add(nome.Nome);
-            if (viewModel.NomeDoQuestionario == null)
-                return View(mensagem.QuestionarioNaoExiste());
+            foreach (var pergunta in listaDePerguntas)
+                viewModel.Perguntas.Add(pergunta.Texto);
 
-            foreach (var questionario in questionarios)
-                viewModel.Questionarios.Add(questionario.Id);
-            if (viewModel.Questionarios == null)
-                return View(mensagem.QuestionarioNaoExiste());
-                        
+            foreach (var idPergunta in listaDePerguntas)
+                viewModel.IdDePerguntas.Add(idPergunta.Id);
+
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditarQuestionario(QuestionarioUpdateViewModel questionarioUpdate)
+        {
+            var nomeQuestionario = _questionarioRepository.ObterQuestionarioPeloId(questionarioUpdate.IdDoQuestionario);
+            nomeQuestionario.Nome = questionarioUpdate.NomeDoQuestionario;
+
+            if (string.IsNullOrEmpty(nomeQuestionario.Nome))
+            {
+                TempData["ErroAlteracaoQuestionario"] = "Alterações no questionario inválidas!";
+                return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
+            }
+            else
+            {
+                _questionarioRepository.Atualizar(nomeQuestionario);
+            }
+            TempData["SucessoAlteracaoQuestionario"] = "Alterações feitas com sucesso!";
+            return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
         }
 
         [HttpGet]

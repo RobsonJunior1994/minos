@@ -1,4 +1,5 @@
-﻿using Minos.Site.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Minos.Site.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,13 @@ namespace Minos.Site.Repositories
             return questionarios;
         }
 
+        public Questionario ObterQuestionarioPeloId(int id)
+        {
+            var questionario = _context.Questionarios.Include(x => x.Perguntas).FirstOrDefault(p => p.Id == id);
+            _context.SaveChanges();
+            return questionario;
+        }
+        
         public Questionario ObterListaDePerguntas()
         {
             throw new NotImplementedException();
@@ -30,6 +38,13 @@ namespace Minos.Site.Repositories
         {
             _context.Add(Questionario);
             _context.SaveChanges();
+        }
+
+        public void Atualizar(Questionario questionario)
+        {
+            _context.Questionarios.Update(questionario);
+            _context.SaveChanges();
+
         }
     }
 }

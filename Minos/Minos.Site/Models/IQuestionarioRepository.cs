@@ -7,7 +7,9 @@ namespace Minos.Site.Models
     public interface IQuestionarioRepository
     {
         Questionario ObterListaDePerguntas();
+        Questionario ObterQuestionarioPeloId(int id);
         List<Questionario> ListarQuestionarios();
         void Salvar(Questionario Questionario);
+        void Atualizar(Questionario questionario);
     }
 }
