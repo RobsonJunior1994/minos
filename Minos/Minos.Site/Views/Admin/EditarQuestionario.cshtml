@@ -1,0 +1,45 @@
+﻿@model Minos.Site.Models.QuestionarioUpdateViewModel
+@{
+    ViewData["Title"] = "Editar Questionario";
+
+    var perguntas = Model.Perguntas;
+    var idDaPergunta = Model.IdDePerguntas;
+    var questionarioId = Model.IdDoQuestionario;
+    var nomeQuestionario = Model.NomeDoQuestionario;
+}
+
+<div class="principal">
+    <p class="alert-success text-center">@TempData["SucessoAlteracaoQuestionario"]</p>
+    <p class="alert-warning text-center">@TempData["ErroAlteracaoQuestionario"]</p>
+    <div class="cadastro">
+        <h3>Editar Questionario</h3>
+        <form action="\Admin\EditarQuestionario" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <input type="hidden" name="IdDoQuestionario" value="@questionarioId" />
+                        <strong>Nome : </strong><input class="form-control" type="text" name="NomeDoQuestionario" value="@nomeQuestionario" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Perguntas :</strong></td>
+                    <td>
+                        @foreach (var perg in perguntas)
+                        {
+                    <tr>
+                        <td>
+                            <input class="hidden" name="idDaPergunta" value="@idDaPergunta" />@perg
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" href="...?idDaPergunta=@idDaPergunta">Editar</a>
+                            <!-- <input class="btn btn-danger" type="submit" value="Deletar" /> -->
+                        </td>
+                    </tr>
+                }
+                        </td>
+                        </tr>
+                    </table>
+                    <input class="btn btn-success" type="submit" value="Confirmar" />
+                </form>
+            </div>
+        </div>

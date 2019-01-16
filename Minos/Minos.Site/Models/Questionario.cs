@@ -24,7 +24,7 @@ namespace Minos.Site.Models
         
         public bool EhValido()
         {
-            if (Nome == null || Nome == " " ||
+            if ( string.IsNullOrEmpty(Nome) ||
                 Periodo == null || Periodo.DataInicial == default || Periodo.DataInicial == null ||
                 Periodo.DataFinal == null || Periodo.DataFinal == default || 
                 Perguntas == null || Perguntas.Count <= 0 || 

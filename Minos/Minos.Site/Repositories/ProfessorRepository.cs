@@ -37,7 +37,6 @@ namespace Minos.Site.Repositories
         public Professor ObterProfessorPeloId(int id)
         {
             var professor = _context.Professores.Include(x => x.Turmas).FirstOrDefault(p => p.Id == id);
-            _context.SaveChanges();
             return professor;
         }
 
