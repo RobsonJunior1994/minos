@@ -25,7 +25,6 @@ namespace Minos.Site.Repositories
         public Questionario ObterQuestionarioPeloId(int id)
         {
             var questionario = _context.Questionarios.Include(x => x.Perguntas).FirstOrDefault(p => p.Id == id);
-            _context.SaveChanges();
             return questionario;
         }
         
