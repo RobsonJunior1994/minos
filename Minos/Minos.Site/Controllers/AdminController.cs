@@ -352,7 +352,7 @@ namespace Minos.Site.Controllers
         {
             Pergunta pergunta = new Pergunta(perguntaEnviada);
             var mensagem = new Mensagem();
-
+            pergunta.Ativo = true;
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Salvar(pergunta);
@@ -368,10 +368,11 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult DeletarPergunta(int id)
         {
-
+            Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Ativo = false;
             if (id > 0 && id.ToString() != "")
             {
-                _perguntaRepository.Deletar(id);
+                _perguntaRepository.Atualizar(pergunta);
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");
