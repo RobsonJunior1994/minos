@@ -10,6 +10,7 @@ namespace Minos.Site.Repositories
     {
 
         private MinosContext _context;
+        //private List<Pergunta> _perguntas;
 
         public PerguntaRepository(MinosContext contexto)
         {
@@ -23,11 +24,24 @@ namespace Minos.Site.Repositories
             _context.SaveChanges();
         }
 
+        //public List<Pergunta> ListarPerguntas()
+        //{
+        //    var perguntas = _context.Perguntas.ToList();
+        //    List<Pergunta> _perguntas = null; 
+        //    foreach (var item in perguntas)
+        //    {
+        //        if(item.Ativo == true)
+        //        {
+        //            _perguntas.Add(item);
+        //        }
+        //    }
+        //    return _perguntas;
+        //}
+
         public List<Pergunta> ListarPerguntas()
         {
-            var perguntas = _context.Perguntas.ToList();
+            List<Pergunta> perguntas = _context.Perguntas.Where(x => x.Ativo == true).ToList();
             return perguntas;
-
         }
 
         public Pergunta ObterPerguntaPeloId(int turmaId)
