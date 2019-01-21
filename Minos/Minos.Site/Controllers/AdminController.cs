@@ -370,7 +370,7 @@ namespace Minos.Site.Controllers
         {
             if (id < 0)
             {
-                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
+                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
