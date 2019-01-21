@@ -24,7 +24,7 @@ namespace Minos.Site.Repositories
 
         public List<Turma> ListarTurmas()
         {
-            var turmas = _context.Turmas.ToList();
+            var turmas = _context.Turmas.Where(x => x.Ativo == true).ToList();
             return turmas;
         }
 
