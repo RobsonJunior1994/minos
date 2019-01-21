@@ -366,15 +366,17 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletarPergunta(int id)
+        public IActionResult DesativarPergunta(int id)
         {
-            Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
-            pergunta.Ativo = false;
-            if (id > 0 && id.ToString() != "")
+            if (id < 0)
             {
-                _perguntaRepository.Atualizar(pergunta);
+                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
+                return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
+            Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Ativo = false;
+            _perguntaRepository.Atualizar(pergunta);
             return RedirectToAction("CadastrarPergunta", "Admin");
         }
 
