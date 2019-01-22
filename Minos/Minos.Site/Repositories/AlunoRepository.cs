@@ -8,9 +8,11 @@ namespace Minos.Site.Repositories
 {
     public class AlunoRepository : IAlunoRepository
     {
+        private MinosContext _context;
         public Aluno ObterAlunoPorMatricula(string matriculaDoAluno)
         {
-            throw new NotImplementedException();
+            var aluno = _context.Alunos.FirstOrDefault(x => x.Matricula == matriculaDoAluno);
+            return aluno;
         }
     }
 }
