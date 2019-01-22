@@ -352,7 +352,7 @@ namespace Minos.Site.Controllers
         {
             Pergunta pergunta = new Pergunta(perguntaEnviada);
             var mensagem = new Mensagem();
-
+            pergunta.Ativo = true;
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Salvar(pergunta);
@@ -366,14 +366,17 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletarPergunta(int id)
+        public IActionResult DesativarPergunta(int id)
         {
-
-            if (id > 0 && id.ToString() != "")
+            if (id <= 0)
             {
-                _perguntaRepository.Deletar(id);
+                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
+                return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
+            Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Ativo = false;
+            _perguntaRepository.Atualizar(pergunta);
             return RedirectToAction("CadastrarPergunta", "Admin");
         }
 
