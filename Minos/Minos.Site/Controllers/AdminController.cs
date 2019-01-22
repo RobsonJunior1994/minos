@@ -87,7 +87,7 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult DesativarTurma (int id)
         {
-            if(id < 0)
+            if(id <= 0)
             {
                 TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
                 return RedirectToAction("ListaDeTurmas", "Admin");
