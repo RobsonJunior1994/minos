@@ -97,6 +97,7 @@ namespace Minos.Site.Controllers
             Turma turma = _turmaRepository.ObterTurmaPeloId(id);
             turma.Ativo = false;
             _turmaRepository.Atualizar(turma);
+            TempData["MenssagemSucesso"] = "Turma desativada com sucesso";
             return RedirectToAction("ListaDeTurmas", "Admin");
 
         }
