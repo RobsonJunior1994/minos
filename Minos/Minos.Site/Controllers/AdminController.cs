@@ -151,6 +151,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
+                professor.Ativo = true;
                 _professorRepository.Salvar(professor);
             }
 
@@ -158,12 +159,21 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult ExcluirProfessor(int idDoProfessor)
+        public IActionResult DesativarProfessor(int idDoProfessor)
         {
-            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            if (idDoProfessor > 0)
             {
-                _professorRepository.Excluir(idDoProfessor);
+                Professor professor = _professorRepository.ObterProfessorPeloId(idDoProfessor);
+                professor.Ativo = false;
+                _professorRepository.Atualizar(professor);
+                TempData["MenssagemSucesso"] = "Professor desativado com sucesso!";
             }
+            else
+            {
+                TempData["MenssagemErro"] = "Falha na tentativa de desativar um professor";
+
+            }
+
             return RedirectToAction("CadastrarProfessor", "Admin");
         }
 

@@ -30,7 +30,7 @@ namespace Minos.Site.Repositories
                 .Professores
                 .Include(p => p.Turmas)
                 .ThenInclude(pt => pt.Turma)
-                .ToList();
+                .Where(x => x.Ativo == true).ToList();
             return professores;
         }
 
