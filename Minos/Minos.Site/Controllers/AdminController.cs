@@ -387,12 +387,13 @@ namespace Minos.Site.Controllers
         [HttpPost]
         public IActionResult DesativarPergunta(int id)
         {
-            if (id <= 0)
+            if (id == 0)
             {
-                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
+                TempData["Mensagem"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
+            TempData["Sucesso"] = "Pergunta desativada com sucesso!";
             Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
             pergunta.Ativo = false;
             _perguntaRepository.Atualizar(pergunta);
