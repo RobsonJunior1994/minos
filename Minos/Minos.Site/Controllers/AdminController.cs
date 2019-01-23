@@ -77,10 +77,29 @@ namespace Minos.Site.Controllers
             }
             else
             {
+                turma.Ativo = true;
                 _turmaRepository.Salvar(turma);
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult DesativarTurma (int id)
+        {
+            if(id == 0)
+            {
+                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
+                return RedirectToAction("ListaDeTurmas", "Admin");
+                
+            }
+
+            Turma turma = _turmaRepository.ObterTurmaPeloId(id);
+            turma.Ativo = false;
+            _turmaRepository.Atualizar(turma);
+            TempData["MenssagemSucesso"] = "Turma desativada com sucesso";
+            return RedirectToAction("ListaDeTurmas", "Admin");
+
         }
 
         [HttpGet]
