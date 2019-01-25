@@ -5,6 +5,8 @@
 
 <div class="lista">
     <p class="alert-danger text-center">@TempData["ErroNaoExisteQuestionario"]</p>
+    <p class="alert-success text-center">@TempData["Sucesso"]</p>
+    <p class="alert-danger text-center">@TempData["ErroId"]</p>
     <h3>Lista de Questionarios</h3>
     <table class="table table-hover">
         <thead>
@@ -17,29 +19,29 @@
             @{
                 if (Model.Count == 0)
                 {
-                    <td>
-                        <h3>Não existe questionários cadastrados.</h3>
-                    </td>
-                }
-                else
+                <td>
+                    <h3>Não existe questionários cadastrados.</h3>
+                </td>
+            }
+            else
+            {
+                foreach (var questionario in Model)
                 {
-                    foreach (var questionario in Model)
-                    {
-                        <tr>
-                            <td>@questionario.NomeDoQuestionario</td>
-                            <td>
-                                <a class="btn btn-warning" href="EditarQuestionario?id=@questionario.IdDoQuestionario">Editar</a>
-                            </td>
-                            <td>
-                                <form action="DesativarQuestionario" method="post">
-                                    <input type="hidden" name="id" value="@questionario.IdDoQuestionario" />
-                                    <input type="submit" value="Desativar" class="btn btn-danger" />
-                                </form>
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>@questionario.NomeDoQuestionario</td>
+                        <td>
+                            <a class="btn btn-warning" href="EditarQuestionario?id=@questionario.IdDoQuestionario">Editar</a>
+                        </td>
+                        <td>
+                            <form action="DesativarQuestionario" method="post">
+                                <input type="hidden" name="id" value="@questionario.IdDoQuestionario" />
+                                <input type="submit" value="Desativar" class="btn btn-danger" />
+                            </form>
+                        </td>
+                    </tr>
                 }
             }
-        </tbody>
-    </table>
-</div>
+            }
+            </tbody>
+        </table>
+    </div>
