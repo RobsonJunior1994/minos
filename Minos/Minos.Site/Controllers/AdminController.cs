@@ -145,7 +145,12 @@ namespace Minos.Site.Controllers
 
             Professor professor = new Professor(nome, sobrenome);
             if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
-                return View();
+            {
+                TempData["MenssagemErro"] = "Associe esse professor a turma(s), se não aparecer as" +
+                "turmas para cadastrar, cadastre turmas primeiro e depois volte aqui para cadastrar professor";
+                return RedirectToAction("cadastrarprofessor", "Admin");
+            }
+
 
             foreach (var turmaId in listaDeIdDasTurmas)
             {
@@ -166,12 +171,14 @@ namespace Minos.Site.Controllers
 
             if (!professor.ValidaProfessor())
             {
-                return View();
+                TempData["MenssagemErro"] = "Prencha todas as informações de professor corretamente";
+                return RedirectToAction("cadastrarprofessor", "Admin");
             }
             else
             {
                 professor.Ativo = true;
                 _professorRepository.Salvar(professor);
+                TempData["MenssagemSucesso"] = "Professor cadastrado com sucesso!";
             }
 
             return RedirectToAction("cadastrarprofessor", "Admin");
