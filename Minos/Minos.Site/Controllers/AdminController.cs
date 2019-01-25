@@ -16,19 +16,22 @@ namespace Minos.Site.Controllers
         private IQuestionarioRepository _questionarioRepository;
         private IPerguntaRepository _perguntaRepository;
         private IPeriodoRepository _periodoRepository;
+        private IAlunoRepository _alunoRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
             ITurmaRepository turmaRepository,
             IQuestionarioRepository questionarioRepository,
             IPerguntaRepository perguntaRepository,
-            IPeriodoRepository periodoRepository)
+            IPeriodoRepository periodoRepository,
+            IAlunoRepository alunoRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
+            _alunoRepository = alunoRepository;
 
         }
 
@@ -435,6 +438,44 @@ namespace Minos.Site.Controllers
             TempData["Sucesso"] = "Pergunta atualizada com sucesso!";
             return RedirectToAction("CadastrarPergunta", "Admin");
             
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarAluno()
+        {
+            ViewBag.listaDeTurmas = _turmaRepository.ListarTurmas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarAluno(AlunoCadastroViewModel _aluno)
+        {
+            Aluno aluno = new Aluno();
+            aluno.Nome = _aluno.nome;
+            aluno.Sobrenome = _aluno.sobrenome;
+            aluno.Matricula = _aluno.matricula;
+            aluno.Turma = _turmaRepository.ObterTurmaPeloId(_aluno.idTurma);
+
+
+            if (aluno.EhValido())
+            {
+                if (_alunoRepository.ObterAlunoPorMatricula(aluno.Matricula) == null)
+                {
+                    _alunoRepository.Salvar(aluno);
+                    TempData["MensagemSucesso"] = "Aluno cadastrado com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Aluno já cadastrado";
+                }
+            }
+            else
+            {
+                TempData["MensagemErro"] = "Falha ao tentar cadastrar aluno, preencha todas as " +
+                    "informações corretamente";
+            }
+
+            return RedirectToAction("CadastrarAluno", "Admin");
         }
 
     }

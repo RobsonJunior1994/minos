@@ -19,6 +19,27 @@ namespace Minos.Site.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Minos.Site.Models.Aluno", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Matricula");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<string>("Sobrenome");
+
+                    b.Property<int?>("TurmaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("Aluno");
+                });
+
             modelBuilder.Entity("Minos.Site.Models.Pergunta", b =>
                 {
                     b.Property<int>("Id")
@@ -155,6 +176,13 @@ namespace Minos.Site.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Minos.Site.Models.Aluno", b =>
+                {
+                    b.HasOne("Minos.Site.Models.Turma", "Turma")
+                        .WithMany()
+                        .HasForeignKey("TurmaId");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.ProfessorTurma", b =>
