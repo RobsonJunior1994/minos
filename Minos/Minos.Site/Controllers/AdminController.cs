@@ -340,6 +340,20 @@ namespace Minos.Site.Controllers
             return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
         }
 
+        [HttpPost]
+        public IActionResult DesativarQuestionario(int id)
+        {
+            if (id == 0)
+            {
+                TempData["ErroId"] = "Ocorreu um erro ao tentar desativar o questionario, por favor tente novamente";
+                return RedirectToAction("ListarQuestionario", "Admin");
+            }
+            Questionario questionario = _questionarioRepository.ObterQuestionarioPeloId(id);
+            questionario.Ativo = false;
+            _questionarioRepository.Atualizar(questionario);
+            return RedirectToAction("ListarQuestionario", "Admin");
+        }
+
         [HttpGet]
         public IActionResult CadastrarPergunta()
         {
