@@ -77,10 +77,29 @@ namespace Minos.Site.Controllers
             }
             else
             {
+                turma.Ativo = true;
                 _turmaRepository.Salvar(turma);
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult DesativarTurma (int id)
+        {
+            if(id == 0)
+            {
+                TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
+                return RedirectToAction("ListaDeTurmas", "Admin");
+                
+            }
+
+            Turma turma = _turmaRepository.ObterTurmaPeloId(id);
+            turma.Ativo = false;
+            _turmaRepository.Atualizar(turma);
+            TempData["MenssagemSucesso"] = "Turma desativada com sucesso";
+            return RedirectToAction("ListaDeTurmas", "Admin");
+
         }
 
         [HttpGet]
@@ -151,6 +170,7 @@ namespace Minos.Site.Controllers
             }
             else
             {
+                professor.Ativo = true;
                 _professorRepository.Salvar(professor);
             }
 
@@ -158,12 +178,21 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult ExcluirProfessor(int idDoProfessor)
+        public IActionResult DesativarProfessor(int idDoProfessor)
         {
-            if (idDoProfessor > 0 && idDoProfessor.ToString() != "")
+            if (idDoProfessor > 0)
             {
-                _professorRepository.Excluir(idDoProfessor);
+                Professor professor = _professorRepository.ObterProfessorPeloId(idDoProfessor);
+                professor.Ativo = false;
+                _professorRepository.Atualizar(professor);
+                TempData["MenssagemSucesso"] = "Professor desativado com sucesso!";
             }
+            else
+            {
+                TempData["MenssagemErro"] = "Falha na tentativa de desativar um professor";
+
+            }
+
             return RedirectToAction("CadastrarProfessor", "Admin");
         }
 
@@ -352,7 +381,7 @@ namespace Minos.Site.Controllers
         {
             Pergunta pergunta = new Pergunta(perguntaEnviada);
             var mensagem = new Mensagem();
-
+            pergunta.Ativo = true;
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Salvar(pergunta);
@@ -366,14 +395,18 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeletarPergunta(int id)
+        public IActionResult DesativarPergunta(int id)
         {
-
-            if (id > 0 && id.ToString() != "")
+            if (id == 0)
             {
-                _perguntaRepository.Deletar(id);
+                TempData["Mensagem"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
+                return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
+            TempData["Sucesso"] = "Pergunta desativada com sucesso!";
+            Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
+            pergunta.Ativo = false;
+            _perguntaRepository.Atualizar(pergunta);
             return RedirectToAction("CadastrarPergunta", "Admin");
         }
 

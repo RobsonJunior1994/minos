@@ -11,6 +11,7 @@ namespace Minos.Site.Models
         public int Id { get; set; }
         [Required]
         public string Texto { get; set; }
+        public bool Ativo { get; set; }
         public List<QuestionarioPergunta> Questionario { get; set; }
 
         public Pergunta(string pergunta)

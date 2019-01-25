@@ -16,6 +16,7 @@ namespace Minos.Site.Models
         public Grau Grau { get; set; }
         public virtual IList<ProfessorTurma> Professores { get; set; }
         public virtual IList<Questionario> Questionarios { get; set; }
+        public bool Ativo { get; internal set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
         {

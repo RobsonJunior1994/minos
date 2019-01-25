@@ -14,6 +14,7 @@ namespace Minos.Site.Models
         [Required]
         public string Sobrenome { get; set; }
         public virtual IList<ProfessorTurma> Turmas { get; set; }
+        public bool Ativo { get; internal set; }
 
         public Professor(string nome, string sobrenome)
         {

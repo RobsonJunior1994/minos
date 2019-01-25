@@ -4,33 +4,38 @@
 }
 
 <div class="principal">
+    <div>
+        <p class="alert-success">@TempData["MenssagemSucesso"]</p>
+        <p class="alert-danger">@TempData["MenssagemErro"]</p>
+    </div>
+
     <div class="cadastro">
         <h2>Cadastrar Professor</h2>
         <form action="\Admin\CadastrarProfessor" method="post">
-                <table class="table table-striped">
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input class="form-control" type="text" name="nome" /></td>
-                    </tr>
-                    <tr>
-                        <td>Sobrenome:</td>
-                        <td><input class="form-control" type="text" name="sobrenome" /></td>
-                    </tr>
+            <table class="table table-striped">
+                <tr>
+                    <td>Nome:</td>
+                    <td><input class="form-control" type="text" name="nome" /></td>
+                </tr>
+                <tr>
+                    <td>Sobrenome:</td>
+                    <td><input class="form-control" type="text" name="sobrenome" /></td>
+                </tr>
 
-                    <tr>
-                        <td>Turmas:</td>
-                    </tr>
-                    @{
+                <tr>
+                    <td>Turmas:</td>
+                </tr>
+                @{
 
-                        var listaDeTurmas = ViewBag.turmas;
-                        foreach (var item in listaDeTurmas)
-                        {
-                            <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
-                        }
-
+                    var listaDeTurmas = ViewBag.turmas;
+                    foreach (var item in listaDeTurmas)
+                    {
+                        <tr><td><input type="checkbox" name="listaDeIdDasTurmas" value="@item.Id" />@item.Serie</td></tr>
                     }
-                    <tr><td><input class="btn btn-primary form-control" type="submit" value="Cadastrar" /></td></tr>
-                </table>
+
+                }
+                <tr><td><input class="btn btn-primary form-control" type="submit" value="Cadastrar" /></td></tr>
+            </table>
         </form>
     </div>
 
@@ -67,9 +72,9 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="\Admin\ExcluirProfessor" method="post">
+                                <form action="\Admin\DesativarProfessor" method="post">
                                     <input hidden name="idDoProfessor" value="@item.Id" />
-                                    <input class="btn btn-danger" type="submit" value="Excluir" />
+                                    <input class="btn btn-danger" type="submit" value="Desativar" />
                                 </form>
                             </td>
                         </tr>

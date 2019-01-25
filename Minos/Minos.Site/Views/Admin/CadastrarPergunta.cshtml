@@ -14,7 +14,7 @@
         <form method="post" action="CadastrarPergunta">
             <table class="table">
                 <tr>
-                    <td><input class="form-control" type="text" name="perguntaEnviada" placeholder="Digite sua pergunta aqui..." /></td>
+                    <td><input class="form-control" type="text" name="perguntaEnviada" placeholder="Digite sua pergunta aqui..." autofocus /></td>
                 </tr>
                 <tr>
                     <td><input type="submit" class="btn btn-primary form-control" value="Cadastrar Pergunta" /></td>
@@ -35,9 +35,9 @@
                         </td>
 
                         <td>
-                            <form method="post" action="DeletarPergunta">
+                            <form method="post" action="DesativarPergunta">
                                 <input type="hidden" name="id" value="@pergunta.Id" />
-                                <input type="submit" class="btn btn-danger" value="Deletar" />
+                                <input type="submit" class="btn btn-danger" value="Desativar" />
                             </form>
                         </td>
 
