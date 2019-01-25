@@ -11,8 +11,8 @@ namespace Minos.Site.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public Periodo Periodo { get; set; } // <- para representar uma data!
-        public bool Ativo { get; set; }
         [Required]
+        public bool Ativo { get; set; }
         public List<QuestionarioPergunta> Perguntas { get; set; }
 
         public Questionario() { }

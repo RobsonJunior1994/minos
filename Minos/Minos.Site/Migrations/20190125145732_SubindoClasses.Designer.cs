@@ -10,8 +10,8 @@ using Minos.Site.Models;
 namespace Minos.Site.Migrations
 {
     [DbContext(typeof(MinosContext))]
-    [Migration("20190121233914_SubindoClassesEAtualizandoPergunta")]
-    partial class SubindoClassesEAtualizandoPergunta
+    [Migration("20190125145732_SubindoClasses")]
+    partial class SubindoClasses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,27 @@ namespace Minos.Site.Migrations
                 .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Minos.Site.Models.Aluno", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Matricula");
+
+                    b.Property<string>("Nome");
+
+                    b.Property<string>("Sobrenome");
+
+                    b.Property<int?>("TurmaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("Alunos");
+                });
 
             modelBuilder.Entity("Minos.Site.Models.Pergunta", b =>
                 {
@@ -58,6 +79,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo");
+
                     b.Property<string>("Nome")
                         .IsRequired();
 
@@ -87,6 +110,8 @@ namespace Minos.Site.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("Nome");
 
@@ -122,6 +147,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo");
+
                     b.Property<string>("CodigoTurma")
                         .IsRequired();
 
@@ -153,6 +180,13 @@ namespace Minos.Site.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Minos.Site.Models.Aluno", b =>
+                {
+                    b.HasOne("Minos.Site.Models.Turma", "Turma")
+                        .WithMany()
+                        .HasForeignKey("TurmaId");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.ProfessorTurma", b =>

@@ -7,6 +7,7 @@ namespace Minos.Site.Models
 {
     public class Aluno
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public Turma Turma { get; set; }
@@ -18,5 +19,7 @@ namespace Minos.Site.Models
             Sobrenome = sobrenome;
             Turma = turma;
         }
+
+        public Aluno() { }
     }
 }

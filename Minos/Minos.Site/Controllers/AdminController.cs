@@ -266,6 +266,7 @@ namespace Minos.Site.Controllers
             
             Questionario questionario = new Questionario() { Periodo = periodo };
             questionario.Nome = Nome;
+            questionario.Ativo = true;
 
             if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
             {
@@ -307,15 +308,18 @@ namespace Minos.Site.Controllers
             var listaQuestionarios = _questionarioRepository.ListarQuestionarios();
 
             var viewModelLista = new List<QuestionarioViewModel>();
-
+            
             foreach (var questionario in listaQuestionarios)
             {
-                var questionarioViewModel = new QuestionarioViewModel()
+                if(questionario.Ativo == true)
                 {
-                    IdDoQuestionario = questionario.Id,
-                    NomeDoQuestionario = questionario.Nome
-                };
-                viewModelLista.Add(questionarioViewModel);
+                    var questionarioViewModel = new QuestionarioViewModel()
+                    {
+                        IdDoQuestionario = questionario.Id,
+                        NomeDoQuestionario = questionario.Nome
+                    };
+                    viewModelLista.Add(questionarioViewModel);
+                }
             }
 
             return View(viewModelLista);
