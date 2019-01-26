@@ -17,6 +17,7 @@ namespace Minos.Site.Controllers
         private IPerguntaRepository _perguntaRepository;
         private IPeriodoRepository _periodoRepository;
         private IAlunoRepository _alunoRepository;
+        private IUsuarioRepository _usuarioRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
@@ -24,7 +25,8 @@ namespace Minos.Site.Controllers
             IQuestionarioRepository questionarioRepository,
             IPerguntaRepository perguntaRepository,
             IPeriodoRepository periodoRepository,
-            IAlunoRepository alunoRepository)
+            IAlunoRepository alunoRepository,
+            IUsuarioRepository usuarioRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
@@ -32,6 +34,7 @@ namespace Minos.Site.Controllers
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
             _alunoRepository = alunoRepository;
+            _usuarioRepository = usuarioRepository;
 
         }
 
@@ -462,6 +465,11 @@ namespace Minos.Site.Controllers
                 {
                     _alunoRepository.Salvar(aluno);
                     TempData["MensagemSucesso"] = "Aluno cadastrado com sucesso!";
+                    Usuario usuario = new Usuario();
+                    usuario.Login = aluno.Matricula;
+                    usuario.Senha = usuario.GerarSenha();
+                    usuario.Admin = "N";
+                    _usuarioRepository.Salvar(usuario);
                 }
                 else
                 {
