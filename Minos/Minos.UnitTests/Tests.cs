@@ -51,7 +51,9 @@ namespace Minos.UnitTests
 
         public void CriaAdminController()
         {
-            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, questionarioRepositoryMock.Object, perguntaRepositoryMock.Object, periodoRepositoryMock.Object)
+            sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, 
+                questionarioRepositoryMock.Object, perguntaRepositoryMock.Object, 
+                periodoRepositoryMock.Object, alunoRepositoryMock.Object)
             {
                 TempData = tempDataMock.Object,
             };

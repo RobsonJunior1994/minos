@@ -32,7 +32,7 @@ namespace Minos.Site.Repositories
 
         public Aluno ObterAlunoPorMatricula(string matriculaDoAluno)
         {
-            var aluno = _context.Aluno.Where(x => x.Matricula == matriculaDoAluno).First();
+            var aluno = _context.Aluno.FirstOrDefault(x => x.Matricula == matriculaDoAluno);
             return aluno;
         }
 

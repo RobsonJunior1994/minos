@@ -455,8 +455,7 @@ namespace Minos.Site.Controllers
             aluno.Sobrenome = _aluno.sobrenome;
             aluno.Matricula = _aluno.matricula;
             aluno.Turma = _turmaRepository.ObterTurmaPeloId(_aluno.idTurma);
-
-
+            
             if (aluno.EhValido())
             {
                 if (_alunoRepository.ObterAlunoPorMatricula(aluno.Matricula) == null)
@@ -472,11 +471,9 @@ namespace Minos.Site.Controllers
             else
             {
                 TempData["MensagemErro"] = "Falha ao tentar cadastrar aluno, preencha todas as " +
-                    "informações corretamente";
+                "informações corretamente";                    
             }
-
             return RedirectToAction("CadastrarAluno", "Admin");
         }
-
     }
 }
