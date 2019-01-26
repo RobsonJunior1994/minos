@@ -1,7 +1,10 @@
-﻿<h2>Aluno</h2>
-<p>Bem vindo a página do aluno.</p>
-
-<a class="btn btn-default" href="Questionario\Index">Ir para questionário</a>
+﻿@model Minos.Site.Models.AlunoIndexViewModel
+<h2>Aluno</h2>
+<h3>Bem vindo @Model.NomeDoAluno</h3>
+<form action="\Questionario\Index" method="post">
+    <input type="hidden" name="MatriculaDoAluno" value="@Model.MatriculaDoAluno" class="form-group" />
+    <input type="submit" value="Ir para questionário" />
+</form>
 
 <form action="\Usuario\Logout" method="post">
     

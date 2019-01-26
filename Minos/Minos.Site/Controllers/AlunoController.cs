@@ -10,22 +10,31 @@ namespace Minos.Site.Controllers
 {
     public class AlunoController : Controller
     {
-        private IQuestionarioRepository _questionarioRepository;
-        
-        public AlunoController(
-            IQuestionarioRepository questionarioRepository)
-        {
-            _questionarioRepository = questionarioRepository;
-        }
+        private IAlunoRepository _alunoRepository;
 
+        public AlunoController(
+            IAlunoRepository alunoRepository)
+        {
+            _alunoRepository = alunoRepository;
+        }
+        
         public IActionResult Index()
         {
             var logado = HttpContext.Session.GetString("LogarAluno");
-            if (logado == null || logado.ToString() != logado.ToString())
+            var aluno = _alunoRepository.ObterAlunoPorMatricula(logado);
+
+            var viewModel = new AlunoIndexViewModel()
+            {
+                NomeDoAluno = aluno.Nome,
+                MatriculaDoAluno = aluno.Matricula
+            };
+
+            if (logado == null ||
+                logado.ToString() != logado.ToString())
             {
                 return RedirectToAction("Login", "Usuario");
             }
-            return View();
+            return View(viewModel);
         }
     }
 }

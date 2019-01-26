@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Models
 {
-    public class Resposta
+    public class AlunoIndexViewModel
     {
-        public string Nota { get; set; }
-        
-        public Media()
-        {
-
-        }
+        public string NomeDoAluno { get; set; }
+        public string MatriculaDoAluno { get; set; }
     }
 }

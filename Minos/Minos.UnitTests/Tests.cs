@@ -64,7 +64,7 @@ namespace Minos.UnitTests
 
         public void CriaUsuarioController()
         {
-            sut3 = new UsuarioController(usuarioRepositoryMock.Object);
+            sut3 = new UsuarioController(usuarioRepositoryMock.Object, alunoRepositoryMock.Object);
         }
     }
 }

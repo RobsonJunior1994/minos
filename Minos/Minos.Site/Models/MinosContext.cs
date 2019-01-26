@@ -16,6 +16,7 @@ namespace Minos.Site.Models
         public DbSet<Pergunta> Perguntas { get; set; }
         public DbSet<Periodo> Periodo { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Resposta> Respostas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -11,11 +11,14 @@ namespace Minos.Site.Controllers
     public class UsuarioController : Controller
     {
         private IUsuarioRepository _usuarioRepository;
+        private IAlunoRepository _alunoRepository;
 
         public UsuarioController(
-            IUsuarioRepository usuarioRepository)
+            IUsuarioRepository usuarioRepository,
+            IAlunoRepository alunoRepository)
         {
             _usuarioRepository = usuarioRepository;
+            _alunoRepository = alunoRepository;
         }
 
 
@@ -35,7 +38,6 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarUsuario(string login, string senha, string repitaSenha)
         {
             Usuario usuario = new Usuario(login, senha);
-            var mensagem = new Mensagem();
 
             if (_usuarioRepository.Existe(login))
             {
@@ -66,9 +68,7 @@ namespace Minos.Site.Controllers
             ViewData["Message"] = "Cadastro efetuado com sucesso!";
             ViewData["Status"] = "bg-success";
             _usuarioRepository.Salvar(usuario);
-
             return View();
-
         }
 
         public IActionResult Login()
@@ -80,12 +80,13 @@ namespace Minos.Site.Controllers
         public IActionResult Login(string login, string senha)
         {
             Usuario usuario = new Usuario(login, senha);
+            //var aluno = _alunoRepository.ObterUsuarioAlunoPorMatricula(login);
+            
             if (usuario.ValidaLogin() == false || usuario.ValidaSenha() == false)
             {
                 ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
                 return View();
             }
-
             else
             {
                 if (usuario.EhValido())
@@ -96,7 +97,6 @@ namespace Minos.Site.Controllers
                         {
                             HttpContext.Session.SetString("LogarAdm", "Administrador");
                             return RedirectToAction("Index", "Admin");
-
                         }
                         else
                         {
@@ -107,9 +107,8 @@ namespace Minos.Site.Controllers
 
                     if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
                     {
-                        HttpContext.Session.SetString("LogarAluno", "Aluno");
+                        HttpContext.Session.SetString("LogarAluno", login);
                         return RedirectToAction("Index", "Aluno");
-
                     }
                     else
                     {
@@ -118,12 +117,9 @@ namespace Minos.Site.Controllers
                     }
                 }
             }
-
             return View();
         }
-
-
-
+        
         [HttpPost]
         public IActionResult Logout()
         {
@@ -131,6 +127,5 @@ namespace Minos.Site.Controllers
             HttpContext.Session.Remove("LogarAluno");
             return RedirectToAction("Login", "Usuario");
         }
-
     }
 }

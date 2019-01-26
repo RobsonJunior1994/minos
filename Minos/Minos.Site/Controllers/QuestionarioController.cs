@@ -31,12 +31,11 @@ namespace Minos.Site.Controllers
                 .Turma
                 .Questionarios
                 .FirstOrDefault(x => x.Periodo.DataInicial.Date <= DateTime.Now.Date && x.Periodo.DataFinal.Date >= DateTime.Now.Date);
-
-            var mensagem = new Mensagem();
-
+           
             if (questionario == null)
             {
-                return View(mensagem.QuestionarioNaoExiste());
+                TempData["ErroQuestionarioNull"] = "Por favor verifique se existe algum questionário cadastrado.";
+                return RedirectToAction("Index", "Aluno");
             }
 
             var viewModel = new QuestionarioAlunoViewModel()
@@ -61,7 +60,6 @@ namespace Minos.Site.Controllers
         public IActionResult Index()
         {
             Resposta resposta = new Resposta();
-            var mensagem = new Mensagem();
 
             if (resposta.EhRespostaValida())
             {
@@ -69,7 +67,8 @@ namespace Minos.Site.Controllers
             }
             else
             {
-                return View(mensagem.RespostaIncorreta());
+
+                return View();
             }
             return View();
         }

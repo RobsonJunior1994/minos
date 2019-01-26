@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace Minos.Site.Repositories
 {
-    public class AlunoRepository : IAlunoRepository
+    public class RespostaRepository : IRespostaRepository
     {
         private MinosContext _context;
 
-        public AlunoRepository (MinosContext contexto)
+        public RespostaRepository(MinosContext contexto)
         {
             _context = contexto;
         }
 
-        public Aluno ObterAlunoPorMatricula(string matriculaDoAluno)
+        public void Salvar(int Resultado)
         {
-            var aluno = _context.Alunos.First(x => x.Matricula == matriculaDoAluno);
-            return aluno;
+            var resposta = _context.
         }
     }
 }
