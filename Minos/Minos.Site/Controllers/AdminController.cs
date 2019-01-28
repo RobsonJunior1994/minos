@@ -386,9 +386,8 @@ namespace Minos.Site.Controllers
                 Questionario questionario = _questionarioRepository.ObterQuestionarioPeloId(id);
                 questionario.Ativo = false;
                 _questionarioRepository.Atualizar(questionario);
+                TempData["Sucesso"] = "Questionario desativado com sucesso!";
             }
-            
-            TempData["Sucesso"] = "Questionario desativado com sucesso!";
             return RedirectToAction("ListarQuestionario", "Admin");
         }
 
