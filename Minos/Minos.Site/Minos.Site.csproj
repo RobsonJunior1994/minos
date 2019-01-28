@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190125110449_SubidClasses.cs" />
+    <Compile Remove="Migrations\20190125110449_SubidClasses.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Banco\Minos.mdf" />
   </ItemGroup>
 

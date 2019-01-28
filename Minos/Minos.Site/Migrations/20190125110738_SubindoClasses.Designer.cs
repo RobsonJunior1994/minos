@@ -10,8 +10,8 @@ using Minos.Site.Models;
 namespace Minos.Site.Migrations
 {
     [DbContext(typeof(MinosContext))]
-    [Migration("20190121233914_SubindoClassesEAtualizandoPergunta")]
-    partial class SubindoClassesEAtualizandoPergunta
+    [Migration("20190125110738_SubindoClasses")]
+    partial class SubindoClasses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,8 @@ namespace Minos.Site.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("Nome")
                         .IsRequired();
@@ -121,6 +123,8 @@ namespace Minos.Site.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Ativo");
 
                     b.Property<string>("CodigoTurma")
                         .IsRequired();

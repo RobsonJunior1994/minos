@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Minos.Site.Migrations
 {
-    public partial class SubindoClassesEAtualizandoPergunta : Migration
+    public partial class SubindoClasses : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,7 +43,8 @@ namespace Minos.Site.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: false),
-                    Sobrenome = table.Column<string>(nullable: false)
+                    Sobrenome = table.Column<string>(nullable: false),
+                    Ativo = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +60,8 @@ namespace Minos.Site.Migrations
                     CodigoTurma = table.Column<string>(nullable: false),
                     Turno = table.Column<int>(nullable: false),
                     Serie = table.Column<int>(nullable: false),
-                    Grau = table.Column<int>(nullable: false)
+                    Grau = table.Column<int>(nullable: false),
+                    Ativo = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
