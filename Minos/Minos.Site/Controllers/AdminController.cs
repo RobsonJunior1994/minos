@@ -457,30 +457,37 @@ namespace Minos.Site.Controllers
             aluno.Nome = _aluno.nome;
             aluno.Sobrenome = _aluno.sobrenome;
             aluno.Matricula = _aluno.matricula;
-            aluno.Turma = _turmaRepository.ObterTurmaPeloId(_aluno.idTurma);
-            
-            if (aluno.EhValido())
+            if(_aluno.idTurma == 0)
             {
-                if (_alunoRepository.ObterAlunoPorMatricula(aluno.Matricula) == null)
+                TempData["MensagemErro"] = "Nenhuma turma foi cadastrada ou não selecionou nenhuma turma";
+            } else
+            {
+                aluno.Turma = _turmaRepository.ObterTurmaPeloId(_aluno.idTurma);
+
+                if (aluno.EhValido())
                 {
-                    _alunoRepository.Salvar(aluno);
-                    TempData["MensagemSucesso"] = "Aluno cadastrado com sucesso!";
-                    Usuario usuario = new Usuario();
-                    usuario.Login = aluno.Matricula;
-                    usuario.Senha = usuario.GerarSenha();
-                    usuario.Admin = "N";
-                    _usuarioRepository.Salvar(usuario);
+                    if (_alunoRepository.ObterAlunoPorMatricula(aluno.Matricula) == null)
+                    {
+                        _alunoRepository.Salvar(aluno);
+                        TempData["MensagemSucesso"] = "Aluno cadastrado com sucesso!";
+                        Usuario usuario = new Usuario();
+                        usuario.Login = aluno.Matricula;
+                        usuario.Senha = usuario.GerarSenha();
+                        usuario.Admin = "N";
+                        _usuarioRepository.Salvar(usuario);
+                    }
+                    else
+                    {
+                        TempData["MensagemErro"] = "Aluno já cadastrado";
+                    }
                 }
                 else
                 {
-                    TempData["MensagemErro"] = "Aluno já cadastrado";
+                    TempData["MensagemErro"] = "Falha ao tentar cadastrar aluno, preencha todas as " +
+                    "informações corretamente";
                 }
             }
-            else
-            {
-                TempData["MensagemErro"] = "Falha ao tentar cadastrar aluno, preencha todas as " +
-                "informações corretamente";                    
-            }
+            
             return RedirectToAction("CadastrarAluno", "Admin");
         }
     }

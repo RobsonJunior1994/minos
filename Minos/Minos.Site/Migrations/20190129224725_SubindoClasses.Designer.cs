@@ -10,7 +10,7 @@ using Minos.Site.Models;
 namespace Minos.Site.Migrations
 {
     [DbContext(typeof(MinosContext))]
-    [Migration("20190125150010_SubindoClasses")]
+    [Migration("20190129224725_SubindoClasses")]
     partial class SubindoClasses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
