@@ -378,7 +378,7 @@ namespace Minos.Site.Controllers
         {
             if (id == 0)
             {
-                TempData["ErroId"] = "Ocorreu um erro ao tentar desativar o questionario, por favor tente novamente";
+                TempData["MensagemErro"] = "Ocorreu um erro ao tentar desativar o questionario, por favor tente novamente";
                 return RedirectToAction("ListarQuestionario", "Admin");
             }
             else
@@ -386,7 +386,7 @@ namespace Minos.Site.Controllers
                 Questionario questionario = _questionarioRepository.ObterQuestionarioPeloId(id);
                 questionario.Ativo = false;
                 _questionarioRepository.Atualizar(questionario);
-                TempData["Sucesso"] = "Questionario desativado com sucesso!";
+                TempData["MensagemSucesso"] = "Questionario desativado com sucesso!";
             }
             return RedirectToAction("ListarQuestionario", "Admin");
         }
