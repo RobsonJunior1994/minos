@@ -273,6 +273,7 @@ namespace Minos.Site.Controllers
             
             Questionario questionario = new Questionario() { Periodo = periodo };
             questionario.Nome = Nome;
+            questionario.Ativo = true;
 
             if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
             {
@@ -314,15 +315,18 @@ namespace Minos.Site.Controllers
             var listaQuestionarios = _questionarioRepository.ListarQuestionarios();
 
             var viewModelLista = new List<QuestionarioViewModel>();
-
+            
             foreach (var questionario in listaQuestionarios)
             {
-                var questionarioViewModel = new QuestionarioViewModel()
+                if(questionario.Ativo == true)
                 {
-                    IdDoQuestionario = questionario.Id,
-                    NomeDoQuestionario = questionario.Nome
-                };
-                viewModelLista.Add(questionarioViewModel);
+                    var questionarioViewModel = new QuestionarioViewModel()
+                    {
+                        IdDoQuestionario = questionario.Id,
+                        NomeDoQuestionario = questionario.Nome
+                    };
+                    viewModelLista.Add(questionarioViewModel);
+                }
             }
 
             return View(viewModelLista);
@@ -374,6 +378,24 @@ namespace Minos.Site.Controllers
             }
             TempData["SucessoAlteracaoQuestionario"] = "Alterações feitas com sucesso!";
             return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
+        }
+
+        [HttpPost]
+        public IActionResult DesativarQuestionario(int id)
+        {
+            if (id == 0)
+            {
+                TempData["MensagemErro"] = "Ocorreu um erro ao tentar desativar o questionario, por favor tente novamente";
+                return RedirectToAction("ListarQuestionario", "Admin");
+            }
+            else
+            {
+                Questionario questionario = _questionarioRepository.ObterQuestionarioPeloId(id);
+                questionario.Ativo = false;
+                _questionarioRepository.Atualizar(questionario);
+                TempData["MensagemSucesso"] = "Questionario desativado com sucesso!";
+            }
+            return RedirectToAction("ListarQuestionario", "Admin");
         }
 
         [HttpGet]
