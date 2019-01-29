@@ -108,7 +108,7 @@ namespace Minos.Site.Controllers
                     if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
                     {
                         HttpContext.Session.SetString("LogarAluno", login);
-                        return RedirectToAction("Index", "Aluno");
+                        return RedirectToAction("Index", "Questionario");
                     }
                     else
                     {

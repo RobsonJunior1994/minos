@@ -7,11 +7,12 @@ namespace Minos.Site.Models
 {
     public class Resposta
     {
+        public int Id { get; set; }
         public string Nota { get; set; }
         
-        public Media()
-        {
-
-        }
+        //public Media()
+        //{
+        //    return;
+        //}
     }
 }

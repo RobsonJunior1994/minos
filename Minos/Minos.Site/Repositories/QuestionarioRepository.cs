@@ -27,6 +27,12 @@ namespace Minos.Site.Repositories
             var questionario = _context.Questionarios.Include(x => x.Perguntas).FirstOrDefault(p => p.Id == id);
             return questionario;
         }
+
+        public Questionario ObterQuestionarioAtivo()
+        {
+            var questionario = _context.Questionarios.FirstOrDefault(q => q.Ativo == true);
+            return questionario;
+        }
         
         public Questionario ObterListaDePerguntas()
         {

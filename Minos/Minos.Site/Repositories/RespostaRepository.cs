@@ -17,7 +17,7 @@ namespace Minos.Site.Repositories
 
         public void Salvar(int Resultado)
         {
-            var resposta = _context.
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,7 @@ using Minos.Site.Models;
 namespace Minos.Site.Migrations
 {
     [DbContext(typeof(MinosContext))]
-    [Migration("20190125223240_SubindoClasses")]
+    [Migration("20190129230812_SubindoClasses")]
     partial class SubindoClasses
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,6 +111,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo");
+
                     b.Property<string>("Nome");
 
                     b.Property<int?>("PeriodoId");
@@ -137,6 +139,19 @@ namespace Minos.Site.Migrations
                     b.HasIndex("PerguntaId");
 
                     b.ToTable("QuestionarioPergunta");
+                });
+
+            modelBuilder.Entity("Minos.Site.Models.Resposta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nota");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Respostas");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.Turma", b =>

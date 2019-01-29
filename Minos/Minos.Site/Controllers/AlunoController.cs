@@ -10,6 +10,8 @@ namespace Minos.Site.Controllers
 {
     public class AlunoController : Controller
     {
+        //Código não será utilizado, por enquanto, pois o aluno agora é redirecionado direto para o questionario.
+
         private IAlunoRepository _alunoRepository;
 
         public AlunoController(

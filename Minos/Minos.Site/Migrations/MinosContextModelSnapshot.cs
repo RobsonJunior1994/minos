@@ -109,6 +109,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo");
+
                     b.Property<string>("Nome");
 
                     b.Property<int?>("PeriodoId");
@@ -135,6 +137,19 @@ namespace Minos.Site.Migrations
                     b.HasIndex("PerguntaId");
 
                     b.ToTable("QuestionarioPergunta");
+                });
+
+            modelBuilder.Entity("Minos.Site.Models.Resposta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nota");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Respostas");
                 });
 
             modelBuilder.Entity("Minos.Site.Models.Turma", b =>

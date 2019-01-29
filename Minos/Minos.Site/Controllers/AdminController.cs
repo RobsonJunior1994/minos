@@ -91,7 +91,6 @@ namespace Minos.Site.Controllers
             {
                 TempData["MensagemDanger"] = "Ocorreu um erro ao tentar desativar turma, por favor tente novamente";
                 return RedirectToAction("ListaDeTurmas", "Admin");
-                
             }
 
             Turma turma = _turmaRepository.ObterTurmaPeloId(id);
@@ -99,7 +98,6 @@ namespace Minos.Site.Controllers
             _turmaRepository.Atualizar(turma);
             TempData["MenssagemSucesso"] = "Turma desativada com sucesso";
             return RedirectToAction("ListaDeTurmas", "Admin");
-
         }
 
         [HttpGet]
@@ -119,15 +117,14 @@ namespace Minos.Site.Controllers
             if (turma.EhValida())
             {
                 _turmaRepository.Atualizar(turma);
-
+                TempData["MenssagemSucesso"] = "Turma Atualizada com sucesso";
             }
             else
             {
                 TempData["MenssagemDanger"] = "Turma não foi atualizada";
                 return RedirectToAction("ListaDeTurmas", "Admin");
             }
-
-            TempData["MenssagemSucesso"] = "Turma Atualizada com sucesso";
+            
             return RedirectToAction("ListaDeTurmas", "Admin");
         }
 
@@ -242,9 +239,7 @@ namespace Minos.Site.Controllers
             {
                 _professorRepository.Atualizar(professor);
             }
-
-            //_professorRepository.EndContext();
-
+            
             return RedirectToAction("cadastrarprofessor", "Admin");
         }
 
@@ -289,15 +284,16 @@ namespace Minos.Site.Controllers
 
             if (questionario.EhValido())
             {
+                questionario.Ativo = true;
                 _questionarioRepository.Salvar(questionario);
+                TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
             }
             else
             {
                 TempData["ErroQuestionario"] = "Por favor verifique se todos os campos foram preenchidos.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
-
-            TempData["SucessoQuestionario"] = "Questionario cadastrado com sucesso.";
+            
             return RedirectToAction("CadastrarQuestionario", "Admin");
         }
 
@@ -364,8 +360,9 @@ namespace Minos.Site.Controllers
             else
             {
                 _questionarioRepository.Atualizar(nomeQuestionario);
+                TempData["SucessoAlteracaoQuestionario"] = "Alterações feitas com sucesso!";
             }
-            TempData["SucessoAlteracaoQuestionario"] = "Alterações feitas com sucesso!";
+            
             return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
         }
 
@@ -426,13 +423,14 @@ namespace Minos.Site.Controllers
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Atualizar(pergunta);
+                TempData["Sucesso"] = "Pergunta atualizada com sucesso!";
             }
             else
             {
                 TempData["Mensagem"] = "Tentativa de atualizar pergunta inválida!";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
-            TempData["Sucesso"] = "Pergunta atualizada com sucesso!";
+            
             return RedirectToAction("CadastrarPergunta", "Admin");
             
         }

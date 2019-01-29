@@ -222,7 +222,7 @@ namespace Minos.UnitTests
             turma.Questionarios = new List<Questionario>();
             turma.Questionarios.Add(questionario);
 
-            IActionResult result = sut2.Index("1");
+            IActionResult result = sut2.Index();
 
 
             //assert
@@ -253,7 +253,7 @@ namespace Minos.UnitTests
             turma.Questionarios = new List<Questionario>();
             turma.Questionarios.Add(questionario);
 
-            IActionResult result = sut2.Index("1");
+            IActionResult result = sut2.Index();
             string mensagem = "Questionario não existe!";
 
             //assert

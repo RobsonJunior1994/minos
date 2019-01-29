@@ -59,7 +59,7 @@ namespace Minos.UnitTests
 
         public void CriaQuestionarioController()
         {
-            sut2 = new QuestionarioController(alunoRepositoryMock.Object, respostaRepositoryMock.Object);
+            sut2 = new QuestionarioController(alunoRepositoryMock.Object, respostaRepositoryMock.Object, questionarioRepositoryMock.Object);
         }
 
         public void CriaUsuarioController()

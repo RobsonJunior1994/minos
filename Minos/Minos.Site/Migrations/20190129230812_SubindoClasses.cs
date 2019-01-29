@@ -52,6 +52,19 @@ namespace Minos.Site.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Respostas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nota = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Respostas", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Turmas",
                 columns: table => new
                 {
@@ -137,6 +150,7 @@ namespace Minos.Site.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true),
                     PeriodoId = table.Column<int>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false),
                     TurmaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -216,6 +230,9 @@ namespace Minos.Site.Migrations
 
             migrationBuilder.DropTable(
                 name: "QuestionarioPergunta");
+
+            migrationBuilder.DropTable(
+                name: "Respostas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

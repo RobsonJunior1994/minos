@@ -8,6 +8,7 @@ namespace Minos.Site.Models
     {
         Questionario ObterListaDePerguntas();
         Questionario ObterQuestionarioPeloId(int id);
+        Questionario ObterQuestionarioAtivo();
         List<Questionario> ListarQuestionarios();
         void Salvar(Questionario Questionario);
         void Atualizar(Questionario questionario);
