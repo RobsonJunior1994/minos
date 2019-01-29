@@ -53,7 +53,7 @@ namespace Minos.UnitTests
         {
             sut = new AdminController(professorRepositoryMock.Object, turmaRepositoryMock.Object, 
                 questionarioRepositoryMock.Object, perguntaRepositoryMock.Object, 
-                periodoRepositoryMock.Object, alunoRepositoryMock.Object)
+                periodoRepositoryMock.Object, alunoRepositoryMock.Object, usuarioRepositoryMock.Object)
             {
                 TempData = tempDataMock.Object,
             };
