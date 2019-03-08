@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using Minos.Site.Controllers;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ namespace Minos.Site.Models
 {
     public class MinosContext : DbContext
     {
+        public MinosContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Professor> Professores { get; set; }
@@ -16,9 +21,12 @@ namespace Minos.Site.Models
         public DbSet<Pergunta> Perguntas { get; set; }
         public DbSet<Periodo> Periodo { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<Resposta> Respostas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ProfessorTurma>().HasKey(pt => new { pt.ProfessorId, pt.TurmaId });
             modelBuilder.Entity<ProfessorTurma>()
                 .HasOne(pt => pt.Professor)
@@ -32,13 +40,20 @@ namespace Minos.Site.Models
 
             modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
 
-            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Usuario>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Turma>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Professor>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Questionario>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Pergunta>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Periodo>().HasKey(t => t.Id);
+            //modelBuilder.Entity<Aluno>().HasKey(t => t.Id);
+
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Minos;Trusted_Connection=true");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Minos;Trusted_Connection=true");
+        //}
 
     }
 }
