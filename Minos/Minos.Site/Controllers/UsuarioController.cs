@@ -21,6 +21,17 @@ namespace Minos.Site.Controllers
 
         public IActionResult Index()
         {
+            if (!_usuarioRepository.Existe("admin"))
+            {
+                Usuario user = new Usuario(
+                    login: "admin",
+                    senha: "admin"
+                    );
+                    user.Admin = "S";
+
+            _usuarioRepository.Salvar(user);
+
+            }
             return RedirectToAction("Login");
 
         }
