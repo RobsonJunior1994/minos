@@ -151,7 +151,12 @@ namespace Minos.Site.Controllers
 
             Professor professor = new Professor(nome, sobrenome);
             if (listaDeIdDasTurmas == null || listaDeIdDasTurmas.Count() == 0)
-                return View();
+            {
+                TempData["MenssagemErro"] = "Associe esse professor a turma(s), se não aparecer as" +
+                "turmas para cadastrar, cadastre turmas primeiro e depois volte aqui para cadastrar professor";
+                return RedirectToAction("cadastrarprofessor", "Admin");
+            }
+
 
             foreach (var turmaId in listaDeIdDasTurmas)
             {
@@ -172,12 +177,14 @@ namespace Minos.Site.Controllers
 
             if (!professor.ValidaProfessor())
             {
-                return View();
+                TempData["MenssagemErro"] = "Prencha todas as informações de professor corretamente";
+                return RedirectToAction("cadastrarprofessor", "Admin");
             }
             else
             {
                 professor.Ativo = true;
                 _professorRepository.Salvar(professor);
+                TempData["MenssagemSucesso"] = "Professor cadastrado com sucesso!";
             }
 
             return RedirectToAction("cadastrarprofessor", "Admin");
@@ -272,6 +279,7 @@ namespace Minos.Site.Controllers
             
             Questionario questionario = new Questionario() { Periodo = periodo };
             questionario.Nome = Nome;
+            questionario.Ativo = true;
 
             if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
             {
@@ -313,15 +321,18 @@ namespace Minos.Site.Controllers
             var listaQuestionarios = _questionarioRepository.ListarQuestionarios();
 
             var viewModelLista = new List<QuestionarioViewModel>();
-
+            
             foreach (var questionario in listaQuestionarios)
             {
-                var questionarioViewModel = new QuestionarioViewModel()
+                if(questionario.Ativo == true)
                 {
-                    IdDoQuestionario = questionario.Id,
-                    NomeDoQuestionario = questionario.Nome
-                };
-                viewModelLista.Add(questionarioViewModel);
+                    var questionarioViewModel = new QuestionarioViewModel()
+                    {
+                        IdDoQuestionario = questionario.Id,
+                        NomeDoQuestionario = questionario.Nome
+                    };
+                    viewModelLista.Add(questionarioViewModel);
+                }
             }
 
             return View(viewModelLista);
@@ -375,6 +386,24 @@ namespace Minos.Site.Controllers
             return RedirectToAction("EditarQuestionario", "Admin", new { id = nomeQuestionario.Id });
         }
 
+        [HttpPost]
+        public IActionResult DesativarQuestionario(int id)
+        {
+            if (id == 0)
+            {
+                TempData["MensagemErro"] = "Ocorreu um erro ao tentar desativar o questionario, por favor tente novamente";
+                return RedirectToAction("ListarQuestionario", "Admin");
+            }
+            else
+            {
+                Questionario questionario = _questionarioRepository.ObterQuestionarioPeloId(id);
+                questionario.Ativo = false;
+                _questionarioRepository.Atualizar(questionario);
+                TempData["MensagemSucesso"] = "Questionario desativado com sucesso!";
+            }
+            return RedirectToAction("ListarQuestionario", "Admin");
+        }
+
         [HttpGet]
         public IActionResult CadastrarPergunta()
         {
@@ -391,10 +420,12 @@ namespace Minos.Site.Controllers
             if (pergunta.EhValida())
             {
                 _perguntaRepository.Salvar(pergunta);
+                TempData["MensagemSucesso"] = "Pergunta cadastrada com sucesso!";
             }
             else
             {
-                return View();
+                TempData["MensagemErro"] = "Preencha corretamente a pergunta!";
+                return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
             return RedirectToAction("CadastrarPergunta", "Admin");
@@ -405,11 +436,11 @@ namespace Minos.Site.Controllers
         {
             if (id == 0)
             {
-                TempData["Mensagem"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
+                TempData["MensagemErro"] = "Ocorreu um erro ao tentar desativar uma pergunta, por favor tente novamente";
                 return RedirectToAction("CadastrarPergunta", "Admin");
             }
 
-            TempData["Sucesso"] = "Pergunta desativada com sucesso!";
+            TempData["MensagemSucesso"] = "Pergunta desativada com sucesso!";
             Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(id);
             pergunta.Ativo = false;
             _perguntaRepository.Atualizar(pergunta);

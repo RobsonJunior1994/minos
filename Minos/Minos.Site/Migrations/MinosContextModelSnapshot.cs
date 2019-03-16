@@ -109,6 +109,8 @@ namespace Minos.Site.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Ativo");
+
                     b.Property<string>("Nome");
 
                     b.Property<int?>("PeriodoId");
