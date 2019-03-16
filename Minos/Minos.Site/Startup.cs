@@ -42,6 +42,7 @@ namespace Minos.Site
             services.AddScoped<IPerguntaRepository, PerguntaRepository>();
             services.AddScoped<IPeriodoRepository, PeriodoRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
+            services.AddScoped<IRespostaRepository, RespostaRepository>();
             services.AddScoped<MinosContext>();
 
         }

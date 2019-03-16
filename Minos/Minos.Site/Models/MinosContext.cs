@@ -40,6 +40,7 @@ namespace Minos.Site.Models
 
             modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
 
+            
             //modelBuilder.Entity<Usuario>().HasKey(t => t.Id);
             //modelBuilder.Entity<Turma>().HasKey(t => t.Id);
             //modelBuilder.Entity<Professor>().HasKey(t => t.Id);

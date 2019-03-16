@@ -91,46 +91,28 @@ namespace Minos.Site.Controllers
         public IActionResult Login(string login, string senha)
         {
             Usuario usuario = new Usuario(login, senha);
-            if (usuario.ValidaLogin() == false || usuario.ValidaSenha() == false)
-            {
-                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
-                return View();
-            }
 
+            if (usuario.EhValido() && _usuarioRepository.DadosDeLoginSaoValidos(login, senha))
+            {
+                if(_usuarioRepository.EhAdm(login, senha))
+                {
+                    HttpContext.Session.SetString("LogarAdm", "Administrador");
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    HttpContext.Session.SetString("LogarAluno", "Aluno");
+                    HttpContext.Session.SetString("Matricula", login);
+                    return RedirectToAction("Index", "Aluno");
+                }
+            }
             else
             {
-                if (usuario.EhValido())
-                {
-                    if (_usuarioRepository.EhAdm(login, senha))
-                    {
-                        if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
-                        {
-                            HttpContext.Session.SetString("LogarAdm", "Administrador");
-                            return RedirectToAction("Index", "Admin");
-
-                        }
-                        else
-                        {
-                            ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
-                            return View();
-                        }
-                    }
-
-                    if (_usuarioRepository.DadosDeLoginSaoValidos(login, senha))
-                    {
-                        HttpContext.Session.SetString("LogarAluno", "Aluno");
-                        return RedirectToAction("Index", "Aluno");
-
-                    }
-                    else
-                    {
-                        ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
-                        return View();
-                    }
-                }
+                ViewData["Message"] = "Por favor verifique se todas as informações foram preenchidas corretamente!";
             }
 
             return View();
+           
         }
 
 

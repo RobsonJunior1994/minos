@@ -265,6 +265,7 @@ namespace Minos.Site.Controllers
         public IActionResult CadastrarQuestionario()
         {
             ViewBag.perguntas = _perguntaRepository.ListarPerguntas();
+            ViewBag.turmas = _turmaRepository.ListarTurmas();
             return View();
         }
 

@@ -36,6 +36,15 @@
                         </td>
                     </tr>
                 }
+                </tr>
+                @foreach (var item in ViewBag.turmas)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="listaDeIdDePerguntas" value="@item.Id" />@item.Serie
+                        </td>
+                    </tr>
+                }
             </table>
             <input class="btn btn-primary form-control" type="submit" value="Cadastrar" />
         </form>

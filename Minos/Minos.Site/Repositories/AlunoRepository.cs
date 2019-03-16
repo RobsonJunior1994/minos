@@ -1,4 +1,5 @@
-﻿using Minos.Site.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Minos.Site.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,13 @@ namespace Minos.Site.Repositories
 
         public Aluno ObterAlunoPorMatricula(string matriculaDoAluno)
         {
-            var aluno = _context.Alunos.FirstOrDefault(x => x.Matricula == matriculaDoAluno);
+            var aluno = _context.Alunos
+                .Include(a => a.Turma)
+                .ThenInclude(t => t.Professores)
+                .Include(t => t.Turma)
+                .ThenInclude(q => q.Questionarios)
+                .FirstOrDefault(x => x.Matricula == matriculaDoAluno);
+                
             return aluno;
         }
 
