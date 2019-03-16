@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Minos.Site.Models;
@@ -26,6 +27,10 @@ namespace Minos.Site
         {
 
             services.AddMvc();
+
+            string connectionString = Configuration.GetConnectionString("Default");
+
+            services.AddDbContext<MinosContext>(options => options.UseSqlServer(connectionString));
             
             services.AddDistributedMemoryCache();
             services.AddSession();
@@ -38,10 +43,12 @@ namespace Minos.Site
             services.AddScoped<IPeriodoRepository, PeriodoRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<MinosContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -63,6 +70,8 @@ namespace Minos.Site
                     name: "default",
                     template: "{controller=Usuario}/{action=Index}/{id?}");
             });
+
+            serviceProvider.GetService<MinosContext>().Database.EnsureCreated();
         }
     }
 }

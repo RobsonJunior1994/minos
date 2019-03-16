@@ -7,8 +7,12 @@ namespace Minos.Site.Models
 {
     public class Resposta
     {
+        public int Id { get; set; }
         public int Opcao { get; set; }
         
+
+        public Resposta() { }
+
         public int Resultado()
         {
             int result;
