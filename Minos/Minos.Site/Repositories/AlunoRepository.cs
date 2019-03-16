@@ -14,17 +14,7 @@ namespace Minos.Site.Repositories
         {
             _context = contexto;
         }
-
-        public void Atualizar(string Matricula)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Desativar(string matricula)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public List<Aluno> ListaDeAlunos()
         {
             throw new NotImplementedException();

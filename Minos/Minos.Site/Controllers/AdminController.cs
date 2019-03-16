@@ -457,7 +457,8 @@ namespace Minos.Site.Controllers
             aluno.Nome = _aluno.nome;
             aluno.Sobrenome = _aluno.sobrenome;
             aluno.Matricula = _aluno.matricula;
-            if(_aluno.idTurma == 0)
+
+            if (_aluno.idTurma == 0)
             {
                 TempData["MensagemErro"] = "Nenhuma turma foi cadastrada ou não selecionou nenhuma turma";
             } else

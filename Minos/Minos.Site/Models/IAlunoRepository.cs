@@ -10,8 +10,5 @@ namespace Minos.Site.Models
         Aluno ObterAlunoPorMatricula(string matriculaDoAluno);
         void Salvar(Aluno aluno);
         List<Aluno> ListaDeAlunos();
-        void Desativar(string matricula);
-        void Atualizar(string Matricula);
-
     }
 }
