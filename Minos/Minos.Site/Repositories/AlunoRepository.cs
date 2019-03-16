@@ -14,15 +14,10 @@ namespace Minos.Site.Repositories
         {
             _context = contexto;
         }
-        
-        public List<Aluno> ListaDeAlunos()
-        {
-            throw new NotImplementedException();
-        }
 
         public Aluno ObterAlunoPorMatricula(string matriculaDoAluno)
         {
-            var aluno = _context.Aluno.FirstOrDefault(x => x.Matricula == matriculaDoAluno);
+            var aluno = _context.Alunos.FirstOrDefault(x => x.Matricula == matriculaDoAluno);
             return aluno;
         }
 

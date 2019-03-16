@@ -9,6 +9,5 @@ namespace Minos.Site.Models
     {
         Aluno ObterAlunoPorMatricula(string matriculaDoAluno);
         void Salvar(Aluno aluno);
-        List<Aluno> ListaDeAlunos();
     }
 }
