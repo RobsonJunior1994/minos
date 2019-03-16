@@ -16,19 +16,25 @@ namespace Minos.Site.Controllers
         private IQuestionarioRepository _questionarioRepository;
         private IPerguntaRepository _perguntaRepository;
         private IPeriodoRepository _periodoRepository;
+        private IAlunoRepository _alunoRepository;
+        private IUsuarioRepository _usuarioRepository;
 
         public AdminController(
             IProfessorRepository professorRepository,
             ITurmaRepository turmaRepository,
             IQuestionarioRepository questionarioRepository,
             IPerguntaRepository perguntaRepository,
-            IPeriodoRepository periodoRepository)
+            IPeriodoRepository periodoRepository,
+            IAlunoRepository alunoRepository,
+            IUsuarioRepository usuarioRepository)
         {
             _professorRepository = professorRepository;
             _turmaRepository = turmaRepository;
             _questionarioRepository = questionarioRepository;
             _perguntaRepository = perguntaRepository;
             _periodoRepository = periodoRepository;
+            _alunoRepository = alunoRepository;
+            _usuarioRepository = usuarioRepository;
 
         }
 
@@ -468,5 +474,53 @@ namespace Minos.Site.Controllers
             
         }
 
+        [HttpGet]
+        public IActionResult CadastrarAluno()
+        {
+            ViewBag.listaDeTurmas = _turmaRepository.ListarTurmas();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarAluno(AlunoCadastroViewModel _aluno)
+        {
+            Aluno aluno = new Aluno();
+            aluno.Nome = _aluno.nome;
+            aluno.Sobrenome = _aluno.sobrenome;
+            aluno.Matricula = _aluno.matricula;
+
+            if (_aluno.idTurma == 0)
+            {
+                TempData["MensagemErro"] = "Nenhuma turma foi cadastrada ou não selecionou nenhuma turma";
+            } else
+            {
+                aluno.Turma = _turmaRepository.ObterTurmaPeloId(_aluno.idTurma);
+
+                if (aluno.EhValido())
+                {
+                    if (_alunoRepository.ObterAlunoPorMatricula(aluno.Matricula) == null)
+                    {
+                        _alunoRepository.Salvar(aluno);
+                        TempData["MensagemSucesso"] = "Aluno cadastrado com sucesso!";
+                        Usuario usuario = new Usuario();
+                        usuario.Login = aluno.Matricula;
+                        usuario.Senha = usuario.GerarSenha();
+                        usuario.Admin = "N";
+                        _usuarioRepository.Salvar(usuario);
+                    }
+                    else
+                    {
+                        TempData["MensagemErro"] = "Aluno já cadastrado";
+                    }
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Falha ao tentar cadastrar aluno, preencha todas as " +
+                    "informações corretamente";
+                }
+            }
+            
+            return RedirectToAction("CadastrarAluno", "Admin");
+        }
     }
 }

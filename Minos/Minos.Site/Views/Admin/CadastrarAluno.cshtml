@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "CadastrarAluno";
+}
+
+<h2>Cadastrar Aluno</h2>
+
+<p class="alert-success">@TempData["MensagemSucesso"]</p>
+<p class="alert-danger">@TempData["MensagemErro"]</p>
+
+<form action="CadastrarAluno" method="post">
+    <table>
+        <tr>
+            <td>Nome</td>
+            <td><input type="text" name="nome" /></td>
+        </tr>
+        <tr>
+            <td>Sobrenome</td>
+            <td><input type="text" name="sobrenome" /></td>
+        </tr>
+        <tr>
+            <td>Turma</td>
+            <td>
+                <select name="idTurma">
+                    @{
+                        foreach (var turma in @ViewBag.listaDeTurmas)
+                        {
+                            <option value="@turma.Id">@turma.Serie</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Matricula</td>
+            <td><input type="text" name="matricula" /></td>
+        </tr>
+
+        <tr><td><input type="submit" value="Cadastrar" /></td></tr>
+    </table>
+</form>

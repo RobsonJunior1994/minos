@@ -13,6 +13,8 @@ namespace Minos.Site.Models
         public Turma Turma { get; set; }
         public string Matricula { get; set; }
 
+        public Aluno () { }
+
         public Aluno (string nome, string sobrenome, Turma turma)
         {
             Nome = nome;
@@ -20,6 +22,15 @@ namespace Minos.Site.Models
             Turma = turma;
         }
 
-        public Aluno() { }
+        internal bool EhValido()
+        {
+            if(String.IsNullOrEmpty(Nome) || String.IsNullOrEmpty(Sobrenome) ||
+                !Turma.EhValida() || String.IsNullOrEmpty(Matricula))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

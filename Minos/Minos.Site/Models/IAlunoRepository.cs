@@ -8,5 +8,6 @@ namespace Minos.Site.Models
     public interface IAlunoRepository
     {
         Aluno ObterAlunoPorMatricula(string matriculaDoAluno);
+        void Salvar(Aluno aluno);
     }
 }

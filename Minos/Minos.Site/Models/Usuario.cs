@@ -67,5 +67,17 @@ namespace Minos.Site.Models
             }
         }
 
+        public string GerarSenha()
+        {
+            Random random = new Random();
+            string senhaAleatoria = "";
+            for (int i = 0; i < 10; i++)
+            {
+                int num = random.Next(0, 10);
+                senhaAleatoria = senhaAleatoria + Convert.ToString(num);
+            }
+            return senhaAleatoria;
+        }
+
     }
 }
