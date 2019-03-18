@@ -37,11 +37,14 @@
                     </tr>
                 }
                 </tr>
+                <tr>
+                    <td><h2 class="text-center">Turmas</h2></td>
+                </tr>
                 @foreach (var item in ViewBag.turmas)
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" name="listaDeIdDePerguntas" value="@item.Id" />@item.Serie
+                            <input type="checkbox" name="listaDeIdeDeTurmas" value="@item.Id" />@item.Serie
                         </td>
                     </tr>
                 }

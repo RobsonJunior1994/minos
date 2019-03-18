@@ -270,7 +270,7 @@ namespace Minos.Site.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarQuestionario(QuestionarioCadastroViewModel questionarioCadastro)
+        public IActionResult CadastrarQuestionario(QuestionarioCadastroViewModel questionarioCadastro, List<int> listaDeIdeDeTurmas)
         {
             string Nome = questionarioCadastro.NomeDoQuestionario;
 
@@ -282,9 +282,9 @@ namespace Minos.Site.Controllers
             questionario.Nome = Nome;
             questionario.Ativo = true;
 
-            if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0)
+            if (questionarioCadastro.ListaDeIdDePerguntas == null || questionarioCadastro.ListaDeIdDePerguntas.Count() == 0 || listaDeIdeDeTurmas.Count() <= 0)
             {
-                TempData["ErroPerguntaVazia"] = "O questionario precisa de perguntas para ser cadastrado.";
+                TempData["ErroPerguntaVazia"] = "O questionario precisa de pergunta(s) e turma(s) para ser cadastrado.";
                 return RedirectToAction("CadastrarQuestionario", "Admin");
             }
 
@@ -305,6 +305,13 @@ namespace Minos.Site.Controllers
             if (questionario.EhValido())
             {
                 _questionarioRepository.Salvar(questionario);
+                foreach (var turmaId in listaDeIdeDeTurmas)
+                {
+                    Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
+                    
+                    turma.Questionarios.Add(questionario);
+                    _turmaRepository.Salvar(turma);
+                }
             }
             else
             {

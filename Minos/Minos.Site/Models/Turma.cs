@@ -24,6 +24,7 @@ namespace Minos.Site.Models
             Serie = serie;
             Turno = turno;
             Professores = new List<ProfessorTurma>();
+            Questionarios = new List<Questionario>();
 
             if (string.IsNullOrEmpty(codigoTurma))
             {
