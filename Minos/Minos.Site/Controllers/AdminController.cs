@@ -307,9 +307,15 @@ namespace Minos.Site.Controllers
                 _questionarioRepository.Salvar(questionario);
                 foreach (var turmaId in listaDeIdeDeTurmas)
                 {
-                    Turma turma = _turmaRepository.ObterTurmaPeloId(turmaId);
-                    
-                    turma.Questionarios.Add(questionario);
+
+                    Turma turma = new Turma();
+                    QuestionarioTurma questionarioTurma = new QuestionarioTurma();
+                    turma = _turmaRepository.ObterTurmaPeloId(turmaId);
+
+                    questionarioTurma.QuestionarioId = questionario.Id;
+                    questionarioTurma.TurmaId = turma.Id;
+
+                    turma.Questionarios.Add(questionarioTurma);
                     _turmaRepository.Salvar(turma);
                 }
             }

@@ -29,7 +29,7 @@ namespace Minos.Site.Repositories
             return questionario;
         }
         
-        public Questionario ObterListaDePerguntas()
+        public Questionario ObterListaDePerguntas(int id)
         {
             throw new NotImplementedException();
         }

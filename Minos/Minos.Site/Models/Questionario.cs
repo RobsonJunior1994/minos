@@ -14,6 +14,7 @@ namespace Minos.Site.Models
         [Required]
         public bool Ativo { get; set; }
         public List<QuestionarioPergunta> Perguntas { get; set; }
+        public virtual IList<QuestionarioTurma> Turmas { get; set; }
 
         public Questionario() { }
 

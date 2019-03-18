@@ -28,6 +28,7 @@ namespace Minos.Site.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ProfessorTurma>().HasKey(pt => new { pt.ProfessorId, pt.TurmaId });
+
             modelBuilder.Entity<ProfessorTurma>()
                 .HasOne(pt => pt.Professor)
                 .WithMany(p => p.Turmas)
@@ -38,16 +39,20 @@ namespace Minos.Site.Models
                 .WithMany(p => p.Professores)
                 .HasForeignKey(pt => pt.TurmaId);
 
-            modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
+            modelBuilder.Entity<QuestionarioTurma>().HasKey(pt => new { pt.QuestionarioId, pt.TurmaId });
 
-            
-            //modelBuilder.Entity<Usuario>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Turma>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Professor>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Questionario>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Pergunta>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Periodo>().HasKey(t => t.Id);
-            //modelBuilder.Entity<Aluno>().HasKey(t => t.Id);
+            modelBuilder.Entity<QuestionarioTurma>()
+                .HasOne(pt => pt.Questionario)
+                .WithMany(p => p.Turmas)
+                .HasForeignKey(pt => pt.QuestionarioId);
+
+            modelBuilder.Entity<QuestionarioTurma>()
+                .HasOne(pt => pt.Turma)
+                .WithMany(p => p.Questionarios)
+                .HasForeignKey(pt => pt.TurmaId);
+
+
+            modelBuilder.Entity<QuestionarioPergunta>().HasKey(qp => new { qp.QuestionarioId, qp.PerguntaId });
 
         }
 

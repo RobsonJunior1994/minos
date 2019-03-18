@@ -15,7 +15,7 @@ namespace Minos.Site.Models
         public Serie Serie { get; set; }
         public Grau Grau { get; set; }
         public virtual IList<ProfessorTurma> Professores { get; set; }
-        public virtual IList<Questionario> Questionarios { get; set; }
+        public virtual IList<QuestionarioTurma> Questionarios { get; set; }
         public bool Ativo { get; internal set; }
 
         public Turma(Grau grau, Serie serie, Turno turno, string codigoTurma)
@@ -24,7 +24,7 @@ namespace Minos.Site.Models
             Serie = serie;
             Turno = turno;
             Professores = new List<ProfessorTurma>();
-            Questionarios = new List<Questionario>();
+            Questionarios = new List<QuestionarioTurma>();
 
             if (string.IsNullOrEmpty(codigoTurma))
             {
@@ -40,7 +40,7 @@ namespace Minos.Site.Models
 
         public Turma()
         {
-
+            
         }
 
        public string GerarCodigo()

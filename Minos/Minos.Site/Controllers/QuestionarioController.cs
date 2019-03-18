@@ -12,13 +12,16 @@ namespace Minos.Site.Controllers
     {
         private IAlunoRepository _alunoRepository;
         private IRespostaRepository _respostaRepository;
+        private IQuestionarioRepository _questionarioRepository;
 
         public QuestionarioController(
             IAlunoRepository alunoRepository,
-            IRespostaRepository respostaRepository)
+            IRespostaRepository respostaRepository,
+            IRespostaRepository questionarioRepository)
         {
             _alunoRepository = alunoRepository;
             _respostaRepository = respostaRepository;
+            _questionarioRepository = questionarioRepository;
         }
         
         [HttpGet]
@@ -30,7 +33,7 @@ namespace Minos.Site.Controllers
                 aluno
                 .Turma
                 .Questionarios
-                .FirstOrDefault(x => x.Periodo.DataInicial.Date <= DateTime.Now.Date && x.Periodo.DataFinal.Date >= DateTime.Now.Date);
+                .FirstOrDefault();
 
             var mensagem = new Mensagem();
 
@@ -47,6 +50,8 @@ namespace Minos.Site.Controllers
                 Perguntas = new List<string>(),
                 Professores = new List<string>()
             };
+
+            _questionarioRepository.ObterListaDePerguntas(questionario.QuestionarioId);// preciso retornar a lista de perguntas
 
             foreach (var perguntaClasse in questionario.Perguntas)
                 viewModel.Perguntas.Add(perguntaClasse.Pergunta.Texto);
