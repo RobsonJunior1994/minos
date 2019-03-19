@@ -310,11 +310,12 @@ namespace Minos.Site.Controllers
 
                     Turma turma = new Turma();
                     QuestionarioTurma questionarioTurma = new QuestionarioTurma();
+                    turma.Questionarios = new List<QuestionarioTurma>();
                     turma = _turmaRepository.ObterTurmaPeloId(turmaId);
 
                     questionarioTurma.QuestionarioId = questionario.Id;
                     questionarioTurma.TurmaId = turma.Id;
-
+                    turma.Questionarios = new List<QuestionarioTurma>();
                     turma.Questionarios.Add(questionarioTurma);
                     _turmaRepository.Salvar(turma);
                 }

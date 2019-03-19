@@ -28,11 +28,7 @@ namespace Minos.Site.Repositories
                 .Include(x => x.Perguntas).FirstOrDefault(p => p.Id == id);
             return questionario;
         }
-        
-        public Questionario ObterListaDePerguntas(int id)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public void Salvar(Questionario Questionario)
         {

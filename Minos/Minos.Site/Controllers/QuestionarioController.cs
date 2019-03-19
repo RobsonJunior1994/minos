@@ -17,7 +17,7 @@ namespace Minos.Site.Controllers
         public QuestionarioController(
             IAlunoRepository alunoRepository,
             IRespostaRepository respostaRepository,
-            IRespostaRepository questionarioRepository)
+            IQuestionarioRepository questionarioRepository)
         {
             _alunoRepository = alunoRepository;
             _respostaRepository = respostaRepository;
@@ -51,9 +51,9 @@ namespace Minos.Site.Controllers
                 Professores = new List<string>()
             };
 
-            _questionarioRepository.ObterListaDePerguntas(questionario.QuestionarioId);// preciso retornar a lista de perguntas
+            var q =_questionarioRepository.ObterQuestionarioPeloId(questionario.QuestionarioId);// preciso retornar a lista de perguntas
 
-            foreach (var perguntaClasse in questionario.Perguntas)
+            foreach (var perguntaClasse in q.Perguntas)
                 viewModel.Perguntas.Add(perguntaClasse.Pergunta.Texto);
 
             foreach (var professorTurma in aluno.Turma.Professores)
