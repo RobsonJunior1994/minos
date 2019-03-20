@@ -317,7 +317,7 @@ namespace Minos.Site.Controllers
                     questionarioTurma.TurmaId = turma.Id;
                     turma.Questionarios = new List<QuestionarioTurma>();
                     turma.Questionarios.Add(questionarioTurma);
-                    _turmaRepository.Salvar(turma);
+                    _turmaRepository.Atualizar(turma);
                 }
             }
             else
