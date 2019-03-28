@@ -13,15 +13,22 @@ namespace Minos.Site.Controllers
         private IAlunoRepository _alunoRepository;
         private IRespostaRepository _respostaRepository;
         private IQuestionarioRepository _questionarioRepository;
+        private IPerguntaRepository _perguntaRepository;
+        private IProfessorRepository _professorRepository;
 
         public QuestionarioController(
             IAlunoRepository alunoRepository,
             IRespostaRepository respostaRepository,
-            IQuestionarioRepository questionarioRepository)
+            IQuestionarioRepository questionarioRepository,
+            IPerguntaRepository perguntaRepository,
+            IProfessorRepository professorRepository
+            )
         {
             _alunoRepository = alunoRepository;
             _respostaRepository = respostaRepository;
             _questionarioRepository = questionarioRepository;
+            _perguntaRepository = perguntaRepository;
+            _professorRepository = professorRepository;
         }
         
         [HttpGet]
@@ -53,12 +60,23 @@ namespace Minos.Site.Controllers
 
             var q =_questionarioRepository.ObterQuestionarioPeloId(questionario.QuestionarioId);// preciso retornar a lista de perguntas
 
-            foreach (var perguntaClasse in q.Perguntas)
-                viewModel.Perguntas.Add(perguntaClasse.Pergunta.Texto);
+            List<Pergunta> perguntas = new List<Pergunta>();
+            foreach (var item in q.Perguntas)
+            {
+                Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(item.PerguntaId);
+                perguntas.Add(pergunta);
+            }
+
+            //foreach (var perguntaClasse in perguntas)
+            //    viewModel.Perguntas.Add(perguntaClasse.Pergunta.Texto);
 
             foreach (var professorTurma in aluno.Turma.Professores)
-                viewModel.Professores.Add(professorTurma.Professor.Nome + " " + professorTurma.Professor.Sobrenome);
-            
+            {
+                var professor = _professorRepository.ObterProfessorPeloId(professorTurma.ProfessorId);
+                viewModel.Professores.Add(professor.Nome + " " + professor.Sobrenome);
+
+            }
+
             return View(viewModel);
         }
 
