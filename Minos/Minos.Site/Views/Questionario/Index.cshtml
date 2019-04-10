@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    @model Minos.Site.Models.QuestionarioAlunoViewModel;
+}
+
+<h2>Index</h2>
+
+<div>@Model.NomeDoAluno Responda o questionário</div>
+<hr />
+
+
+@{
+    foreach (Professor professor in Model.Professores)
+    {
+        professor.Nome;
+
+    }
+}
+
+

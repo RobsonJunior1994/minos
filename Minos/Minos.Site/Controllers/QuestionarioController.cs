@@ -55,7 +55,7 @@ namespace Minos.Site.Controllers
                 Matricula = aluno.Matricula,
                 NomeDoAluno = aluno.Nome + " " + aluno.Sobrenome,
                 Perguntas = new List<string>(),
-                Professores = new List<string>()
+                Professores = new List<Professor>()
             };
 
             var q =_questionarioRepository.ObterQuestionarioPeloId(questionario.QuestionarioId);// preciso retornar a lista de perguntas
@@ -64,7 +64,8 @@ namespace Minos.Site.Controllers
             foreach (var item in q.Perguntas)
             {
                 Pergunta pergunta = _perguntaRepository.ObterPerguntaPeloId(item.PerguntaId);
-                perguntas.Add(pergunta);
+                //perguntas.Add(pergunta);
+                viewModel.Perguntas.Add(pergunta.Texto);
             }
 
             //foreach (var perguntaClasse in perguntas)
@@ -73,7 +74,7 @@ namespace Minos.Site.Controllers
             foreach (var professorTurma in aluno.Turma.Professores)
             {
                 var professor = _professorRepository.ObterProfessorPeloId(professorTurma.ProfessorId);
-                viewModel.Professores.Add(professor.Nome + " " + professor.Sobrenome);
+                viewModel.Professores.Add(professor);
 
             }
 
